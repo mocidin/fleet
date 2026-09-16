@@ -1,0 +1,74 @@
+[
+ {
+  "icon": "comet-spark",
+  "font": "Exo",
+  "casing": "upper",
+  "tracking": "tight",
+  "weight": 800,
+  "size": 22
+ },
+ {
+  "icon": "striped-sun",
+  "font": "Exo",
+  "casing": "upper",
+  "tracking": "tight",
+  "weight": 800,
+  "size": 22
+ },
+ {
+  "icon": "comet-spark",
+  "font": "Play",
+  "casing": "upper",
+  "tracking": "tight",
+  "weight": 800,
+  "size": 22
+ },
+ {
+  "icon": "eclipse-flare",
+  "font": "Play",
+  "casing": "upper",
+  "tracking": "tight",
+  "weight": 800,
+  "size": 22
+ },
+ {
+  "icon": "comet-spark",
+  "font": "Exo",
+  "body": "Current (Space Grotesk)",
+  "primary": "#0095FF",
+  "casing": "upper",
+  "tracking": "tight",
+  "weight": 800,
+  "size": 22
+ },
+ {
+  "icon": "striped-sun",
+  "font": "Exo",
+  "body": "Current (Space Grotesk)",
+  "primary": "#0095FF",
+  "casing": "upper",
+  "tracking": "tight",
+  "weight": 800,
+  "size": 22
+ },
+ {
+  "icon": "comet-spark",
+  "font": "Play",
+  "body": "Current (Space Grotesk)",
+  "primary": "#0095FF",
+  "casing": "upper",
+  "tracking": "tight",
+  "weight": 800,
+  "size": 22
+ },
+ {
+  "icon": "eclipse-flare",
+  "font": "Play",
+  "body": "Current (Space Grotesk)",
+  "primary": "#0095FF",
+  "casing": "upper",
+  "tracking": "tight",
+  "weight": 800,
+  "size": 22
+ }
+]
