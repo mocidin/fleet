@@ -5,7 +5,7 @@ description: Programmatically test a fleet app's LIVE Stripe payment conversion 
 
 # Test Payment Flow (live, programmatic, $0)
 
-Proven working on Recruiterbase 2026-09-01 (the reference run). Works on any fleet app whose checkout is Stripe-hosted (payment links or Checkout Sessions) with a webhook that fulfills.
+Proven working on Recruiterbase 2026-09-01 (the reference run). Works on any fleet app: every checkout is a server-minted Checkout Session (`app/api/stripe/checkout/route.ts`) with a webhook that fulfills. A fuller drill that also exercises that route (200 for a new user, 409 while paid, 200 again on the same customer after churn) and the portal route ran on all four apps 2026-09-17.
 
 ## What it proves
 
@@ -36,8 +36,8 @@ All secrets come from the app repo's `.env.local` (Stripe key is usually `STRIPE
 
 ### 1. Discover the app's real flow first
 
-- Find the checkout entry: payment link env vars or a session-creation route.
-- Get the REAL success URL from the live payment link: `GET /v1/payment_links/:id` → `after_completion.redirect.url` (or from the session-creation code). The test session must use it verbatim.
+- Find the checkout entry: the app's `app/api/stripe/checkout/route.ts`, which names the live price id.
+- Take the REAL success URL from that route (`/api/stripe/success?session_id={CHECKOUT_SESSION_ID}` on the site URL). The test session must use it verbatim.
 - Find the webhook route and the fulfillment table/columns it writes (Recruiterbase: `payment` table keyed on `user_id` from `client_reference_id`; Ghostplug: brand row). Note how user identity rides along (usually `client_reference_id` + `prefilled_email` / `customer_email`).
 
 ### 2. Create the throwaway auth user
@@ -58,7 +58,7 @@ curl -u "$STRIPE_KEY:" https://api.stripe.com/v1/checkout/sessions \
  -d mode=subscription \
  -d "line_items[0][price]=<the app's EXISTING live price id>" \
  -d "line_items[0][quantity]=1" \
- -d "success_url=<the payment link's exact after_completion url, with {CHECKOUT_SESSION_ID}>" \
+ -d "success_url=<the checkout route's exact success url, with {CHECKOUT_SESSION_ID}>" \
  -d client_reference_id=<throwaway user id> \
  -d customer_email=<throwaway email> \
  -d "subscription_data[trial_period_days]=1" \
