@@ -1,6 +1,6 @@
 ---
 name: claude-code-permissions
-description: Diagnosis and fix for Claude Code approval prompts appearing when they should not, in the VS Code extension or the CLI. Covers the three settings.json keys and which file each runtime actually reads, the master-toggle bug that wasted weeks, the relaunch requirement, the paths that always prompt regardless, and the escalation ladder. Use when the user says "prompts came back", "still asking me to approve", "permission prompts", "bypass isn't working", or asks to configure permission mode. Check this BEFORE searching anywhere else — the diagnosis is complete, only the remedy varies.
+description: Diagnosis and fix for Claude Code approval prompts appearing when they should not, in the Claude Desktop app (Code tab), the CLI, or a cloud session. Covers the Desktop app's per-account bypass toggle, the settings precedence that lets a repo's committed settings override the global bypass, the laptop-only override file, the relaunch requirement, and the paths that always prompt regardless. Use when the user says "prompts came back", "still asking me to approve", "permission prompts", "bypass isn't working", "had to allow everything", or asks to configure permission mode. Check this BEFORE searching anywhere else, the diagnosis is complete, only the remedy varies.
 allowed-tools:
   - Bash
   - Read
@@ -9,43 +9,33 @@ allowed-tools:
 
 # Claude Code permission mode
 
-Dom runs every session with full bypass, zero approval prompts. When prompts return, the cause is always one of the items below. Do not re-investigate from scratch.
+Dom runs every local session with full bypass, zero approval prompts. When prompts return, the cause is one of the items below. Do not re-investigate from scratch.
 
-**Platform is never the cause.** He is on macOS and uses the VS Code extension as his primary entry point (switched from Cursor 2026-08-10; all Cursor data and config references deleted). The bug is in the extension itself and is identical on every OS.
+**Surface (since 2026-09-16):** the Claude Desktop app, Code tab, is the only local entry point. VS Code and Cursor are retired; their settings.json keys are dead and must not be recommended. Cloud sessions (phone, browser, Desktop app in cloud mode) run in accept-edits with every tool pre-approved by each repo's committed `.claude/settings.json` and never prompt.
 
-## The keys, and which file each runtime reads
+## The two layers on the laptop, both required
 
-The two namespaces are **independent**. Setting only the CLI path does NOT cover the extension.
+1. **App gate.** Settings > Claude Code > **"Allow bypass permissions mode"** must be ON. It is a per-account opt-in stored by the app (`bypassPermissionsGateByAccount` in `~/Library/Application Support/Claude/claude_desktop_config.json`, read it for diagnosis, never edit it). While it is off, any request for bypass is refused with "bypass permissions mode is not available here (not enabled for this account in Settings...)" and the session silently falls back to a prompting mode. Only Dom can flip it; it takes effect for NEW sessions, and if a fresh session still asks, quit and reopen the app once.
 
-**VS Code extension** — `~/Library/Application Support/Code/User/settings.json` (Windows `%APPDATA%\Code\User\settings.json`, Linux `~/.config/Code/User/settings.json`):
-
-```json
-"claudeCode.allowDangerouslySkipPermissions": true,
-"claudeCode.initialPermissionMode": "bypassPermissions",
-"claudeCode.permissions": { "defaultMode": "bypassPermissions" }
-```
-
-The **first key is the master toggle**. Without it the others are dead settings. This is the bug that wasted weeks of diagnosis. (Observed 2026-07-25: the VS Code file carries the first two and bypass works; the third is belt-and-braces from the Cursor era.)
-
-**CLI** — `~/.claude/settings.json`:
+2. **Mode selection.** Settings precedence is managed > local project (`.claude/settings.local.json`) > shared project (`.claude/settings.json`) > user (`~/.claude/settings.json`). Every fleet repo commits `.claude/settings.json` with `"defaultMode": "acceptEdits"` for cloud sessions, and that OUTRANKS the bypass in `~/.claude/settings.json`. So each fleet repo carries a gitignored `.claude/settings.local.json`:
 
 ```json
-"permissions": { "defaultMode": "bypassPermissions" }
+{ "permissions": { "defaultMode": "bypassPermissions" } }
 ```
 
-**After changing VS Code's settings.json, fully quit and relaunch VS Code.** A window reload is not enough; the extension caches the mode at process start.
+(hypertheory's also keeps its `allow` list). Installed 2026-09-16 in hypertheory, ghostplug, brandflare, stonedgpt, recruiterbase. A new fleet repo or a fresh clone needs the file added; a missing file is the first thing to check when one repo prompts and the others do not.
 
-## Known extension bug
+## Diagnosis order
 
-The extension is supposed to honor `defaultMode` from `~/.claude/settings.json` and doesn't. Six-plus open issues: anthropics/claude-code #36348, #43308, #12604, #15921, #35870, #43953. Do not try to fix this by editing `~/.claude/settings.json` alone — wrong file for the runtime.
+1. `get_session self` (ccd session tool) or the mode selector next to the send button: if the running session says acceptEdits or default, layer 2 is missing for this repo, or layer 1 is off.
+2. Try `set_session_permission_mode bypassPermissions` on self. "not available here / not enabled for this account" = layer 1 off, tell Dom the exact toggle. "session was not launched with --dangerously-skip-permissions" = layer 1 is fine, only this already-running session cannot switch; new sessions will start in bypass. In that case switch the current session to `auto` as the stopgap.
+3. Check the repo's `.claude/settings.local.json` exists, is gitignored (`git check-ignore -q .claude/settings.local.json`), and carries `defaultMode: bypassPermissions`.
+4. Check `~/.claude/settings.json` still has `permissions.defaultMode: bypassPermissions` (the user layer, belt and braces).
 
 ## Paths that still prompt even in bypass mode
 
-Anthropic safety circuit-breakers, cannot be disabled: `.git`, `.vscode`, `.idea`, most of `.claude`, plus `rm -rf /` or `rm -rf ~`.
+Anthropic safety circuit-breakers, cannot be disabled: `.git`, `.vscode`, `.idea`, most of `.claude`, plus `rm -rf /` or `rm -rf ~`. Raising a session to a MORE permissive mode from inside the session always shows Dom one approval card; that single card is expected, not a regression.
 
-## If prompts return after a clean relaunch
+## CLI (rarely used now)
 
-1. Verify the keys are still in VS Code's settings.json — the settings UI sometimes overwrites them.
-2. Check for a per-repo `.claude/settings.json` overriding `defaultMode`.
-3. Escalation: launch the CLI directly with `--dangerously-skip-permissions` instead of the extension.
-4. Last resort, only if it keeps happening despite all of the above: a community patcher exists at [github.com/seanGSISG/claude-code-extension-patcher](https://github.com/seanGSISG/claude-code-extension-patcher), which patches the extension binary directly. Do not recommend lightly; it requires re-patching on every extension update.
+`~/.claude/settings.json` `permissions.defaultMode: bypassPermissions` plus the same per-repo local override; or launch with `claude --dangerously-skip-permissions`.
