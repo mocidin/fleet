@@ -1,6 +1,6 @@
 ---
 name: cleanup
-description: Wipe every regenerable cache on the machine and report what is left, and reclaim RAM by reaping Claude Code session processes older than a day (the swap-death cause; a SessionStart hook reaps at 48h between runs). Covers Claude Code session cruft, dev build caches, dead node_modules, the whole VS Code cache and local-history surface, the TypeScript and npm and pip and Homebrew caches, app updater leftovers, and known-safe app caches. Ends with a discovery scan so new bloat surfaces itself instead of needing a manual audit. Preserves chats, memory, MCP, skills, and all source.
+description: Wipe every regenerable cache on the machine and report what is left, and reclaim RAM by ending Claude chat processes idle for six hours (the swap-death cause; an hourly launchd job ends them at twelve between runs). Covers Claude Code session cruft, dev build caches, dead node_modules, the whole VS Code cache and local-history surface, the TypeScript and npm and pip and Homebrew caches, app updater leftovers, and known-safe app caches. Ends with a discovery scan so new bloat surfaces itself instead of needing a manual audit. Preserves chats, memory, MCP, skills, and all source.
 disable-model-invocation: true
 allowed-tools:
   - Bash
@@ -65,12 +65,13 @@ echo ""
 echo "1.5 Claude session processes (RAM, not disk)"
 # Each Claude Desktop chat keeps a 200-300MB session process alive until the
 # app quits (the app's own idle timeout is disabled), and days of them once
-# pushed the machine 11GB into swap (2026-09-01). A SessionStart hook reaps at 48h automatically; a manual
-# cleanup tightens to 24h. Kills lose nothing — chats stay resumable. The
-# reaper always spares this session's own ancestry.
+# pushed the machine 11GB into swap (2026-09-01). An hourly launchd job
+# (ai.hypertheory.reaper) ends chats idle for 12h, measured by CPU time; a
+# manual cleanup tightens to 6h. Ending one loses nothing, chats stay
+# resumable. The reaper always spares this session's own ancestry.
 sysctl vm.swapusage 2>/dev/null | sed 's/^/  /'
-out=$(~/.claude/scripts/reap-claude-sessions.sh 24 2>/dev/null)
-[ -n "$out" ] && echo "$out" | sed 's/^/  /' || echo "  none older than 24h"
+out=$(~/.claude/scripts/reap-claude-sessions.sh 6 2>/dev/null)
+[ -n "$out" ] && echo "$out" | sed 's/^/  /' || echo "  none idle over 6h"
 
 # ---------------------------------------------------------------------------
 echo ""
