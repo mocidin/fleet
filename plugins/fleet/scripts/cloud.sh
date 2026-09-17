@@ -10,6 +10,10 @@
 cd "${CLAUDE_PROJECT_DIR:-.}" 2>/dev/null || exit 0
 [ -f package.json ] || exit 0
 
+# Pull the latest skills so an edit pushed to mocidin/fleet reaches the next
+# cloud session instead of waiting for the environment cache to rebuild.
+claude plugin update fleet@fleet >/dev/null 2>&1 || true
+
 if [ ! -d node_modules ]; then
   npm ci --no-audit --no-fund --loglevel=error >/dev/null 2>&1 || npm install --no-audit --no-fund --loglevel=error >/dev/null 2>&1 || true
 fi
