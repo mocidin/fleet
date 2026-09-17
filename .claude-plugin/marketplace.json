@@ -8,7 +8,7 @@
     {
       "name": "fleet",
       "source": "./plugins/fleet",
-      "description": "The fleet's skills (push-code, legal-audit, optimize-design, tech-stack-update and the rest) plus the SessionStart hook that installs packages and pulls .env.local from Vercel in cloud sessions"
+      "description": "The fleet's skills (push-code, legal-audit, optimize-design and the rest) plus the SessionStart hook that installs packages and pulls .env.local from Vercel in cloud sessions"
     }
   ]
 }
