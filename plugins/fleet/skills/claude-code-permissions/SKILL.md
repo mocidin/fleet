@@ -1,41 +1,44 @@
 ---
 name: claude-code-permissions
-description: Diagnosis and fix for Claude Code approval prompts appearing when they should not, in the Claude Desktop app (Code tab), the CLI, or a cloud session. Covers the Desktop app's per-account bypass toggle, the settings precedence that lets a repo's committed settings override the global bypass, the laptop-only override file, the relaunch requirement, and the paths that always prompt regardless. Use when the user says "prompts came back", "still asking me to approve", "permission prompts", "bypass isn't working", "had to allow everything", or asks to configure permission mode. Check this BEFORE searching anywhere else, the diagnosis is complete, only the remedy varies.
-allowed-tools:
-  - Bash
-  - Read
-  - Edit
+description: Diagnosis and fix for Claude Code approval prompts appearing when they should not, in the Claude Desktop app (Code tab) or the CLI. Covers which settings tier the app honors for bypass, the SettingsResolver log line that names the culprit, the account toggle and folder mode picker, cloud-session limits, and the paths that always prompt regardless. Use when the user says "prompts came back", "still asking me to approve", "why am I seeing Allow buttons", "permission prompts", "bypass isn't working", or asks to configure permission mode. Check this BEFORE searching anywhere else. The diagnosis is complete, only the remedy varies.
 ---
 
 # Claude Code permission mode
 
-Dom runs every local session with full bypass, zero approval prompts. When prompts return, the cause is one of the items below. Do not re-investigate from scratch.
+Dom runs every local session with full bypass, zero approval prompts. When prompts return, the cause is one of the items below. Do not re-investigate from scratch; read the log, match the cause, apply the remedy.
 
-**Surface (since 2026-09-16):** the Claude Desktop app, Code tab, is the only local entry point. VS Code and Cursor are retired; their settings.json keys are dead and must not be recommended. Cloud sessions (phone, browser, Desktop app in cloud mode) run in accept-edits with every tool pre-approved by each repo's committed `.claude/settings.json` and never prompt.
+## Read the log first
 
-## The two layers on the laptop, both required
-
-1. **App gate.** Settings > Claude Code > **"Allow bypass permissions mode"** must be ON. It is a per-account opt-in stored by the app (`bypassPermissionsGateByAccount` in `~/Library/Application Support/Claude/claude_desktop_config.json`, read it for diagnosis, never edit it). While it is off, any request for bypass is refused with "bypass permissions mode is not available here (not enabled for this account in Settings...)" and the session silently falls back to a prompting mode. Only Dom can flip it; it takes effect for NEW sessions, and if a fresh session still asks, quit and reopen the app once.
-
-2. **Mode selection.** Settings precedence is managed > local project (`.claude/settings.local.json`) > shared project (`.claude/settings.json`) > user (`~/.claude/settings.json`). Every fleet repo commits `.claude/settings.json` with `"defaultMode": "acceptEdits"` for cloud sessions, and that OUTRANKS the bypass in `~/.claude/settings.json`. So each fleet repo carries a gitignored `.claude/settings.local.json`:
-
-```json
-{ "permissions": { "defaultMode": "bypassPermissions" } }
+```bash
+grep -i "SettingsResolver\|setPermissionMode\|Failed to set permission mode" ~/Library/Logs/Claude/main.log | tail -20
 ```
 
-(hypertheory's also keeps its `allow` list). Installed 2026-09-16 in hypertheory, ghostplug, brandflare, stonedgpt, recruiterbase. A new fleet repo or a fresh clone needs the file added; a missing file is the first thing to check when one repo prompts and the others do not.
+- `Ignoring defaultMode "bypassPermissions" from projectLocal tier` or `from project tier`: the app refuses bypass from BOTH `.claude/settings.json` and `.claude/settings.local.json` (Desktop 2.110 / CLI 2.1.271, 2026-09-16). Bypass can only come from the user tier, and ANY `defaultMode` at the project tier outranks it. Remedy: no `defaultMode` key in either project file, in every fleet repo.
+- `Cannot set permission mode to bypassPermissions because the session was not launched with --dangerously-skip-permissions`: the folder's mode picker was not on Bypass when the session started. Remedy: pick Bypass for that folder in the app (remembered per folder as `epitaxy-folder-permission-mode` in `~/Library/Application Support/Claude/claude_desktop_config.json`) and start a new session.
 
-## Diagnosis order
+## The four things that must all be true (local sessions)
 
-1. `get_session self` (ccd session tool) or the mode selector next to the send button: if the running session says acceptEdits or default, layer 2 is missing for this repo, or layer 1 is off.
-2. Try `set_session_permission_mode bypassPermissions` on self. "not available here / not enabled for this account" = layer 1 off, tell Dom the exact toggle. "session was not launched with --dangerously-skip-permissions" = layer 1 is fine, only this already-running session cannot switch; new sessions will start in bypass. In that case switch the current session to `auto` as the stopgap.
-3. Check the repo's `.claude/settings.local.json` exists, is gitignored (`git check-ignore -q .claude/settings.local.json`), and carries `defaultMode: bypassPermissions`.
-4. Check `~/.claude/settings.json` still has `permissions.defaultMode: bypassPermissions` (the user layer, belt and braces).
+1. Desktop app account toggle: Settings > Claude Code > "Allow bypass permissions mode" ON (`bypassPermissionsOptInByAccount` in claude_desktop_config.json).
+2. The folder's mode picker set to Bypass, so the app launches the CLI with `--dangerously-skip-permissions`.
+3. `~/.claude/settings.json` has `"permissions": { "defaultMode": "bypassPermissions" }`.
+4. No `defaultMode` key in `<repo>/.claude/settings.json` or `<repo>/.claude/settings.local.json`. Check every fleet repo:
+
+```bash
+for r in ~/code/hypertheory/*/; do grep -Hn defaultMode "$r.claude/settings.json" "$r.claude/settings.local.json" 2>/dev/null; done
+```
+
+Any hit is the bug. Remove the key (keep the file's allow list), commit the committed file's change locally, and tell Dom new sessions will start clean. The current session can be flipped from the app's mode picker; that is what he does himself.
+
+## Cloud sessions (web, phone, remote repos in the Desktop app)
+
+Cloud sessions can never run bypass; the docs say `bypassPermissions` and `dontAsk` from any settings file are ignored there. Their best is **Auto** (a classifier approves actions instead of prompting), chosen once per remote repo from the mode dropdown; the app remembers it per folder (`remote:mocidin/<repo>` entries in the desktop config). Never put `defaultMode: acceptEdits` back in a committed settings file "for cloud": it does nothing useful there and breaks bypass on the laptop.
 
 ## Paths that still prompt even in bypass mode
 
-Anthropic safety circuit-breakers, cannot be disabled: `.git`, `.vscode`, `.idea`, most of `.claude`, plus `rm -rf /` or `rm -rf ~`. Raising a session to a MORE permissive mode from inside the session always shows Dom one approval card; that single card is expected, not a regression.
+Anthropic safety circuit-breakers, cannot be disabled: writes under `.git`, `.vscode`, `.idea`, most of `.claude`, plus `rm -rf /` or `rm -rf ~`. A prompt on one of those is not a regression.
 
-## CLI (rarely used now)
+## History
 
-`~/.claude/settings.json` `permissions.defaultMode: bypassPermissions` plus the same per-repo local override; or launch with `claude --dangerously-skip-permissions`.
+- 2026-07-25 to 2026-09-15: VS Code extension era, master toggle `claudeCode.allowDangerouslySkipPermissions`; VS Code is retired, those keys no longer matter.
+- 2026-09-16 morning: gitignored `.claude/settings.local.json` with bypass in each repo beat the committed accept-edits line. Worked for hours.
+- 2026-09-16 evening: Desktop 2.110 started ignoring bypass at the project-local tier; the committed accept-edits then won every session. Fix was removing `defaultMode` from every committed settings.json (five repos, one commit each).
