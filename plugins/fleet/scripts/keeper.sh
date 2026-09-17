@@ -1,6 +1,6 @@
 #!/bin/zsh
 # The keeper: the one maintenance job for the laptop. Runs hourly from launchd
-# (ai.hypertheory.keeper) and is what /cleanup runs by hand.
+# (ai.hypertheory.keeper); "keeper deep" is the same sweep by hand when asked.
 #
 #   keeper            hourly pass: end chats idle 12h, stop dev servers idle 6h
 #                     (the hub excepted), prune week-old Claude scratch, warn
@@ -69,7 +69,7 @@ servers() {
 # --- memory: a warning, not a fix. macOS grows swap on demand, so used/total
 # says little; the kernel's own free percentage is the honest signal.
 memory() { local free=$(memory_pressure 2>/dev/null | sed -nE 's/.*free percentage: ([0-9]+)%.*/\1/p')
-  [[ -n $free ]] && (( free < 15 )) && say "memory tight: ${free}% free, $(sysctl -n vm.swapusage | sed -E 's/.*used = ([0-9.]+)M.*/\1/')M swapped, quit the Claude app or run /cleanup"; true }
+  [[ -n $free ]] && (( free < 15 )) && say "memory tight: ${free}% free, $(sysctl -n vm.swapusage | sed -E 's/.*used = ([0-9.]+)M.*/\1/')M swapped, quit the Claude app or run keeper deep"; true }
 
 # --- scratch: week-old Claude scratch that regenerates. Transcripts are NOT here.
 # file-history backs the Esc-Esc rewind, so it keeps a 7 day window. The
