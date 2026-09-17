@@ -10,7 +10,7 @@ allowed-tools:
 Run exactly this command and print its output verbatim — no preamble, no commentary, no trailing text:
 
 ```bash
-for d in $(find ~/code/hypertheory/fleet/plugins/fleet/skills ~/.claude/plugins -maxdepth 6 -name SKILL.md -path "*/fleet/skills/*" 2>/dev/null | xargs -n1 dirname | sort -u -t/ -k1,1 | awk -F/ '!seen[$NF]++'); do
+for d in $(find ~/.claude/plugins ~/code/hypertheory/fleet -name SKILL.md -path '*fleet*' 2>/dev/null | xargs -n1 dirname | awk -F/ '!seen[$NF]++' | sort -t/ -k1,1); do
   name=$(basename "$d")
   desc=$(grep -m1 "^description:" "$d/SKILL.md" 2>/dev/null | sed 's/^description: *//' | sed 's/\. .*$/./')
   printf "| /%s | %s |\n" "$name" "$desc"
