@@ -13,7 +13,7 @@ Two rules govern what is in here, and they are why this skill should not need re
 1. **Only regenerable state gets deleted.** Never source, never chats, never memory, never credentials. Everything wiped either rebuilds itself on next use or re-downloads on demand. Nothing here is recoverable-only-from-here.
 2. **Anything not covered gets reported, not ignored.** The final step scans for large directories the script did not handle. New bloat from a newly installed app shows up in that list on the next run rather than requiring a fresh manual audit.
 
-It intentionally **kills running dev servers** (so `.next` can be cleared safely) and **keeps all conversation transcripts**. Restart the dev server afterward.
+It intentionally **stops every running dev server through `dev stop`** (so `.next` can be cleared safely; a pkill would be undone by launchd within seconds), restarts the hub at the end, and **keeps all conversation transcripts**.
 
 ```bash
 set -u
@@ -52,18 +52,20 @@ START=$(df -k / | awk 'NR==2{print $4}')
 # ---------------------------------------------------------------------------
 echo ""
 echo "1. Dev servers"
-# Stopped so the .next dirs below can be cleared without a half-written cache.
-ps aux | grep -iE "next dev|next-server" | grep -v grep | awk '{print "  killing PID "$2}'
-pkill -f "next dev" 2>/dev/null
-pkill -f "next-server" 2>/dev/null
+# Stopped through the launchd remote control so the .next dirs below can be
+# cleared without a half-written cache. Never pkill them: each server is a
+# KeepAlive launchd service and would be back within five seconds, mid-wipe.
+for app in $(/opt/homebrew/bin/dev | awk '$3=="running"{print $1}'); do
+  /opt/homebrew/bin/dev stop "$app" | sed 's/^/  /'
+done
 echo "  done"
 
 # ---------------------------------------------------------------------------
 echo ""
 echo "1.5 Claude session processes (RAM, not disk)"
-# Each VS Code Claude session keeps a ~100-200MB node process alive until VS
-# Code quits, and days of them once pushed the machine 11GB into swap
-# (2026-09-01). A SessionStart hook reaps at 48h automatically; a manual
+# Each Claude Desktop chat keeps a 200-300MB session process alive until the
+# app quits (the app's own idle timeout is disabled), and days of them once
+# pushed the machine 11GB into swap (2026-09-01). A SessionStart hook reaps at 48h automatically; a manual
 # cleanup tightens to 24h. Kills lose nothing — chats stay resumable. The
 # reaper always spares this session's own ancestry.
 sysctl vm.swapusage 2>/dev/null | sed 's/^/  /'
@@ -245,6 +247,11 @@ echo "9. Left over (not touched, review if any line looks wrong)"
 echo "  (~/.Trash and ~/.vscode/extensions are deliberate holdouts, see below)"
 
 # ---------------------------------------------------------------------------
+# The hub is the one app that runs at login; bring it back, the rest start on demand.
+echo ""
+echo "10. Dev servers back"
+/opt/homebrew/bin/dev hypertheory | sed 's/^/  /'
+
 date -u +"%Y-%m-%dT%H:%M:%S.000Z" > ~/.claude/.last-cleanup
 END=$(df -k / | awk 'NR==2{print $4}')
 echo ""
@@ -260,4 +267,4 @@ Deliberate holdouts, each for a reason, all reported by step 9 rather than silen
 - **`~/.Trash`**. Files you chose to keep recoverable. Emptying it is a decision, not a cache sweep.
 - **Active repos' `node_modules`**. Deleting them would break the dev server this script just told you to restart. Only repos dormant for 90+ days are cleared.
 
-After running, tell the user: "Cleanup done and dev servers stopped. Restart your dev server, and fully quit and relaunch VS Code to release memory held by the running process, since the disk sweep alone will not speed up the current session."
+After running, tell the user: "Cleanup done. The hub dev server is back on port 3000, the other apps start on demand. Quit and relaunch the Claude Desktop app to release the memory its renderer and idle chats hold, since the disk sweep alone will not speed up the current session."
