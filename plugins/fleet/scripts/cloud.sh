@@ -33,14 +33,19 @@ if [ ! -s .env.local ] && [ -n "$VERCEL" ]; then
   # single-record endpoint decrypts, so it is one call per variable, in parallel,
   # each to its own file so the JSON never interleaves.
   ids=$(curl -sf -H "Authorization: Bearer $VERCEL" "$api/v9/projects/$project/env?teamId=$team" | jq -r '.envs[] | select(.target | index("production")) | .id')
+  fetch() { curl -sf --retry 4 --retry-all-errors --retry-delay 1 -H "Authorization: Bearer $VERCEL" "$api/v1/projects/$project/env/$1?teamId=$team&decrypt=true" > "$dir/$1.json" || rm -f "$dir/$1.json"; }
   for id in $ids; do
-    curl -sf -H "Authorization: Bearer $VERCEL" "$api/v1/projects/$project/env/$id?teamId=$team&decrypt=true" > "$dir/$id.json" &
-    while [ "$(jobs -r | wc -l)" -ge 8 ]; do sleep 0.2; done
+    fetch "$id" &
+    while [ "$(jobs -r | wc -l)" -ge 6 ]; do sleep 0.2; done
   done
   wait
+  # A transient connection failure must not cost a variable: one more pass, serial, for any record still missing.
+  for id in $ids; do [ -s "$dir/$id.json" ] || fetch "$id"; done
+  expected=$(printf '%s\n' $ids | grep -c .); got=$(ls "$dir"/*.json 2>/dev/null | wc -l | tr -d ' ')
+  [ "$got" = "$expected" ] || echo "fleet: pulled $got of $expected env records for $project"
   # Plain KEY=value lines, quoted only when the value needs it (dotenv reads both).
   cat "$dir"/*.json 2>/dev/null \
-    | jq -r 'select(.decrypted == true) | if (.value | test("[\n\"#$\\\\]")) then "\(.key)=\(.value | @json)" else "\(.key)=\(.value)" end' \
+    | jq -r 'select(.decrypted == true) | .value |= (sub("^\\s+"; "") | sub("\\s+$"; "")) | if (.value | test("[\n\"#$\\\\]")) then "\(.key)=\(.value | @json)" else "\(.key)=\(.value)" end' \
     | sort > "$dir/env" 2>/dev/null
   if [ -s "$dir/env" ]; then
     mv "$dir/env" .env.local
