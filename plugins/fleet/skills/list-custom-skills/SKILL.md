@@ -7,6 +7,9 @@ allowed-tools:
 
 # List Custom Skills
 
+> Fleet root: `~/code/hypertheory` on the laptop. In a cloud session the repos live side by side under the parent of the current repo (`$(git rev-parse --show-toplevel)/..`), and only the repos attached to that session exist; resolve every `~/code/hypertheory/<app>` path below against whichever root exists.
+
+
 Run exactly this command and print its output verbatim — no preamble, no commentary, no trailing text:
 
 ```bash

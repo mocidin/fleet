@@ -16,6 +16,9 @@ allowed-tools:
 
 # Optimize Design Skill
 
+> Fleet root: `~/code/hypertheory` on the laptop. In a cloud session the repos live side by side under the parent of the current repo (`$(git rev-parse --show-toplevel)/..`), and only the repos attached to that session exist; resolve every `~/code/hypertheory/<app>` path below against whichever root exists.
+
+
 Bring the current repo (or a named fleet app) up to the fleet's **design gold standard**: one shared token architecture, one light-mode paradigm, one dark-mode paradigm, applied identically everywhere. The in-fleet reference implementation is **Brandflare** (`~/code/hypertheory/brandflare`, `app/globals.css`) — when in doubt, mirror it.
 
 The goal is that a component copied from any fleet app drops into any other and looks native, because every app shares the same `--backdrop` / `--main` / `--border` / `--primary` vocabulary and the same semantic `@utility` classes (`card`, `dropdown`, `shadow-around`, …).

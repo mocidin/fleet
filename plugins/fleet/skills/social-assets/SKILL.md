@@ -5,6 +5,9 @@ description: Generate a fleet app's social identity kit, the profile photo (whit
 
 # Social assets
 
+> Fleet root: `~/code/hypertheory` on the laptop. In a cloud session the repos live side by side under the parent of the current repo (`$(git rev-parse --show-toplevel)/..`), and only the repos attached to that session exist; resolve every `~/code/hypertheory/<app>` path below against whichever root exists.
+
+
 One command produces the profile photo and THREE header candidates for an app,
 each read from the app's own `app/icon.svg` and `--primary-rgb`, nothing
 hand-picked. The default family is `mosaic` (the pixel-block die of squares at

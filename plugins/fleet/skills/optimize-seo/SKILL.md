@@ -16,6 +16,9 @@ allowed-tools:
 
 # Optimize SEO Skill
 
+> Fleet root: `~/code/hypertheory` on the laptop. In a cloud session the repos live side by side under the parent of the current repo (`$(git rev-parse --show-toplevel)/..`), and only the repos attached to that session exist; resolve every `~/code/hypertheory/<app>` path below against whichever root exists.
+
+
 Bring the current repo (or a named fleet app) up to the fleet's SEO gold standard, then verify with live data. The in-fleet reference implementation is **Recruiterbase** (`~/code/hypertheory/recruiterbase`) — when in doubt, mirror it.
 
 ## Autonomous operation (no approval gates)

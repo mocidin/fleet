@@ -16,6 +16,9 @@ allowed-tools:
 
 # Legal Audit Skill
 
+> Fleet root: `~/code/hypertheory` on the laptop. In a cloud session the repos live side by side under the parent of the current repo (`$(git rev-parse --show-toplevel)/..`), and only the repos attached to that session exist; resolve every `~/code/hypertheory/<app>` path below against whichever root exists.
+
+
 Bring the current repo (or a named fleet app, or "all apps") to the fleet's legal gold standard: terms and privacy policy that are (1) **true** — they describe exactly what the code does, nothing more, nothing less; (2) **maximally protective** — every enforceable shield a consumer SaaS can carry; (3) **enforceably assented to** — clickwrap that courts actually uphold. The governing objective, in the user's words: *minimize the surface area for a lawsuit we can't defend.*
 
 **This skill is not a lawyer.** It produces best-practice legal work product and cites primary sources, but nothing it writes is legal advice. High-stakes items (entity formation, arbitration strategy for a live customer base, cannabis/age-gating decisions, non-user data sales) end the report with an explicit "worth an hour of a real attorney" flag when they clear the severity bar.

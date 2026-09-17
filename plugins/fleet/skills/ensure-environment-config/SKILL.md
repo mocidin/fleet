@@ -9,6 +9,9 @@ allowed-tools:
 
 # Ensure Environment Configuration
 
+> Fleet root: `~/code/hypertheory` on the laptop. In a cloud session the repos live side by side under the parent of the current repo (`$(git rev-parse --show-toplevel)/..`), and only the repos attached to that session exist; resolve every `~/code/hypertheory/<app>` path below against whichever root exists.
+
+
 Verify the current repo's full identity stack — git, gh, GitHub MCP, Vercel MCP, Vercel CLI, Supabase MCP — matches the user's canonical account map, fix what's wrong, and confirm push will succeed. Never actually push.
 
 ## Canonical account map

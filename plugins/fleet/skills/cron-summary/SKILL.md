@@ -5,6 +5,9 @@ description: Print a live, fleet-wide summary of every cron job across the Hyper
 
 # Cron Summary
 
+> Fleet root: `~/code/hypertheory` on the laptop. In a cloud session the repos live side by side under the parent of the current repo (`$(git rev-parse --show-toplevel)/..`), and only the repos attached to that session exist; resolve every `~/code/hypertheory/<app>` path below against whichever root exists.
+
+
 Produce a fleet-wide cron summary IN CHAT, read live from the repos so it can never go stale. Do not write any files and do not create any dashboards; the chat output is the deliverable.
 
 ## Gather (do this fresh every run)

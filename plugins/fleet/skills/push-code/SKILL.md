@@ -5,6 +5,9 @@ description: Verify every fleet working tree is complete and deploy-safe, then c
 
 # Push Code
 
+> Fleet root: `~/code/hypertheory` on the laptop. In a cloud session the repos live side by side under the parent of the current repo (`$(git rev-parse --show-toplevel)/..`), and only the repos attached to that session exist; resolve every `~/code/hypertheory/<app>` path below against whichever root exists.
+
+
 Sweep all five fleet working trees, verify each one is complete and will not break the build, then commit and push to main. Pushing to main IS deploying to production. Invoking this skill counts as Dom saying "push", so no further push confirmation is needed; everything that passes validation ships in this run.
 
 The repos: `~/code/hypertheory/hypertheory`, `~/code/hypertheory/ghostplug`, `~/code/hypertheory/brandflare`, `~/code/hypertheory/stonedgpt`, `~/code/hypertheory/recruiterbase`.
