@@ -115,7 +115,7 @@ A fix is applied only when ALL of these hold; otherwise the finding stays `open`
 4. `npx tsc --noEmit` clean after the edit, and the repo's lint command clean on the touched files.
 5. One commit per finding, only the touched files (`git add <file>`), message naming the finding id. Never push: pushing is deploying and needs Dom's word. In a cloud session the repo's own CLAUDE.md governs the push.
 
-Dependency remedies: a same-major bump of a critical direct dependency (for example `next` patch) is applied in default mode when `npx tsc --noEmit` passes afterwards, as its own commit, and the ledger row records that Vercel's build is the real verdict (local hub builds fail randomly on font fetches and are not a gate). Never bump across a major.
+Dependency remedies are never applied by this skill. Upgrades are owned by the weekly stack update (hub `lib/stack/`, Saturday cron, Monday Activity card with a Ship button per app), which upgrades on a branch and verifies typecheck, lint and build before Dom merges. A critical advisory becomes a ledger row whose fix reads "ships with the next stack update"; the row closes when the installed version leaves the advisory range. If the advisory is a live auth bypass on an app with customers and the next stack card is more than a few days out, say so in the report so Dom can ship it sooner.
 
 Live database fixes (RLS policies, function grants) are NEVER applied by this skill on its own. The ledger row carries the exact SQL. When Dom is in the session, ask once per change with `AskUserQuestion` naming the table and the policy; a yes applies it through the Supabase MCP `apply_migration` and marks the row `fixed`. When he is not (scheduled run, no answer), the row stays `open` and the report says so.
 
@@ -131,9 +131,9 @@ A few sentences, plain words, no file paths unless he asks. Shape:
 
 Laptop only. Launch one `general-purpose` agent per repo, in parallel, each told: the repo path, `report` mode, this skill's path, and to return ONLY the finding candidates that meet the bar in the story form plus the public-by-design entries it confirmed, no prose. Run step 2 (DB posture) in the main session for all five projects while the agents read code. Reconcile every ledger in the main session, then apply the fix tier repo by repo. Commit each repo's ledger change separately from any code fix.
 
-## Scheduled routine
+## Scheduled run
 
-One weekly cloud routine per repo (Monday, before Dom's morning), prompt `/security-review report`. It reads code and the live posture, updates only `.claude/security.md`, commits that file alone when it changed, and pushes per the repo's CLAUDE.md (a ledger-only commit rebuilds identical code, so it is deploy-safe). A clean week therefore produces exactly one line in the run log and nothing else. Fixes never happen in the routine; they happen when Dom runs the skill in a session and can answer the live-change questions.
+The weekly unattended run is always `report` mode: it reads code and the live posture, updates only `.claude/security.md`, commits that file alone when it changed, and pushes per the repo's CLAUDE.md (a ledger-only commit rebuilds identical code, so it is deploy-safe). A clean week therefore produces exactly one line in the run log and nothing else. Fixes never happen unattended; they happen when Dom runs the skill in a session and can answer the live-change questions. The lane that hosts the weekly run (claude.ai routine per repo, or a hub cron launching a hosted agent per repo like the stack update) is recorded in the hub memory file `project_security_review.md` once chosen.
 
 ## Ledger template (`<repo>/.claude/security.md`)
 
