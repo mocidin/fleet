@@ -14,1180 +14,604 @@ type Author = "picks" | "lorc" | "delapouite" | "skoll" | "sbed" | "viscious-spe
 const AUTHORS: Author[] = ["picks", "lorc", "delapouite", "skoll", "sbed", "viscious-speed", "all"];
 const GROUPS: Group[] = ["common", "geometric", "retro", "futuristic", "space", "script", "display", "serif", "condensed", "mono"];
 
-import {
-  Inter, Roboto, Open_Sans, Lato, Montserrat, Poppins, Nunito, Nunito_Sans, Raleway, Work_Sans, DM_Sans, Rubik, Karla, Mulish, Cabin, Ubuntu, Source_Sans_3, Fira_Sans, PT_Sans, Noto_Sans, Public_Sans, IBM_Plex_Sans, Figtree, Outfit, Sora, Manrope, Plus_Jakarta_Sans, Lexend, Urbanist, Jost, Josefin_Sans, Archivo, Barlow, Hind, Dosis, Signika, Sen, Quicksand, Varela_Round, Heebo, Assistant, Titillium_Web, Exo_2, Kanit, Prompt, Red_Hat_Display, Red_Hat_Text, Onest, Instrument_Sans, Geist, Syne, Unbounded, Bricolage_Grotesque, Familjen_Grotesk, Gabarito, Funnel_Display, Host_Grotesk, Schibsted_Grotesk, Golos_Text, Hanken_Grotesk, Albert_Sans, Epilogue, Kumbh_Sans, Sofia_Sans, Wix_Madefor_Display, Rethink_Sans, Afacad, Reddit_Sans, Parkinsans, Darker_Grotesque, Space_Grotesk, League_Spartan, Questrial, Montserrat_Alternates, Comfortaa, Fredoka, Baloo_2, Lexend_Zetta, Lexend_Mega, Lexend_Exa, Lexend_Giga, Tilt_Warp, Tilt_Neon, Anta, Bruno_Ace, Bruno_Ace_SC, Tomorrow, Tektur, Kdam_Thmor_Pro, Genos, Trispace, Smooch_Sans, Mohave, Pathway_Extreme, Spinnaker, Telex, Voltaire, Yantramanav, M_PLUS_Rounded_1c, Zen_Kaku_Gothic_New, Dela_Gothic_One, Righteous, Audiowide, Days_One, Monomaniac_One, Concert_One, Lilita_One, Paytone_One, Bowlby_One, Bowlby_One_SC, Racing_Sans_One, Krona_One, Goldman, Iceberg, Turret_Road, Sarpanch, Fugaz_One, Chango, Contrail_One, Boogaloo, Sansita, Sniglet, Shrikhand, Titan_One, Rowdies, Bagel_Fat_One, Gasoek_One, Bangers, Luckiest_Guy, Alfa_Slab_One, Ultra, Rammetto_One, Rubik_Mono_One, Black_Ops_One, Bungee, Passion_One, Squada_One, Russo_One, Poller_One, Jockey_One, Marvel, Homenaje, Geo, Rationale, Strait, Economica, Share, Share_Tech, Limelight, Poiret_One, Abril_Fatface, Yeseva_One, Lobster, Pacifico, Kaushan_Script, Permanent_Marker, Protest_Strike, Protest_Riot, Chonburi, Cherry_Bomb_One, Mochiy_Pop_One, Jaro, Climate_Crisis, Foldit, Faster_One, Wallpoet, Syncopate, Major_Mono_Display, Bungee_Shade, Bungee_Inline, Monoton, Orbitron, Michroma, Chakra_Petch, Oxanium, Quantico, Aldrich, Electrolize, Jura, Nova_Square, Nova_Flat, Nova_Round, Play, Saira, Rajdhani, Bai_Jamjuree, Advent_Pro, Gruppo, Stick_No_Bills, Sono, Exo, Zen_Dots, Tourney, Krub, Mitr, Niramit, Grandstander, Playfair_Display, Merriweather, Lora, Roboto_Slab, Bitter, Zilla_Slab, Arvo, Libre_Baskerville, DM_Serif_Display, Fraunces, Instrument_Serif, Young_Serif, Newsreader, Spectral, Crimson_Pro, EB_Garamond, Cardo, Alegreya, Bodoni_Moda, Italiana, Marcellus, Forum, Julius_Sans_One, Cinzel, Cinzel_Decorative, Cormorant_Garamond, Josefin_Slab, Noto_Serif, Source_Serif_4, Domine, Vollkorn, Prata, Gloock, Bevan, Oswald, Bebas_Neue, Anton, Anton_SC, Antonio, Teko, Archivo_Black, Archivo_Narrow, Barlow_Condensed, Barlow_Semi_Condensed, Saira_Condensed, Sofia_Sans_Condensed, Fjalla_One, Pathway_Gothic_One, League_Gothic, Roboto_Condensed, Fira_Sans_Condensed, Ubuntu_Condensed, Encode_Sans_Condensed, Yanone_Kaffeesatz, Khand, Pragati_Narrow, Six_Caps, Staatliches, Bungee_Hairline, Space_Mono, JetBrains_Mono, Geist_Mono, Martian_Mono, IBM_Plex_Mono, Roboto_Mono, Fira_Code, Source_Code_Pro, DM_Mono, Azeret_Mono, Sometype_Mono, Red_Hat_Mono, Chivo_Mono, Spline_Sans_Mono, Nova_Mono, Share_Tech_Mono, Xanh_Mono, Kode_Mono, Ubuntu_Mono, Courier_Prime, Inconsolata, Overpass_Mono, Cutive_Mono, Syne_Mono, Fragment_Mono, B612_Mono, Unica_One, Federo, Megrim, Kenia, Revalia, Stalinist_One, Bungee_Outline, Rubik_Iso, Rubik_80s_Fade, Rubik_Vinyl, Rubik_Moonrocks, Rubik_Lines, Rubik_Glitch, Rubik_Maze, Saira_Stencil_One, Allerta_Stencil, Stardos_Stencil, Sirin_Stencil, Emblema_One, Codystar, Ropa_Sans, Prosto_One, Kelly_Slab, Sansation, Iceland, Nova_Oval, Nova_Cut, Nova_Script, Nova_Slim, Lobster_Two, Dancing_Script, Great_Vibes, Satisfy, Cookie, Courgette, Sacramento, Yellowtail, Allura, Alex_Brush, Parisienne, Tangerine, Pinyon_Script, Mr_Dafoe, Norican, Oleo_Script, Oleo_Script_Swash_Caps, Sansita_Swashed, Berkshire_Swash, Playball, Damion, Marck_Script, Caveat, Shadows_Into_Light, Indie_Flower, Amatic_SC, Rock_Salt, Homemade_Apple, Nothing_You_Could_Do, Reenie_Beanie, Covered_By_Your_Grace, Gloria_Hallelujah, Architects_Daughter, Patrick_Hand, Kalam, Handlee, Neucha, Comic_Neue, Bad_Script, Merienda, Niconne, Rochester, Rouge_Script, Herr_Von_Muellerhoff, Monsieur_La_Doulaise, Mrs_Saint_Delafield, Italianno, Grand_Hotel, Lily_Script_One, Leckerli_One, Style_Script, Cherish, Carattere, Caramel, Ephesis, Ms_Madi, Send_Flowers, Splash, Water_Brush, Whisper, Ballet, Birthstone, Bonheur_Royale, Corinthia, Estonia, Hurricane, Imperial_Script, Inspiration, Island_Moments, Kolker_Brush, Lavishly_Yours, Love_Light, Luxurious_Script, Meow_Script, Moon_Dance, Mea_Culpa, Neonderthaw, Oooh_Baby, Passions_Conflict, Petemoss, Puppies_Play, Qwitcher_Grypen, Sassy_Frass, Smooch, Square_Peg, Tapestry, The_Nautigal, Twinkle_Star, Updock, Vujahday_Script, Waterfall, Comforter, Comforter_Brush, Explora, Festive, Gwendolyn, Licorice, Mrs_Sheppards, My_Soul, Praise, Babylonica, Beau_Rivage, Fuggles, Charm, Charmonman, Mali, Itim, Sriracha, Pattaya, Sofia, Euphoria_Script, Clicker_Script, Engagement, Kristi, La_Belle_Aurore, Meddon, Over_the_Rainbow, Sue_Ellen_Francisco, Zeyada, Cedarville_Cursive, Dawning_of_a_New_Day, Give_You_Glory, Just_Me_Again_Down_Here, Loved_by_the_King, Waiting_for_the_Sunrise, Calligraffitti, Coming_Soon, Crafty_Girls, Delius, Delius_Swash_Caps, Gochi_Hand, Just_Another_Hand, Schoolbell, Short_Stack, Sunshiney, Swanky_and_Moo_Moo, Walter_Turncoat, Annie_Use_Your_Telescope, Chilanka, Gaegu, Nanum_Pen_Script, Nanum_Brush_Script, Hi_Melody, Dokdo, East_Sea_Dokdo, Gamja_Flower, Poor_Story, Yeon_Sung, Cute_Font, Do_Hyeon, Jua, Kirang_Haerang, Black_Han_Sans, Black_And_White_Picture, Gugi, Hahmlet, Gowun_Dodum, Gowun_Batang, Nanum_Gothic, Nanum_Myeongjo, Noto_Sans_KR, Rye, Vast_Shadow, Chewy, Ranchers, Londrina_Solid, Londrina_Shadow, Londrina_Outline, Londrina_Sketch, Fredericka_the_Great, Modak, Kavoon, Lemon, Cherry_Cream_Soda, Frijole, Knewave, Original_Surfer, Sonsie_One, Spicy_Rice, Ribeye, Ribeye_Marrow, Sedgwick_Ave, Sedgwick_Ave_Display, Slackey, Trade_Winds, Freckle_Face, Fontdiner_Swanky, Henny_Penny, Nixie_One, Elsie, Mystery_Quest, Protest_Revolution, Protest_Guerrilla, Alumni_Sans, Alumni_Sans_Collegiate_One, Alumni_Sans_Inline_One, Alumni_Sans_Pinstripe, Graduate, Carter_One, Coda, Coiny, Fascinate, Fascinate_Inline, Flavors, Galindo, Gorditas, Hanalei, Hanalei_Fill, Joti_One, Kumar_One, Kumar_One_Outline, Lakki_Reddy, Margarine, Metal_Mania, Miltonian, Miltonian_Tattoo, Moul, Mouse_Memoirs, New_Rocker, Nosifer, Piedra, Pirata_One, Sancreek, Sarina, Shojumaru, Smokum, Snowburst_One, Stint_Ultra_Expanded, Stint_Ultra_Condensed, Supermercado_One, Trochut, Unkempt, Wendy_One, Zilla_Slab_Highlight, Reggae_One, RocknRoll_One, Rampart_One, Stick, Train_One, Yusei_Magic, Kaisei_Opti, Kaisei_Decol, Kaisei_HarunoUmi, Kaisei_Tokumin, Potta_One, Hachi_Maru_Pop, Yomogi, Zen_Antique, Zen_Kurenaido, Zen_Loop, Zen_Maru_Gothic, Zen_Old_Mincho, Klee_One, Shippori_Antique, Shippori_Antique_B1, Mochiy_Pop_P_One, Murecho, M_PLUS_1, M_PLUS_2, M_PLUS_1_Code, BIZ_UDPGothic, BIZ_UDPMincho, Kosugi, Kosugi_Maru, Sawarabi_Gothic, Sawarabi_Mincho, Hina_Mincho, Yuji_Boku, Yuji_Mai, Yuji_Syuku, Yuji_Hentaigana_Akari, Yuji_Hentaigana_Akebono,
-} from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
-const roboto = Roboto({ subsets: ["latin"] });
-const openSans = Open_Sans({ subsets: ["latin"] });
-const lato = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
-const montserrat = Montserrat({ subsets: ["latin"] });
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
-const nunito = Nunito({ subsets: ["latin"] });
-const nunitoSans = Nunito_Sans({ subsets: ["latin"] });
-const raleway = Raleway({ subsets: ["latin"] });
-const workSans = Work_Sans({ subsets: ["latin"] });
-const dMSans = DM_Sans({ subsets: ["latin"] });
-const rubik = Rubik({ subsets: ["latin"] });
-const karla = Karla({ subsets: ["latin"] });
-const mulish = Mulish({ subsets: ["latin"] });
-const cabin = Cabin({ subsets: ["latin"] });
-const ubuntu = Ubuntu({ subsets: ["latin"], weight: ["400", "500", "700"] });
-const sourceSans3 = Source_Sans_3({ subsets: ["latin"] });
-const firaSans = Fira_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
-const pTSans = PT_Sans({ subsets: ["latin"], weight: ["400", "700"] });
-const notoSans = Noto_Sans({ subsets: ["latin"] });
-const publicSans = Public_Sans({ subsets: ["latin"] });
-const iBMPlexSans = IBM_Plex_Sans({ subsets: ["latin"] });
-const figtree = Figtree({ subsets: ["latin"] });
-const outfit = Outfit({ subsets: ["latin"] });
-const sora = Sora({ subsets: ["latin"] });
-const manrope = Manrope({ subsets: ["latin"] });
-const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"] });
-const lexend = Lexend({ subsets: ["latin"] });
-const urbanist = Urbanist({ subsets: ["latin"] });
-const jost = Jost({ subsets: ["latin"] });
-const josefinSans = Josefin_Sans({ subsets: ["latin"] });
-const archivo = Archivo({ subsets: ["latin"] });
-const barlow = Barlow({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
-const hind = Hind({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
-const dosis = Dosis({ subsets: ["latin"] });
-const signika = Signika({ subsets: ["latin"] });
-const sen = Sen({ subsets: ["latin"] });
-const quicksand = Quicksand({ subsets: ["latin"] });
-const varelaRound = Varela_Round({ subsets: ["latin"], weight: "400" });
-const heebo = Heebo({ subsets: ["latin"] });
-const assistant = Assistant({ subsets: ["latin"] });
-const titilliumWeb = Titillium_Web({ subsets: ["latin"], weight: ["400", "600", "700", "900"] });
-const exo2 = Exo_2({ subsets: ["latin"] });
-const kanit = Kanit({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
-const prompt = Prompt({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
-const redHatDisplay = Red_Hat_Display({ subsets: ["latin"] });
-const redHatText = Red_Hat_Text({ subsets: ["latin"] });
-const onest = Onest({ subsets: ["latin"] });
-const instrumentSans = Instrument_Sans({ subsets: ["latin"] });
-const geist = Geist({ subsets: ["latin"] });
-const syne = Syne({ subsets: ["latin"] });
-const unbounded = Unbounded({ subsets: ["latin"] });
-const bricolageGrotesque = Bricolage_Grotesque({ subsets: ["latin"] });
-const familjenGrotesk = Familjen_Grotesk({ subsets: ["latin"] });
-const gabarito = Gabarito({ subsets: ["latin"] });
-const funnelDisplay = Funnel_Display({ subsets: ["latin"] });
-const hostGrotesk = Host_Grotesk({ subsets: ["latin"] });
-const schibstedGrotesk = Schibsted_Grotesk({ subsets: ["latin"] });
-const golosText = Golos_Text({ subsets: ["latin"] });
-const hankenGrotesk = Hanken_Grotesk({ subsets: ["latin"] });
-const albertSans = Albert_Sans({ subsets: ["latin"] });
-const epilogue = Epilogue({ subsets: ["latin"] });
-const kumbhSans = Kumbh_Sans({ subsets: ["latin"] });
-const sofiaSans = Sofia_Sans({ subsets: ["latin"] });
-const wixMadeforDisplay = Wix_Madefor_Display({ subsets: ["latin"] });
-const rethinkSans = Rethink_Sans({ subsets: ["latin"] });
-const afacad = Afacad({ subsets: ["latin"] });
-const redditSans = Reddit_Sans({ subsets: ["latin"] });
-const parkinsans = Parkinsans({ subsets: ["latin"] });
-const darkerGrotesque = Darker_Grotesque({ subsets: ["latin"] });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
-const leagueSpartan = League_Spartan({ subsets: ["latin"] });
-const questrial = Questrial({ subsets: ["latin"], weight: "400" });
-const montserratAlternates = Montserrat_Alternates({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
-const comfortaa = Comfortaa({ subsets: ["latin"] });
-const fredoka = Fredoka({ subsets: ["latin"] });
-const baloo2 = Baloo_2({ subsets: ["latin"] });
-const lexendZetta = Lexend_Zetta({ subsets: ["latin"] });
-const lexendMega = Lexend_Mega({ subsets: ["latin"] });
-const lexendExa = Lexend_Exa({ subsets: ["latin"] });
-const lexendGiga = Lexend_Giga({ subsets: ["latin"] });
-const tiltWarp = Tilt_Warp({ subsets: ["latin"] });
-const tiltNeon = Tilt_Neon({ subsets: ["latin"] });
-const anta = Anta({ subsets: ["latin"], weight: "400" });
-const brunoAce = Bruno_Ace({ subsets: ["latin"], weight: "400" });
-const brunoAceSC = Bruno_Ace_SC({ subsets: ["latin"], weight: "400" });
-const tomorrow = Tomorrow({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
-const tektur = Tektur({ subsets: ["latin"] });
-const kdamThmorPro = Kdam_Thmor_Pro({ subsets: ["latin"], weight: "400" });
-const genos = Genos({ subsets: ["latin"] });
-const trispace = Trispace({ subsets: ["latin"] });
-const smoochSans = Smooch_Sans({ subsets: ["latin"] });
-const mohave = Mohave({ subsets: ["latin"] });
-const pathwayExtreme = Pathway_Extreme({ subsets: ["latin"] });
-const spinnaker = Spinnaker({ subsets: ["latin"], weight: "400" });
-const telex = Telex({ subsets: ["latin"], weight: "400" });
-const voltaire = Voltaire({ subsets: ["latin"], weight: "400" });
-const yantramanav = Yantramanav({ subsets: ["latin"], weight: ["400", "500", "700", "900"] });
-const mPLUSRounded1c = M_PLUS_Rounded_1c({ subsets: ["latin"], weight: ["400", "500", "700", "800", "900"] });
-const zenKakuGothicNew = Zen_Kaku_Gothic_New({ subsets: ["latin"], weight: ["400", "500", "700", "900"] });
-const delaGothicOne = Dela_Gothic_One({ subsets: ["latin"], weight: "400" });
-const righteous = Righteous({ subsets: ["latin"], weight: "400" });
-const audiowide = Audiowide({ subsets: ["latin"], weight: "400" });
-const daysOne = Days_One({ subsets: ["latin"], weight: "400" });
-const monomaniacOne = Monomaniac_One({ subsets: ["latin"], weight: "400" });
-const concertOne = Concert_One({ subsets: ["latin"], weight: "400" });
-const lilitaOne = Lilita_One({ subsets: ["latin"], weight: "400" });
-const paytoneOne = Paytone_One({ subsets: ["latin"], weight: "400" });
-const bowlbyOne = Bowlby_One({ subsets: ["latin"], weight: "400" });
-const bowlbyOneSC = Bowlby_One_SC({ subsets: ["latin"], weight: "400" });
-const racingSansOne = Racing_Sans_One({ subsets: ["latin"], weight: "400" });
-const kronaOne = Krona_One({ subsets: ["latin"], weight: "400" });
-const goldman = Goldman({ subsets: ["latin"], weight: ["400", "700"] });
-const iceberg = Iceberg({ subsets: ["latin"], weight: "400" });
-const turretRoad = Turret_Road({ subsets: ["latin"], weight: ["400", "500", "700", "800"] });
-const sarpanch = Sarpanch({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
-const fugazOne = Fugaz_One({ subsets: ["latin"], weight: "400" });
-const chango = Chango({ subsets: ["latin"], weight: "400" });
-const contrailOne = Contrail_One({ subsets: ["latin"], weight: "400" });
-const boogaloo = Boogaloo({ subsets: ["latin"], weight: "400" });
-const sansita = Sansita({ subsets: ["latin"], weight: ["400", "700", "800", "900"] });
-const sniglet = Sniglet({ subsets: ["latin"], weight: ["400", "800"] });
-const shrikhand = Shrikhand({ subsets: ["latin"], weight: "400" });
-const titanOne = Titan_One({ subsets: ["latin"], weight: "400" });
-const rowdies = Rowdies({ subsets: ["latin"], weight: ["400", "700"] });
-const bagelFatOne = Bagel_Fat_One({ subsets: ["latin"], weight: "400" });
-const gasoekOne = Gasoek_One({ subsets: ["latin"], weight: "400" });
-const bangers = Bangers({ subsets: ["latin"], weight: "400" });
-const luckiestGuy = Luckiest_Guy({ subsets: ["latin"], weight: "400" });
-const alfaSlabOne = Alfa_Slab_One({ subsets: ["latin"], weight: "400" });
-const ultra = Ultra({ subsets: ["latin"], weight: "400" });
-const rammettoOne = Rammetto_One({ subsets: ["latin"], weight: "400" });
-const rubikMonoOne = Rubik_Mono_One({ subsets: ["latin"], weight: "400" });
-const blackOpsOne = Black_Ops_One({ subsets: ["latin"], weight: "400" });
-const bungee = Bungee({ subsets: ["latin"], weight: "400" });
-const passionOne = Passion_One({ subsets: ["latin"], weight: ["400", "700", "900"] });
-const squadaOne = Squada_One({ subsets: ["latin"], weight: "400" });
-const russoOne = Russo_One({ subsets: ["latin"], weight: "400" });
-const pollerOne = Poller_One({ subsets: ["latin"], weight: "400" });
-const jockeyOne = Jockey_One({ subsets: ["latin"], weight: "400" });
-const marvel = Marvel({ subsets: ["latin"], weight: ["400", "700"] });
-const homenaje = Homenaje({ subsets: ["latin"], weight: "400" });
-const geo = Geo({ subsets: ["latin"], weight: "400" });
-const rationale = Rationale({ subsets: ["latin"], weight: "400" });
-const strait = Strait({ subsets: ["latin"], weight: "400" });
-const economica = Economica({ subsets: ["latin"], weight: ["400", "700"] });
-const share = Share({ subsets: ["latin"], weight: ["400", "700"] });
-const shareTech = Share_Tech({ subsets: ["latin"], weight: "400" });
-const limelight = Limelight({ subsets: ["latin"], weight: "400" });
-const poiretOne = Poiret_One({ subsets: ["latin"], weight: "400" });
-const abrilFatface = Abril_Fatface({ subsets: ["latin"], weight: "400" });
-const yesevaOne = Yeseva_One({ subsets: ["latin"], weight: "400" });
-const lobster = Lobster({ subsets: ["latin"], weight: "400" });
-const pacifico = Pacifico({ subsets: ["latin"], weight: "400" });
-const kaushanScript = Kaushan_Script({ subsets: ["latin"], weight: "400" });
-const permanentMarker = Permanent_Marker({ subsets: ["latin"], weight: "400" });
-const protestStrike = Protest_Strike({ subsets: ["latin"], weight: "400" });
-const protestRiot = Protest_Riot({ subsets: ["latin"], weight: "400" });
-const chonburi = Chonburi({ subsets: ["latin"], weight: "400" });
-const cherryBombOne = Cherry_Bomb_One({ subsets: ["latin"], weight: "400" });
-const mochiyPopOne = Mochiy_Pop_One({ subsets: ["latin"], weight: "400" });
-const jaro = Jaro({ subsets: ["latin"] });
-const climateCrisis = Climate_Crisis({ subsets: ["latin"] });
-const foldit = Foldit({ subsets: ["latin"] });
-const fasterOne = Faster_One({ subsets: ["latin"], weight: "400" });
-const wallpoet = Wallpoet({ subsets: ["latin"], weight: "400" });
-const syncopate = Syncopate({ subsets: ["latin"], weight: ["400", "700"] });
-const majorMonoDisplay = Major_Mono_Display({ subsets: ["latin"], weight: "400" });
-const bungeeShade = Bungee_Shade({ subsets: ["latin"], weight: "400" });
-const bungeeInline = Bungee_Inline({ subsets: ["latin"], weight: "400" });
-const monoton = Monoton({ subsets: ["latin"], weight: "400" });
-const orbitron = Orbitron({ subsets: ["latin"] });
-const michroma = Michroma({ subsets: ["latin"], weight: "400" });
-const chakraPetch = Chakra_Petch({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
-const oxanium = Oxanium({ subsets: ["latin"] });
-const quantico = Quantico({ subsets: ["latin"], weight: ["400", "700"] });
-const aldrich = Aldrich({ subsets: ["latin"], weight: "400" });
-const electrolize = Electrolize({ subsets: ["latin"], weight: "400" });
-const jura = Jura({ subsets: ["latin"] });
-const novaSquare = Nova_Square({ subsets: ["latin"], weight: "400" });
-const novaFlat = Nova_Flat({ subsets: ["latin"], weight: "400" });
-const novaRound = Nova_Round({ subsets: ["latin"], weight: "400" });
-const play = Play({ subsets: ["latin"], weight: ["400", "700"] });
-const saira = Saira({ subsets: ["latin"] });
-const rajdhani = Rajdhani({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
-const baiJamjuree = Bai_Jamjuree({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
-const adventPro = Advent_Pro({ subsets: ["latin"] });
-const gruppo = Gruppo({ subsets: ["latin"], weight: "400" });
-const stickNoBills = Stick_No_Bills({ subsets: ["latin"] });
-const sono = Sono({ subsets: ["latin"] });
-const exo = Exo({ subsets: ["latin"] });
-const zenDots = Zen_Dots({ subsets: ["latin"], weight: "400" });
-const tourney = Tourney({ subsets: ["latin"] });
-const krub = Krub({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
-const mitr = Mitr({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
-const niramit = Niramit({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
-const grandstander = Grandstander({ subsets: ["latin"] });
-const playfairDisplay = Playfair_Display({ subsets: ["latin"] });
-const merriweather = Merriweather({ subsets: ["latin"] });
-const lora = Lora({ subsets: ["latin"] });
-const robotoSlab = Roboto_Slab({ subsets: ["latin"] });
-const bitter = Bitter({ subsets: ["latin"] });
-const zillaSlab = Zilla_Slab({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
-const arvo = Arvo({ subsets: ["latin"], weight: ["400", "700"] });
-const libreBaskerville = Libre_Baskerville({ subsets: ["latin"] });
-const dMSerifDisplay = DM_Serif_Display({ subsets: ["latin"], weight: "400" });
-const fraunces = Fraunces({ subsets: ["latin"] });
-const instrumentSerif = Instrument_Serif({ subsets: ["latin"], weight: "400" });
-const youngSerif = Young_Serif({ subsets: ["latin"], weight: "400" });
-const newsreader = Newsreader({ subsets: ["latin"] });
-const spectral = Spectral({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
-const crimsonPro = Crimson_Pro({ subsets: ["latin"] });
-const eBGaramond = EB_Garamond({ subsets: ["latin"] });
-const cardo = Cardo({ subsets: ["latin"], weight: ["400", "700"] });
-const alegreya = Alegreya({ subsets: ["latin"] });
-const bodoniModa = Bodoni_Moda({ subsets: ["latin"] });
-const italiana = Italiana({ subsets: ["latin"], weight: "400" });
-const marcellus = Marcellus({ subsets: ["latin"], weight: "400" });
-const forum = Forum({ subsets: ["latin"], weight: "400" });
-const juliusSansOne = Julius_Sans_One({ subsets: ["latin"], weight: "400" });
-const cinzel = Cinzel({ subsets: ["latin"] });
-const cinzelDecorative = Cinzel_Decorative({ subsets: ["latin"], weight: ["400", "700", "900"] });
-const cormorantGaramond = Cormorant_Garamond({ subsets: ["latin"] });
-const josefinSlab = Josefin_Slab({ subsets: ["latin"] });
-const notoSerif = Noto_Serif({ subsets: ["latin"] });
-const sourceSerif4 = Source_Serif_4({ subsets: ["latin"] });
-const domine = Domine({ subsets: ["latin"] });
-const vollkorn = Vollkorn({ subsets: ["latin"] });
-const prata = Prata({ subsets: ["latin"], weight: "400" });
-const gloock = Gloock({ subsets: ["latin"], weight: "400" });
-const bevan = Bevan({ subsets: ["latin"], weight: "400" });
-const oswald = Oswald({ subsets: ["latin"] });
-const bebasNeue = Bebas_Neue({ subsets: ["latin"], weight: "400" });
-const anton = Anton({ subsets: ["latin"], weight: "400" });
-const antonSC = Anton_SC({ subsets: ["latin"], weight: "400" });
-const antonio = Antonio({ subsets: ["latin"] });
-const teko = Teko({ subsets: ["latin"] });
-const archivoBlack = Archivo_Black({ subsets: ["latin"], weight: "400" });
-const archivoNarrow = Archivo_Narrow({ subsets: ["latin"] });
-const barlowCondensed = Barlow_Condensed({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
-const barlowSemiCondensed = Barlow_Semi_Condensed({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
-const sairaCondensed = Saira_Condensed({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
-const sofiaSansCondensed = Sofia_Sans_Condensed({ subsets: ["latin"] });
-const fjallaOne = Fjalla_One({ subsets: ["latin"], weight: "400" });
-const pathwayGothicOne = Pathway_Gothic_One({ subsets: ["latin"], weight: "400" });
-const leagueGothic = League_Gothic({ subsets: ["latin"] });
-const robotoCondensed = Roboto_Condensed({ subsets: ["latin"] });
-const firaSansCondensed = Fira_Sans_Condensed({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
-const ubuntuCondensed = Ubuntu_Condensed({ subsets: ["latin"], weight: "400" });
-const encodeSansCondensed = Encode_Sans_Condensed({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
-const yanoneKaffeesatz = Yanone_Kaffeesatz({ subsets: ["latin"] });
-const khand = Khand({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
-const pragatiNarrow = Pragati_Narrow({ subsets: ["latin"], weight: ["400", "700"] });
-const sixCaps = Six_Caps({ subsets: ["latin"], weight: "400" });
-const staatliches = Staatliches({ subsets: ["latin"], weight: "400" });
-const bungeeHairline = Bungee_Hairline({ subsets: ["latin"], weight: "400" });
-const spaceMono = Space_Mono({ subsets: ["latin"], weight: ["400", "700"] });
-const jetBrainsMono = JetBrains_Mono({ subsets: ["latin"] });
-const geistMono = Geist_Mono({ subsets: ["latin"] });
-const martianMono = Martian_Mono({ subsets: ["latin"] });
-const iBMPlexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
-const robotoMono = Roboto_Mono({ subsets: ["latin"] });
-const firaCode = Fira_Code({ subsets: ["latin"] });
-const sourceCodePro = Source_Code_Pro({ subsets: ["latin"] });
-const dMMono = DM_Mono({ subsets: ["latin"], weight: ["400", "500"] });
-const azeretMono = Azeret_Mono({ subsets: ["latin"] });
-const sometypeMono = Sometype_Mono({ subsets: ["latin"] });
-const redHatMono = Red_Hat_Mono({ subsets: ["latin"] });
-const chivoMono = Chivo_Mono({ subsets: ["latin"] });
-const splineSansMono = Spline_Sans_Mono({ subsets: ["latin"] });
-const novaMono = Nova_Mono({ subsets: ["latin"], weight: "400" });
-const shareTechMono = Share_Tech_Mono({ subsets: ["latin"], weight: "400" });
-const xanhMono = Xanh_Mono({ subsets: ["latin"], weight: "400" });
-const kodeMono = Kode_Mono({ subsets: ["latin"] });
-const ubuntuMono = Ubuntu_Mono({ subsets: ["latin"], weight: ["400", "700"] });
-const courierPrime = Courier_Prime({ subsets: ["latin"], weight: ["400", "700"] });
-const inconsolata = Inconsolata({ subsets: ["latin"] });
-const overpassMono = Overpass_Mono({ subsets: ["latin"] });
-const cutiveMono = Cutive_Mono({ subsets: ["latin"], weight: "400" });
-const syneMono = Syne_Mono({ subsets: ["latin"], weight: "400" });
-const fragmentMono = Fragment_Mono({ subsets: ["latin"], weight: "400" });
-const b612Mono = B612_Mono({ subsets: ["latin"], weight: ["400", "700"] });
-const unicaOne = Unica_One({ subsets: ["latin"], weight: "400" });
-const federo = Federo({ subsets: ["latin"], weight: "400" });
-const megrim = Megrim({ subsets: ["latin"], weight: "400" });
-const kenia = Kenia({ subsets: ["latin"], weight: "400" });
-const revalia = Revalia({ subsets: ["latin"], weight: "400" });
-const stalinistOne = Stalinist_One({ subsets: ["latin"], weight: "400" });
-const bungeeOutline = Bungee_Outline({ subsets: ["latin"], weight: "400" });
-const rubikIso = Rubik_Iso({ subsets: ["latin"], weight: "400" });
-const rubik80sFade = Rubik_80s_Fade({ subsets: ["latin"], weight: "400" });
-const rubikVinyl = Rubik_Vinyl({ subsets: ["latin"], weight: "400" });
-const rubikMoonrocks = Rubik_Moonrocks({ subsets: ["latin"], weight: "400" });
-const rubikLines = Rubik_Lines({ subsets: ["latin"], weight: "400" });
-const rubikGlitch = Rubik_Glitch({ subsets: ["latin"], weight: "400" });
-const rubikMaze = Rubik_Maze({ subsets: ["latin"], weight: "400" });
-const sairaStencilOne = Saira_Stencil_One({ subsets: ["latin"], weight: "400" });
-const allertaStencil = Allerta_Stencil({ subsets: ["latin"], weight: "400" });
-const stardosStencil = Stardos_Stencil({ subsets: ["latin"], weight: ["400", "700"] });
-const sirinStencil = Sirin_Stencil({ subsets: ["latin"], weight: "400" });
-const emblemaOne = Emblema_One({ subsets: ["latin"], weight: "400" });
-const codystar = Codystar({ subsets: ["latin"], weight: "400" });
-const ropaSans = Ropa_Sans({ subsets: ["latin"], weight: "400" });
-const prostoOne = Prosto_One({ subsets: ["latin"], weight: "400" });
-const kellySlab = Kelly_Slab({ subsets: ["latin"], weight: "400" });
-const sansation = Sansation({ subsets: ["latin"], weight: ["400", "700"] });
-const iceland = Iceland({ subsets: ["latin"], weight: "400" });
-const novaOval = Nova_Oval({ subsets: ["latin"], weight: "400" });
-const novaCut = Nova_Cut({ subsets: ["latin"], weight: "400" });
-const novaScript = Nova_Script({ subsets: ["latin"], weight: "400" });
-const novaSlim = Nova_Slim({ subsets: ["latin"], weight: "400" });
-const lobsterTwo = Lobster_Two({ subsets: ["latin"], weight: ["400", "700"] });
-const dancingScript = Dancing_Script({ subsets: ["latin"] });
-const greatVibes = Great_Vibes({ subsets: ["latin"], weight: "400" });
-const satisfy = Satisfy({ subsets: ["latin"], weight: "400" });
-const cookie = Cookie({ subsets: ["latin"], weight: "400" });
-const courgette = Courgette({ subsets: ["latin"], weight: "400" });
-const sacramento = Sacramento({ subsets: ["latin"], weight: "400" });
-const yellowtail = Yellowtail({ subsets: ["latin"], weight: "400" });
-const allura = Allura({ subsets: ["latin"], weight: "400" });
-const alexBrush = Alex_Brush({ subsets: ["latin"], weight: "400" });
-const parisienne = Parisienne({ subsets: ["latin"], weight: "400" });
-const tangerine = Tangerine({ subsets: ["latin"], weight: ["400", "700"] });
-const pinyonScript = Pinyon_Script({ subsets: ["latin"], weight: "400" });
-const mrDafoe = Mr_Dafoe({ subsets: ["latin"], weight: "400" });
-const norican = Norican({ subsets: ["latin"], weight: "400" });
-const oleoScript = Oleo_Script({ subsets: ["latin"], weight: ["400", "700"] });
-const oleoScriptSwashCaps = Oleo_Script_Swash_Caps({ subsets: ["latin"], weight: ["400", "700"] });
-const sansitaSwashed = Sansita_Swashed({ subsets: ["latin"] });
-const berkshireSwash = Berkshire_Swash({ subsets: ["latin"], weight: "400" });
-const playball = Playball({ subsets: ["latin"], weight: "400" });
-const damion = Damion({ subsets: ["latin"], weight: "400" });
-const marckScript = Marck_Script({ subsets: ["latin"], weight: "400" });
-const caveat = Caveat({ subsets: ["latin"] });
-const shadowsIntoLight = Shadows_Into_Light({ subsets: ["latin"], weight: "400" });
-const indieFlower = Indie_Flower({ subsets: ["latin"], weight: "400" });
-const amaticSC = Amatic_SC({ subsets: ["latin"], weight: ["400", "700"] });
-const rockSalt = Rock_Salt({ subsets: ["latin"], weight: "400" });
-const homemadeApple = Homemade_Apple({ subsets: ["latin"], weight: "400" });
-const nothingYouCouldDo = Nothing_You_Could_Do({ subsets: ["latin"], weight: "400" });
-const reenieBeanie = Reenie_Beanie({ subsets: ["latin"], weight: "400" });
-const coveredByYourGrace = Covered_By_Your_Grace({ subsets: ["latin"], weight: "400" });
-const gloriaHallelujah = Gloria_Hallelujah({ subsets: ["latin"], weight: "400" });
-const architectsDaughter = Architects_Daughter({ subsets: ["latin"], weight: "400" });
-const patrickHand = Patrick_Hand({ subsets: ["latin"], weight: "400" });
-const kalam = Kalam({ subsets: ["latin"], weight: ["400", "700"] });
-const handlee = Handlee({ subsets: ["latin"], weight: "400" });
-const neucha = Neucha({ subsets: ["latin"], weight: "400" });
-const comicNeue = Comic_Neue({ subsets: ["latin"], weight: ["400", "700"] });
-const badScript = Bad_Script({ subsets: ["latin"], weight: "400" });
-const merienda = Merienda({ subsets: ["latin"] });
-const niconne = Niconne({ subsets: ["latin"], weight: "400" });
-const rochester = Rochester({ subsets: ["latin"], weight: "400" });
-const rougeScript = Rouge_Script({ subsets: ["latin"], weight: "400" });
-const herrVonMuellerhoff = Herr_Von_Muellerhoff({ subsets: ["latin"], weight: "400" });
-const monsieurLaDoulaise = Monsieur_La_Doulaise({ subsets: ["latin"], weight: "400" });
-const mrsSaintDelafield = Mrs_Saint_Delafield({ subsets: ["latin"], weight: "400" });
-const italianno = Italianno({ subsets: ["latin"], weight: "400" });
-const grandHotel = Grand_Hotel({ subsets: ["latin"], weight: "400" });
-const lilyScriptOne = Lily_Script_One({ subsets: ["latin"], weight: "400" });
-const leckerliOne = Leckerli_One({ subsets: ["latin"], weight: "400" });
-const styleScript = Style_Script({ subsets: ["latin"], weight: "400" });
-const cherish = Cherish({ subsets: ["latin"], weight: "400" });
-const carattere = Carattere({ subsets: ["latin"], weight: "400" });
-const caramel = Caramel({ subsets: ["latin"], weight: "400" });
-const ephesis = Ephesis({ subsets: ["latin"], weight: "400" });
-const msMadi = Ms_Madi({ subsets: ["latin"], weight: "400" });
-const sendFlowers = Send_Flowers({ subsets: ["latin"], weight: "400" });
-const splash = Splash({ subsets: ["latin"], weight: "400" });
-const waterBrush = Water_Brush({ subsets: ["latin"], weight: "400" });
-const whisper = Whisper({ subsets: ["latin"], weight: "400" });
-const ballet = Ballet({ subsets: ["latin"] });
-const birthstone = Birthstone({ subsets: ["latin"], weight: "400" });
-const bonheurRoyale = Bonheur_Royale({ subsets: ["latin"], weight: "400" });
-const corinthia = Corinthia({ subsets: ["latin"], weight: ["400", "700"] });
-const estonia = Estonia({ subsets: ["latin"], weight: "400" });
-const hurricane = Hurricane({ subsets: ["latin"], weight: "400" });
-const imperialScript = Imperial_Script({ subsets: ["latin"], weight: "400" });
-const inspiration = Inspiration({ subsets: ["latin"], weight: "400" });
-const islandMoments = Island_Moments({ subsets: ["latin"], weight: "400" });
-const kolkerBrush = Kolker_Brush({ subsets: ["latin"], weight: "400" });
-const lavishlyYours = Lavishly_Yours({ subsets: ["latin"], weight: "400" });
-const loveLight = Love_Light({ subsets: ["latin"], weight: "400" });
-const luxuriousScript = Luxurious_Script({ subsets: ["latin"], weight: "400" });
-const meowScript = Meow_Script({ subsets: ["latin"], weight: "400" });
-const moonDance = Moon_Dance({ subsets: ["latin"], weight: "400" });
-const meaCulpa = Mea_Culpa({ subsets: ["latin"], weight: "400" });
-const neonderthaw = Neonderthaw({ subsets: ["latin"], weight: "400" });
-const ooohBaby = Oooh_Baby({ subsets: ["latin"], weight: "400" });
-const passionsConflict = Passions_Conflict({ subsets: ["latin"], weight: "400" });
-const petemoss = Petemoss({ subsets: ["latin"], weight: "400" });
-const puppiesPlay = Puppies_Play({ subsets: ["latin"], weight: "400" });
-const qwitcherGrypen = Qwitcher_Grypen({ subsets: ["latin"], weight: ["400", "700"] });
-const sassyFrass = Sassy_Frass({ subsets: ["latin"], weight: "400" });
-const smooch = Smooch({ subsets: ["latin"], weight: "400" });
-const squarePeg = Square_Peg({ subsets: ["latin"], weight: "400" });
-const tapestry = Tapestry({ subsets: ["latin"], weight: "400" });
-const theNautigal = The_Nautigal({ subsets: ["latin"], weight: ["400", "700"] });
-const twinkleStar = Twinkle_Star({ subsets: ["latin"], weight: "400" });
-const updock = Updock({ subsets: ["latin"], weight: "400" });
-const vujahdayScript = Vujahday_Script({ subsets: ["latin"], weight: "400" });
-const waterfall = Waterfall({ subsets: ["latin"], weight: "400" });
-const comforter = Comforter({ subsets: ["latin"], weight: "400" });
-const comforterBrush = Comforter_Brush({ subsets: ["latin"], weight: "400" });
-const explora = Explora({ subsets: ["latin"], weight: "400" });
-const festive = Festive({ subsets: ["latin"], weight: "400" });
-const gwendolyn = Gwendolyn({ subsets: ["latin"], weight: ["400", "700"] });
-const licorice = Licorice({ subsets: ["latin"], weight: "400" });
-const mrsSheppards = Mrs_Sheppards({ subsets: ["latin"], weight: "400" });
-const mySoul = My_Soul({ subsets: ["latin"], weight: "400" });
-const praise = Praise({ subsets: ["latin"], weight: "400" });
-const babylonica = Babylonica({ subsets: ["latin"], weight: "400" });
-const beauRivage = Beau_Rivage({ subsets: ["latin"], weight: "400" });
-const fuggles = Fuggles({ subsets: ["latin"], weight: "400" });
-const charm = Charm({ subsets: ["latin"], weight: ["400", "700"] });
-const charmonman = Charmonman({ subsets: ["latin"], weight: ["400", "700"] });
-const mali = Mali({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
-const itim = Itim({ subsets: ["latin"], weight: "400" });
-const sriracha = Sriracha({ subsets: ["latin"], weight: "400" });
-const pattaya = Pattaya({ subsets: ["latin"], weight: "400" });
-const sofia = Sofia({ subsets: ["latin"], weight: "400" });
-const euphoriaScript = Euphoria_Script({ subsets: ["latin"], weight: "400" });
-const clickerScript = Clicker_Script({ subsets: ["latin"], weight: "400" });
-const engagement = Engagement({ subsets: ["latin"], weight: "400" });
-const kristi = Kristi({ subsets: ["latin"], weight: "400" });
-const laBelleAurore = La_Belle_Aurore({ subsets: ["latin"], weight: "400" });
-const meddon = Meddon({ subsets: ["latin"], weight: "400" });
-const overtheRainbow = Over_the_Rainbow({ subsets: ["latin"], weight: "400" });
-const sueEllenFrancisco = Sue_Ellen_Francisco({ subsets: ["latin"], weight: "400" });
-const zeyada = Zeyada({ subsets: ["latin"], weight: "400" });
-const cedarvilleCursive = Cedarville_Cursive({ subsets: ["latin"], weight: "400" });
-const dawningofaNewDay = Dawning_of_a_New_Day({ subsets: ["latin"], weight: "400" });
-const giveYouGlory = Give_You_Glory({ subsets: ["latin"], weight: "400" });
-const justMeAgainDownHere = Just_Me_Again_Down_Here({ subsets: ["latin"], weight: "400" });
-const lovedbytheKing = Loved_by_the_King({ subsets: ["latin"], weight: "400" });
-const waitingfortheSunrise = Waiting_for_the_Sunrise({ subsets: ["latin"], weight: "400" });
-const calligraffitti = Calligraffitti({ subsets: ["latin"], weight: "400" });
-const comingSoon = Coming_Soon({ subsets: ["latin"], weight: "400" });
-const craftyGirls = Crafty_Girls({ subsets: ["latin"], weight: "400" });
-const delius = Delius({ subsets: ["latin"], weight: "400" });
-const deliusSwashCaps = Delius_Swash_Caps({ subsets: ["latin"], weight: "400" });
-const gochiHand = Gochi_Hand({ subsets: ["latin"], weight: "400" });
-const justAnotherHand = Just_Another_Hand({ subsets: ["latin"], weight: "400" });
-const schoolbell = Schoolbell({ subsets: ["latin"], weight: "400" });
-const shortStack = Short_Stack({ subsets: ["latin"], weight: "400" });
-const sunshiney = Sunshiney({ subsets: ["latin"], weight: "400" });
-const swankyandMooMoo = Swanky_and_Moo_Moo({ subsets: ["latin"], weight: "400" });
-const walterTurncoat = Walter_Turncoat({ subsets: ["latin"], weight: "400" });
-const annieUseYourTelescope = Annie_Use_Your_Telescope({ subsets: ["latin"], weight: "400" });
-const chilanka = Chilanka({ subsets: ["latin"], weight: "400" });
-const gaegu = Gaegu({ subsets: ["latin"], weight: ["400", "700"] });
-const nanumPenScript = Nanum_Pen_Script({ subsets: ["latin"], weight: "400" });
-const nanumBrushScript = Nanum_Brush_Script({ subsets: ["latin"], weight: "400" });
-const hiMelody = Hi_Melody({ subsets: ["latin"], weight: "400" });
-const dokdo = Dokdo({ subsets: ["latin"], weight: "400" });
-const eastSeaDokdo = East_Sea_Dokdo({ subsets: ["latin"], weight: "400" });
-const gamjaFlower = Gamja_Flower({ subsets: ["latin"], weight: "400" });
-const poorStory = Poor_Story({ subsets: ["latin"], weight: "400" });
-const yeonSung = Yeon_Sung({ subsets: ["latin"], weight: "400" });
-const cuteFont = Cute_Font({ subsets: ["latin"], weight: "400" });
-const doHyeon = Do_Hyeon({ subsets: ["latin"], weight: "400" });
-const jua = Jua({ subsets: ["latin"], weight: "400" });
-const kirangHaerang = Kirang_Haerang({ subsets: ["latin"], weight: "400" });
-const blackHanSans = Black_Han_Sans({ subsets: ["latin"], weight: "400" });
-const blackAndWhitePicture = Black_And_White_Picture({ subsets: ["latin"], weight: "400" });
-const gugi = Gugi({ subsets: ["latin"], weight: "400" });
-const hahmlet = Hahmlet({ subsets: ["latin"] });
-const gowunDodum = Gowun_Dodum({ subsets: ["latin"], weight: "400" });
-const gowunBatang = Gowun_Batang({ subsets: ["latin"], weight: ["400", "700"] });
-const nanumGothic = Nanum_Gothic({ subsets: ["latin"], weight: ["400", "700", "800"] });
-const nanumMyeongjo = Nanum_Myeongjo({ subsets: ["latin"], weight: ["400", "700", "800"] });
-const notoSansKR = Noto_Sans_KR({ subsets: ["latin"] });
-const rye = Rye({ subsets: ["latin"], weight: "400" });
-const vastShadow = Vast_Shadow({ subsets: ["latin"], weight: "400" });
-const chewy = Chewy({ subsets: ["latin"], weight: "400" });
-const ranchers = Ranchers({ subsets: ["latin"], weight: "400" });
-const londrinaSolid = Londrina_Solid({ subsets: ["latin"], weight: ["400", "900"] });
-const londrinaShadow = Londrina_Shadow({ subsets: ["latin"], weight: "400" });
-const londrinaOutline = Londrina_Outline({ subsets: ["latin"], weight: "400" });
-const londrinaSketch = Londrina_Sketch({ subsets: ["latin"], weight: "400" });
-const frederickatheGreat = Fredericka_the_Great({ subsets: ["latin"], weight: "400" });
-const modak = Modak({ subsets: ["latin"], weight: "400" });
-const kavoon = Kavoon({ subsets: ["latin"], weight: "400" });
-const lemon = Lemon({ subsets: ["latin"], weight: "400" });
-const cherryCreamSoda = Cherry_Cream_Soda({ subsets: ["latin"], weight: "400" });
-const frijole = Frijole({ subsets: ["latin"], weight: "400" });
-const knewave = Knewave({ subsets: ["latin"], weight: "400" });
-const originalSurfer = Original_Surfer({ subsets: ["latin"], weight: "400" });
-const sonsieOne = Sonsie_One({ subsets: ["latin"], weight: "400" });
-const spicyRice = Spicy_Rice({ subsets: ["latin"], weight: "400" });
-const ribeye = Ribeye({ subsets: ["latin"], weight: "400" });
-const ribeyeMarrow = Ribeye_Marrow({ subsets: ["latin"], weight: "400" });
-const sedgwickAve = Sedgwick_Ave({ subsets: ["latin"], weight: "400" });
-const sedgwickAveDisplay = Sedgwick_Ave_Display({ subsets: ["latin"], weight: "400" });
-const slackey = Slackey({ subsets: ["latin"], weight: "400" });
-const tradeWinds = Trade_Winds({ subsets: ["latin"], weight: "400" });
-const freckleFace = Freckle_Face({ subsets: ["latin"], weight: "400" });
-const fontdinerSwanky = Fontdiner_Swanky({ subsets: ["latin"], weight: "400" });
-const hennyPenny = Henny_Penny({ subsets: ["latin"], weight: "400" });
-const nixieOne = Nixie_One({ subsets: ["latin"], weight: "400" });
-const elsie = Elsie({ subsets: ["latin"], weight: ["400", "900"] });
-const mysteryQuest = Mystery_Quest({ subsets: ["latin"], weight: "400" });
-const protestRevolution = Protest_Revolution({ subsets: ["latin"], weight: "400" });
-const protestGuerrilla = Protest_Guerrilla({ subsets: ["latin"], weight: "400" });
-const alumniSans = Alumni_Sans({ subsets: ["latin"] });
-const alumniSansCollegiateOne = Alumni_Sans_Collegiate_One({ subsets: ["latin"], weight: "400" });
-const alumniSansInlineOne = Alumni_Sans_Inline_One({ subsets: ["latin"], weight: "400" });
-const alumniSansPinstripe = Alumni_Sans_Pinstripe({ subsets: ["latin"], weight: "400" });
-const graduate = Graduate({ subsets: ["latin"], weight: "400" });
-const carterOne = Carter_One({ subsets: ["latin"], weight: "400" });
-const coda = Coda({ subsets: ["latin"], weight: ["400", "800"] });
-const coiny = Coiny({ subsets: ["latin"], weight: "400" });
-const fascinate = Fascinate({ subsets: ["latin"], weight: "400" });
-const fascinateInline = Fascinate_Inline({ subsets: ["latin"], weight: "400" });
-const flavors = Flavors({ subsets: ["latin"], weight: "400" });
-const galindo = Galindo({ subsets: ["latin"], weight: "400" });
-const gorditas = Gorditas({ subsets: ["latin"], weight: ["400", "700"] });
-const hanalei = Hanalei({ subsets: ["latin"], weight: "400" });
-const hanaleiFill = Hanalei_Fill({ subsets: ["latin"], weight: "400" });
-const jotiOne = Joti_One({ subsets: ["latin"], weight: "400" });
-const kumarOne = Kumar_One({ subsets: ["latin"], weight: "400" });
-const kumarOneOutline = Kumar_One_Outline({ subsets: ["latin"], weight: "400" });
-const lakkiReddy = Lakki_Reddy({ subsets: ["latin"], weight: "400" });
-const margarine = Margarine({ subsets: ["latin"], weight: "400" });
-const metalMania = Metal_Mania({ subsets: ["latin"], weight: "400" });
-const miltonian = Miltonian({ subsets: ["latin"], weight: "400" });
-const miltonianTattoo = Miltonian_Tattoo({ subsets: ["latin"], weight: "400" });
-const moul = Moul({ subsets: ["latin"], weight: "400" });
-const mouseMemoirs = Mouse_Memoirs({ subsets: ["latin"], weight: "400" });
-const newRocker = New_Rocker({ subsets: ["latin"], weight: "400" });
-const nosifer = Nosifer({ subsets: ["latin"], weight: "400" });
-const piedra = Piedra({ subsets: ["latin"], weight: "400" });
-const pirataOne = Pirata_One({ subsets: ["latin"], weight: "400" });
-const sancreek = Sancreek({ subsets: ["latin"], weight: "400" });
-const sarina = Sarina({ subsets: ["latin"], weight: "400" });
-const shojumaru = Shojumaru({ subsets: ["latin"], weight: "400" });
-const smokum = Smokum({ subsets: ["latin"], weight: "400" });
-const snowburstOne = Snowburst_One({ subsets: ["latin"], weight: "400" });
-const stintUltraExpanded = Stint_Ultra_Expanded({ subsets: ["latin"], weight: "400" });
-const stintUltraCondensed = Stint_Ultra_Condensed({ subsets: ["latin"], weight: "400" });
-const supermercadoOne = Supermercado_One({ subsets: ["latin"], weight: "400" });
-const trochut = Trochut({ subsets: ["latin"], weight: ["400", "700"] });
-const unkempt = Unkempt({ subsets: ["latin"], weight: ["400", "700"] });
-const wendyOne = Wendy_One({ subsets: ["latin"], weight: "400" });
-const zillaSlabHighlight = Zilla_Slab_Highlight({ subsets: ["latin"], weight: ["400", "700"] });
-const reggaeOne = Reggae_One({ subsets: ["latin"], weight: "400" });
-const rocknRollOne = RocknRoll_One({ subsets: ["latin"], weight: "400" });
-const rampartOne = Rampart_One({ subsets: ["latin"], weight: "400" });
-const stick = Stick({ subsets: ["latin"], weight: "400" });
-const trainOne = Train_One({ subsets: ["latin"], weight: "400" });
-const yuseiMagic = Yusei_Magic({ subsets: ["latin"], weight: "400" });
-const kaiseiOpti = Kaisei_Opti({ subsets: ["latin"], weight: ["400", "500", "700"] });
-const kaiseiDecol = Kaisei_Decol({ subsets: ["latin"], weight: ["400", "500", "700"] });
-const kaiseiHarunoUmi = Kaisei_HarunoUmi({ subsets: ["latin"], weight: ["400", "500", "700"] });
-const kaiseiTokumin = Kaisei_Tokumin({ subsets: ["latin"], weight: ["400", "500", "700", "800"] });
-const pottaOne = Potta_One({ subsets: ["latin"], weight: "400" });
-const hachiMaruPop = Hachi_Maru_Pop({ subsets: ["latin"], weight: "400" });
-const yomogi = Yomogi({ subsets: ["latin"], weight: "400" });
-const zenAntique = Zen_Antique({ subsets: ["latin"], weight: "400" });
-const zenKurenaido = Zen_Kurenaido({ subsets: ["latin"], weight: "400" });
-const zenLoop = Zen_Loop({ subsets: ["latin"], weight: "400" });
-const zenMaruGothic = Zen_Maru_Gothic({ subsets: ["latin"], weight: ["400", "500", "700", "900"] });
-const zenOldMincho = Zen_Old_Mincho({ subsets: ["latin"], weight: ["400", "500", "600", "700", "900"] });
-const kleeOne = Klee_One({ subsets: ["latin"], weight: ["400", "600"] });
-const shipporiAntique = Shippori_Antique({ subsets: ["latin"], weight: "400" });
-const shipporiAntiqueB1 = Shippori_Antique_B1({ subsets: ["latin"], weight: "400" });
-const mochiyPopPOne = Mochiy_Pop_P_One({ subsets: ["latin"], weight: "400" });
-const murecho = Murecho({ subsets: ["latin"] });
-const mPLUS1 = M_PLUS_1({ subsets: ["latin"] });
-const mPLUS2 = M_PLUS_2({ subsets: ["latin"] });
-const mPLUS1Code = M_PLUS_1_Code({ subsets: ["latin"] });
-const bIZUDPGothic = BIZ_UDPGothic({ subsets: ["latin"], weight: ["400", "700"] });
-const bIZUDPMincho = BIZ_UDPMincho({ subsets: ["latin"], weight: ["400", "700"] });
-const kosugi = Kosugi({ subsets: ["latin"], weight: "400" });
-const kosugiMaru = Kosugi_Maru({ subsets: ["latin"], weight: "400" });
-const sawarabiGothic = Sawarabi_Gothic({ subsets: ["latin"], weight: "400" });
-const sawarabiMincho = Sawarabi_Mincho({ subsets: ["latin"], weight: "400" });
-const hinaMincho = Hina_Mincho({ subsets: ["latin"], weight: "400" });
-const yujiBoku = Yuji_Boku({ subsets: ["latin"], weight: "400" });
-const yujiMai = Yuji_Mai({ subsets: ["latin"], weight: "400" });
-const yujiSyuku = Yuji_Syuku({ subsets: ["latin"], weight: "400" });
-const yujiHentaiganaAkari = Yuji_Hentaigana_Akari({ subsets: ["latin"], weight: "400" });
-const yujiHentaiganaAkebono = Yuji_Hentaigana_Akebono({ subsets: ["latin"], weight: "400" });
 
-const FONTS: { name: string; family: string | null; group: Group }[] = [
+// Candidate fonts load at runtime from Google Fonts, one stylesheet per family
+// the first time it is shown, never at build: 583 next/font loaders fetched all
+// at once tripped Google's rate limit, and since Next 16.3 a font that fails to
+// fetch is a build error that takes the whole dev server down. `axis` is the
+// weight axis the family offers (from next's font data), so every weight the
+// stepper reaches is real. Baking still writes a proper next/font loader for
+// the one font that wins.
+type Font = { name: string; family: string | null; axis?: string; group: Group };
+const FONTS: Font[] = [
   { name: "Current (Orbitron)", family: null, group: "futuristic" },
   { name: "Current (Montserrat)", family: null, group: "common" },
-  { name: "Inter", family: inter.style.fontFamily, group: "common" },
-  { name: "Roboto", family: roboto.style.fontFamily, group: "common" },
-  { name: "Open Sans", family: openSans.style.fontFamily, group: "common" },
-  { name: "Lato", family: lato.style.fontFamily, group: "common" },
-  { name: "Montserrat", family: montserrat.style.fontFamily, group: "common" },
-  { name: "Poppins", family: poppins.style.fontFamily, group: "common" },
-  { name: "Nunito", family: nunito.style.fontFamily, group: "common" },
-  { name: "Nunito Sans", family: nunitoSans.style.fontFamily, group: "common" },
-  { name: "Raleway", family: raleway.style.fontFamily, group: "common" },
-  { name: "Work Sans", family: workSans.style.fontFamily, group: "common" },
-  { name: "DM Sans", family: dMSans.style.fontFamily, group: "common" },
-  { name: "Rubik", family: rubik.style.fontFamily, group: "common" },
-  { name: "Karla", family: karla.style.fontFamily, group: "common" },
-  { name: "Mulish", family: mulish.style.fontFamily, group: "common" },
-  { name: "Cabin", family: cabin.style.fontFamily, group: "common" },
-  { name: "Ubuntu", family: ubuntu.style.fontFamily, group: "common" },
-  { name: "Source Sans 3", family: sourceSans3.style.fontFamily, group: "common" },
-  { name: "Fira Sans", family: firaSans.style.fontFamily, group: "common" },
-  { name: "PT Sans", family: pTSans.style.fontFamily, group: "common" },
-  { name: "Noto Sans", family: notoSans.style.fontFamily, group: "common" },
-  { name: "Public Sans", family: publicSans.style.fontFamily, group: "common" },
-  { name: "IBM Plex Sans", family: iBMPlexSans.style.fontFamily, group: "common" },
-  { name: "Figtree", family: figtree.style.fontFamily, group: "common" },
-  { name: "Outfit", family: outfit.style.fontFamily, group: "common" },
-  { name: "Sora", family: sora.style.fontFamily, group: "common" },
-  { name: "Manrope", family: manrope.style.fontFamily, group: "common" },
-  { name: "Plus Jakarta Sans", family: plusJakartaSans.style.fontFamily, group: "common" },
-  { name: "Lexend", family: lexend.style.fontFamily, group: "common" },
-  { name: "Urbanist", family: urbanist.style.fontFamily, group: "common" },
-  { name: "Jost", family: jost.style.fontFamily, group: "common" },
-  { name: "Josefin Sans", family: josefinSans.style.fontFamily, group: "common" },
-  { name: "Archivo", family: archivo.style.fontFamily, group: "common" },
-  { name: "Barlow", family: barlow.style.fontFamily, group: "common" },
-  { name: "Hind", family: hind.style.fontFamily, group: "common" },
-  { name: "Dosis", family: dosis.style.fontFamily, group: "common" },
-  { name: "Signika", family: signika.style.fontFamily, group: "common" },
-  { name: "Sen", family: sen.style.fontFamily, group: "common" },
-  { name: "Quicksand", family: quicksand.style.fontFamily, group: "common" },
-  { name: "Varela Round", family: varelaRound.style.fontFamily, group: "common" },
-  { name: "Heebo", family: heebo.style.fontFamily, group: "common" },
-  { name: "Assistant", family: assistant.style.fontFamily, group: "common" },
-  { name: "Titillium Web", family: titilliumWeb.style.fontFamily, group: "common" },
-  { name: "Exo 2", family: exo2.style.fontFamily, group: "common" },
-  { name: "Kanit", family: kanit.style.fontFamily, group: "common" },
-  { name: "Prompt", family: prompt.style.fontFamily, group: "common" },
-  { name: "Red Hat Display", family: redHatDisplay.style.fontFamily, group: "common" },
-  { name: "Red Hat Text", family: redHatText.style.fontFamily, group: "common" },
-  { name: "Onest", family: onest.style.fontFamily, group: "common" },
-  { name: "Instrument Sans", family: instrumentSans.style.fontFamily, group: "common" },
-  { name: "Geist", family: geist.style.fontFamily, group: "common" },
-  { name: "Syne", family: syne.style.fontFamily, group: "geometric" },
-  { name: "Unbounded", family: unbounded.style.fontFamily, group: "geometric" },
-  { name: "Bricolage Grotesque", family: bricolageGrotesque.style.fontFamily, group: "geometric" },
-  { name: "Familjen Grotesk", family: familjenGrotesk.style.fontFamily, group: "geometric" },
-  { name: "Gabarito", family: gabarito.style.fontFamily, group: "geometric" },
-  { name: "Funnel Display", family: funnelDisplay.style.fontFamily, group: "geometric" },
-  { name: "Host Grotesk", family: hostGrotesk.style.fontFamily, group: "geometric" },
-  { name: "Schibsted Grotesk", family: schibstedGrotesk.style.fontFamily, group: "geometric" },
-  { name: "Golos Text", family: golosText.style.fontFamily, group: "geometric" },
-  { name: "Hanken Grotesk", family: hankenGrotesk.style.fontFamily, group: "geometric" },
-  { name: "Albert Sans", family: albertSans.style.fontFamily, group: "geometric" },
-  { name: "Epilogue", family: epilogue.style.fontFamily, group: "geometric" },
-  { name: "Kumbh Sans", family: kumbhSans.style.fontFamily, group: "geometric" },
-  { name: "Sofia Sans", family: sofiaSans.style.fontFamily, group: "geometric" },
-  { name: "Wix Madefor Display", family: wixMadeforDisplay.style.fontFamily, group: "geometric" },
-  { name: "Rethink Sans", family: rethinkSans.style.fontFamily, group: "geometric" },
-  { name: "Afacad", family: afacad.style.fontFamily, group: "geometric" },
-  { name: "Reddit Sans", family: redditSans.style.fontFamily, group: "geometric" },
-  { name: "Parkinsans", family: parkinsans.style.fontFamily, group: "geometric" },
-  { name: "Darker Grotesque", family: darkerGrotesque.style.fontFamily, group: "geometric" },
-  { name: "Space Grotesk", family: spaceGrotesk.style.fontFamily, group: "geometric" },
-  { name: "League Spartan", family: leagueSpartan.style.fontFamily, group: "geometric" },
-  { name: "Questrial", family: questrial.style.fontFamily, group: "geometric" },
-  { name: "Montserrat Alternates", family: montserratAlternates.style.fontFamily, group: "geometric" },
-  { name: "Comfortaa", family: comfortaa.style.fontFamily, group: "geometric" },
-  { name: "Fredoka", family: fredoka.style.fontFamily, group: "geometric" },
-  { name: "Baloo 2", family: baloo2.style.fontFamily, group: "geometric" },
-  { name: "Lexend Zetta", family: lexendZetta.style.fontFamily, group: "geometric" },
-  { name: "Lexend Mega", family: lexendMega.style.fontFamily, group: "geometric" },
-  { name: "Lexend Exa", family: lexendExa.style.fontFamily, group: "geometric" },
-  { name: "Lexend Giga", family: lexendGiga.style.fontFamily, group: "geometric" },
-  { name: "Tilt Warp", family: tiltWarp.style.fontFamily, group: "geometric" },
-  { name: "Tilt Neon", family: tiltNeon.style.fontFamily, group: "geometric" },
-  { name: "Anta", family: anta.style.fontFamily, group: "geometric" },
-  { name: "Bruno Ace", family: brunoAce.style.fontFamily, group: "geometric" },
-  { name: "Bruno Ace SC", family: brunoAceSC.style.fontFamily, group: "geometric" },
-  { name: "Tomorrow", family: tomorrow.style.fontFamily, group: "geometric" },
-  { name: "Tektur", family: tektur.style.fontFamily, group: "geometric" },
-  { name: "Kdam Thmor Pro", family: kdamThmorPro.style.fontFamily, group: "geometric" },
-  { name: "Genos", family: genos.style.fontFamily, group: "geometric" },
-  { name: "Trispace", family: trispace.style.fontFamily, group: "geometric" },
-  { name: "Smooch Sans", family: smoochSans.style.fontFamily, group: "geometric" },
-  { name: "Mohave", family: mohave.style.fontFamily, group: "geometric" },
-  { name: "Pathway Extreme", family: pathwayExtreme.style.fontFamily, group: "geometric" },
-  { name: "Spinnaker", family: spinnaker.style.fontFamily, group: "geometric" },
-  { name: "Telex", family: telex.style.fontFamily, group: "geometric" },
-  { name: "Voltaire", family: voltaire.style.fontFamily, group: "geometric" },
-  { name: "Yantramanav", family: yantramanav.style.fontFamily, group: "geometric" },
-  { name: "M PLUS Rounded 1c", family: mPLUSRounded1c.style.fontFamily, group: "geometric" },
-  { name: "Zen Kaku Gothic New", family: zenKakuGothicNew.style.fontFamily, group: "geometric" },
-  { name: "Dela Gothic One", family: delaGothicOne.style.fontFamily, group: "geometric" },
-  { name: "Righteous", family: righteous.style.fontFamily, group: "retro" },
-  { name: "Audiowide", family: audiowide.style.fontFamily, group: "retro" },
-  { name: "Days One", family: daysOne.style.fontFamily, group: "retro" },
-  { name: "Monomaniac One", family: monomaniacOne.style.fontFamily, group: "retro" },
-  { name: "Concert One", family: concertOne.style.fontFamily, group: "retro" },
-  { name: "Lilita One", family: lilitaOne.style.fontFamily, group: "retro" },
-  { name: "Paytone One", family: paytoneOne.style.fontFamily, group: "retro" },
-  { name: "Bowlby One", family: bowlbyOne.style.fontFamily, group: "retro" },
-  { name: "Bowlby One SC", family: bowlbyOneSC.style.fontFamily, group: "retro" },
-  { name: "Racing Sans One", family: racingSansOne.style.fontFamily, group: "retro" },
-  { name: "Krona One", family: kronaOne.style.fontFamily, group: "retro" },
-  { name: "Goldman", family: goldman.style.fontFamily, group: "retro" },
-  { name: "Iceberg", family: iceberg.style.fontFamily, group: "retro" },
-  { name: "Turret Road", family: turretRoad.style.fontFamily, group: "retro" },
-  { name: "Sarpanch", family: sarpanch.style.fontFamily, group: "retro" },
-  { name: "Fugaz One", family: fugazOne.style.fontFamily, group: "retro" },
-  { name: "Chango", family: chango.style.fontFamily, group: "retro" },
-  { name: "Contrail One", family: contrailOne.style.fontFamily, group: "retro" },
-  { name: "Boogaloo", family: boogaloo.style.fontFamily, group: "retro" },
-  { name: "Sansita", family: sansita.style.fontFamily, group: "retro" },
-  { name: "Sniglet", family: sniglet.style.fontFamily, group: "retro" },
-  { name: "Shrikhand", family: shrikhand.style.fontFamily, group: "retro" },
-  { name: "Titan One", family: titanOne.style.fontFamily, group: "retro" },
-  { name: "Rowdies", family: rowdies.style.fontFamily, group: "retro" },
-  { name: "Bagel Fat One", family: bagelFatOne.style.fontFamily, group: "retro" },
-  { name: "Gasoek One", family: gasoekOne.style.fontFamily, group: "retro" },
-  { name: "Bangers", family: bangers.style.fontFamily, group: "retro" },
-  { name: "Luckiest Guy", family: luckiestGuy.style.fontFamily, group: "retro" },
-  { name: "Alfa Slab One", family: alfaSlabOne.style.fontFamily, group: "retro" },
-  { name: "Ultra", family: ultra.style.fontFamily, group: "retro" },
-  { name: "Rammetto One", family: rammettoOne.style.fontFamily, group: "retro" },
-  { name: "Rubik Mono One", family: rubikMonoOne.style.fontFamily, group: "retro" },
-  { name: "Black Ops One", family: blackOpsOne.style.fontFamily, group: "retro" },
-  { name: "Bungee", family: bungee.style.fontFamily, group: "retro" },
-  { name: "Passion One", family: passionOne.style.fontFamily, group: "retro" },
-  { name: "Squada One", family: squadaOne.style.fontFamily, group: "retro" },
-  { name: "Russo One", family: russoOne.style.fontFamily, group: "retro" },
-  { name: "Poller One", family: pollerOne.style.fontFamily, group: "retro" },
-  { name: "Jockey One", family: jockeyOne.style.fontFamily, group: "retro" },
-  { name: "Marvel", family: marvel.style.fontFamily, group: "retro" },
-  { name: "Homenaje", family: homenaje.style.fontFamily, group: "retro" },
-  { name: "Geo", family: geo.style.fontFamily, group: "retro" },
-  { name: "Rationale", family: rationale.style.fontFamily, group: "retro" },
-  { name: "Strait", family: strait.style.fontFamily, group: "retro" },
-  { name: "Economica", family: economica.style.fontFamily, group: "retro" },
-  { name: "Share", family: share.style.fontFamily, group: "retro" },
-  { name: "Share Tech", family: shareTech.style.fontFamily, group: "retro" },
-  { name: "Limelight", family: limelight.style.fontFamily, group: "retro" },
-  { name: "Poiret One", family: poiretOne.style.fontFamily, group: "retro" },
-  { name: "Abril Fatface", family: abrilFatface.style.fontFamily, group: "retro" },
-  { name: "Yeseva One", family: yesevaOne.style.fontFamily, group: "retro" },
-  { name: "Lobster", family: lobster.style.fontFamily, group: "retro" },
-  { name: "Pacifico", family: pacifico.style.fontFamily, group: "retro" },
-  { name: "Kaushan Script", family: kaushanScript.style.fontFamily, group: "retro" },
-  { name: "Permanent Marker", family: permanentMarker.style.fontFamily, group: "retro" },
-  { name: "Protest Strike", family: protestStrike.style.fontFamily, group: "retro" },
-  { name: "Protest Riot", family: protestRiot.style.fontFamily, group: "retro" },
-  { name: "Chonburi", family: chonburi.style.fontFamily, group: "retro" },
-  { name: "Cherry Bomb One", family: cherryBombOne.style.fontFamily, group: "retro" },
-  { name: "Mochiy Pop One", family: mochiyPopOne.style.fontFamily, group: "retro" },
-  { name: "Jaro", family: jaro.style.fontFamily, group: "retro" },
-  { name: "Climate Crisis", family: climateCrisis.style.fontFamily, group: "retro" },
-  { name: "Foldit", family: foldit.style.fontFamily, group: "retro" },
-  { name: "Faster One", family: fasterOne.style.fontFamily, group: "retro" },
-  { name: "Wallpoet", family: wallpoet.style.fontFamily, group: "retro" },
-  { name: "Syncopate", family: syncopate.style.fontFamily, group: "retro" },
-  { name: "Major Mono Display", family: majorMonoDisplay.style.fontFamily, group: "retro" },
-  { name: "Bungee Shade", family: bungeeShade.style.fontFamily, group: "retro" },
-  { name: "Bungee Inline", family: bungeeInline.style.fontFamily, group: "retro" },
-  { name: "Monoton", family: monoton.style.fontFamily, group: "retro" },
-  { name: "Orbitron", family: orbitron.style.fontFamily, group: "space" },
-  { name: "Michroma", family: michroma.style.fontFamily, group: "space" },
-  { name: "Chakra Petch", family: chakraPetch.style.fontFamily, group: "space" },
-  { name: "Oxanium", family: oxanium.style.fontFamily, group: "space" },
-  { name: "Quantico", family: quantico.style.fontFamily, group: "space" },
-  { name: "Aldrich", family: aldrich.style.fontFamily, group: "space" },
-  { name: "Electrolize", family: electrolize.style.fontFamily, group: "space" },
-  { name: "Jura", family: jura.style.fontFamily, group: "space" },
-  { name: "Nova Square", family: novaSquare.style.fontFamily, group: "space" },
-  { name: "Nova Flat", family: novaFlat.style.fontFamily, group: "space" },
-  { name: "Nova Round", family: novaRound.style.fontFamily, group: "space" },
-  { name: "Play", family: play.style.fontFamily, group: "space" },
-  { name: "Saira", family: saira.style.fontFamily, group: "space" },
-  { name: "Rajdhani", family: rajdhani.style.fontFamily, group: "space" },
-  { name: "Bai Jamjuree", family: baiJamjuree.style.fontFamily, group: "space" },
-  { name: "Advent Pro", family: adventPro.style.fontFamily, group: "space" },
-  { name: "Gruppo", family: gruppo.style.fontFamily, group: "space" },
-  { name: "Stick No Bills", family: stickNoBills.style.fontFamily, group: "space" },
-  { name: "Sono", family: sono.style.fontFamily, group: "space" },
-  { name: "Exo", family: exo.style.fontFamily, group: "space" },
-  { name: "Zen Dots", family: zenDots.style.fontFamily, group: "space" },
-  { name: "Tourney", family: tourney.style.fontFamily, group: "space" },
-  { name: "Krub", family: krub.style.fontFamily, group: "space" },
-  { name: "Mitr", family: mitr.style.fontFamily, group: "space" },
-  { name: "Niramit", family: niramit.style.fontFamily, group: "space" },
-  { name: "Grandstander", family: grandstander.style.fontFamily, group: "space" },
-  { name: "Playfair Display", family: playfairDisplay.style.fontFamily, group: "serif" },
-  { name: "Merriweather", family: merriweather.style.fontFamily, group: "serif" },
-  { name: "Lora", family: lora.style.fontFamily, group: "serif" },
-  { name: "Roboto Slab", family: robotoSlab.style.fontFamily, group: "serif" },
-  { name: "Bitter", family: bitter.style.fontFamily, group: "serif" },
-  { name: "Zilla Slab", family: zillaSlab.style.fontFamily, group: "serif" },
-  { name: "Arvo", family: arvo.style.fontFamily, group: "serif" },
-  { name: "Libre Baskerville", family: libreBaskerville.style.fontFamily, group: "serif" },
-  { name: "DM Serif Display", family: dMSerifDisplay.style.fontFamily, group: "serif" },
-  { name: "Fraunces", family: fraunces.style.fontFamily, group: "serif" },
-  { name: "Instrument Serif", family: instrumentSerif.style.fontFamily, group: "serif" },
-  { name: "Young Serif", family: youngSerif.style.fontFamily, group: "serif" },
-  { name: "Newsreader", family: newsreader.style.fontFamily, group: "serif" },
-  { name: "Spectral", family: spectral.style.fontFamily, group: "serif" },
-  { name: "Crimson Pro", family: crimsonPro.style.fontFamily, group: "serif" },
-  { name: "EB Garamond", family: eBGaramond.style.fontFamily, group: "serif" },
-  { name: "Cardo", family: cardo.style.fontFamily, group: "serif" },
-  { name: "Alegreya", family: alegreya.style.fontFamily, group: "serif" },
-  { name: "Bodoni Moda", family: bodoniModa.style.fontFamily, group: "serif" },
-  { name: "Italiana", family: italiana.style.fontFamily, group: "serif" },
-  { name: "Marcellus", family: marcellus.style.fontFamily, group: "serif" },
-  { name: "Forum", family: forum.style.fontFamily, group: "serif" },
-  { name: "Julius Sans One", family: juliusSansOne.style.fontFamily, group: "serif" },
-  { name: "Cinzel", family: cinzel.style.fontFamily, group: "serif" },
-  { name: "Cinzel Decorative", family: cinzelDecorative.style.fontFamily, group: "serif" },
-  { name: "Cormorant Garamond", family: cormorantGaramond.style.fontFamily, group: "serif" },
-  { name: "Josefin Slab", family: josefinSlab.style.fontFamily, group: "serif" },
-  { name: "Noto Serif", family: notoSerif.style.fontFamily, group: "serif" },
-  { name: "Source Serif 4", family: sourceSerif4.style.fontFamily, group: "serif" },
-  { name: "Domine", family: domine.style.fontFamily, group: "serif" },
-  { name: "Vollkorn", family: vollkorn.style.fontFamily, group: "serif" },
-  { name: "Prata", family: prata.style.fontFamily, group: "serif" },
-  { name: "Gloock", family: gloock.style.fontFamily, group: "serif" },
-  { name: "Bevan", family: bevan.style.fontFamily, group: "serif" },
-  { name: "Oswald", family: oswald.style.fontFamily, group: "condensed" },
-  { name: "Bebas Neue", family: bebasNeue.style.fontFamily, group: "condensed" },
-  { name: "Anton", family: anton.style.fontFamily, group: "condensed" },
-  { name: "Anton SC", family: antonSC.style.fontFamily, group: "condensed" },
-  { name: "Antonio", family: antonio.style.fontFamily, group: "condensed" },
-  { name: "Teko", family: teko.style.fontFamily, group: "condensed" },
-  { name: "Archivo Black", family: archivoBlack.style.fontFamily, group: "condensed" },
-  { name: "Archivo Narrow", family: archivoNarrow.style.fontFamily, group: "condensed" },
-  { name: "Barlow Condensed", family: barlowCondensed.style.fontFamily, group: "condensed" },
-  { name: "Barlow Semi Condensed", family: barlowSemiCondensed.style.fontFamily, group: "condensed" },
-  { name: "Saira Condensed", family: sairaCondensed.style.fontFamily, group: "condensed" },
-  { name: "Sofia Sans Condensed", family: sofiaSansCondensed.style.fontFamily, group: "condensed" },
-  { name: "Fjalla One", family: fjallaOne.style.fontFamily, group: "condensed" },
-  { name: "Pathway Gothic One", family: pathwayGothicOne.style.fontFamily, group: "condensed" },
-  { name: "League Gothic", family: leagueGothic.style.fontFamily, group: "condensed" },
-  { name: "Roboto Condensed", family: robotoCondensed.style.fontFamily, group: "condensed" },
-  { name: "Fira Sans Condensed", family: firaSansCondensed.style.fontFamily, group: "condensed" },
-  { name: "Ubuntu Condensed", family: ubuntuCondensed.style.fontFamily, group: "condensed" },
-  { name: "Encode Sans Condensed", family: encodeSansCondensed.style.fontFamily, group: "condensed" },
-  { name: "Yanone Kaffeesatz", family: yanoneKaffeesatz.style.fontFamily, group: "condensed" },
-  { name: "Khand", family: khand.style.fontFamily, group: "condensed" },
-  { name: "Pragati Narrow", family: pragatiNarrow.style.fontFamily, group: "condensed" },
-  { name: "Six Caps", family: sixCaps.style.fontFamily, group: "condensed" },
-  { name: "Staatliches", family: staatliches.style.fontFamily, group: "condensed" },
-  { name: "Bungee Hairline", family: bungeeHairline.style.fontFamily, group: "condensed" },
-  { name: "Space Mono", family: spaceMono.style.fontFamily, group: "mono" },
-  { name: "JetBrains Mono", family: jetBrainsMono.style.fontFamily, group: "mono" },
-  { name: "Geist Mono", family: geistMono.style.fontFamily, group: "mono" },
-  { name: "Martian Mono", family: martianMono.style.fontFamily, group: "mono" },
-  { name: "IBM Plex Mono", family: iBMPlexMono.style.fontFamily, group: "mono" },
-  { name: "Roboto Mono", family: robotoMono.style.fontFamily, group: "mono" },
-  { name: "Fira Code", family: firaCode.style.fontFamily, group: "mono" },
-  { name: "Source Code Pro", family: sourceCodePro.style.fontFamily, group: "mono" },
-  { name: "DM Mono", family: dMMono.style.fontFamily, group: "mono" },
-  { name: "Azeret Mono", family: azeretMono.style.fontFamily, group: "mono" },
-  { name: "Sometype Mono", family: sometypeMono.style.fontFamily, group: "mono" },
-  { name: "Red Hat Mono", family: redHatMono.style.fontFamily, group: "mono" },
-  { name: "Chivo Mono", family: chivoMono.style.fontFamily, group: "mono" },
-  { name: "Spline Sans Mono", family: splineSansMono.style.fontFamily, group: "mono" },
-  { name: "Nova Mono", family: novaMono.style.fontFamily, group: "mono" },
-  { name: "Share Tech Mono", family: shareTechMono.style.fontFamily, group: "mono" },
-  { name: "Xanh Mono", family: xanhMono.style.fontFamily, group: "mono" },
-  { name: "Kode Mono", family: kodeMono.style.fontFamily, group: "mono" },
-  { name: "Ubuntu Mono", family: ubuntuMono.style.fontFamily, group: "mono" },
-  { name: "Courier Prime", family: courierPrime.style.fontFamily, group: "mono" },
-  { name: "Inconsolata", family: inconsolata.style.fontFamily, group: "mono" },
-  { name: "Overpass Mono", family: overpassMono.style.fontFamily, group: "mono" },
-  { name: "Cutive Mono", family: cutiveMono.style.fontFamily, group: "mono" },
-  { name: "Syne Mono", family: syneMono.style.fontFamily, group: "mono" },
-  { name: "Fragment Mono", family: fragmentMono.style.fontFamily, group: "mono" },
-  { name: "B612 Mono", family: b612Mono.style.fontFamily, group: "mono" },
-  { name: "Unica One", family: unicaOne.style.fontFamily, group: "futuristic" },
-  { name: "Federo", family: federo.style.fontFamily, group: "futuristic" },
-  { name: "Megrim", family: megrim.style.fontFamily, group: "futuristic" },
-  { name: "Kenia", family: kenia.style.fontFamily, group: "futuristic" },
-  { name: "Revalia", family: revalia.style.fontFamily, group: "futuristic" },
-  { name: "Stalinist One", family: stalinistOne.style.fontFamily, group: "futuristic" },
-  { name: "Bungee Outline", family: bungeeOutline.style.fontFamily, group: "futuristic" },
-  { name: "Rubik Iso", family: rubikIso.style.fontFamily, group: "futuristic" },
-  { name: "Rubik 80s Fade", family: rubik80sFade.style.fontFamily, group: "futuristic" },
-  { name: "Rubik Vinyl", family: rubikVinyl.style.fontFamily, group: "futuristic" },
-  { name: "Rubik Moonrocks", family: rubikMoonrocks.style.fontFamily, group: "futuristic" },
-  { name: "Rubik Lines", family: rubikLines.style.fontFamily, group: "futuristic" },
-  { name: "Rubik Glitch", family: rubikGlitch.style.fontFamily, group: "futuristic" },
-  { name: "Rubik Maze", family: rubikMaze.style.fontFamily, group: "futuristic" },
-  { name: "Saira Stencil One", family: sairaStencilOne.style.fontFamily, group: "futuristic" },
-  { name: "Allerta Stencil", family: allertaStencil.style.fontFamily, group: "futuristic" },
-  { name: "Stardos Stencil", family: stardosStencil.style.fontFamily, group: "futuristic" },
-  { name: "Sirin Stencil", family: sirinStencil.style.fontFamily, group: "futuristic" },
-  { name: "Emblema One", family: emblemaOne.style.fontFamily, group: "futuristic" },
-  { name: "Codystar", family: codystar.style.fontFamily, group: "futuristic" },
-  { name: "Ropa Sans", family: ropaSans.style.fontFamily, group: "futuristic" },
-  { name: "Prosto One", family: prostoOne.style.fontFamily, group: "futuristic" },
-  { name: "Kelly Slab", family: kellySlab.style.fontFamily, group: "futuristic" },
-  { name: "Sansation", family: sansation.style.fontFamily, group: "futuristic" },
-  { name: "Iceland", family: iceland.style.fontFamily, group: "futuristic" },
-  { name: "Nova Oval", family: novaOval.style.fontFamily, group: "futuristic" },
-  { name: "Nova Cut", family: novaCut.style.fontFamily, group: "futuristic" },
-  { name: "Nova Script", family: novaScript.style.fontFamily, group: "futuristic" },
-  { name: "Nova Slim", family: novaSlim.style.fontFamily, group: "futuristic" },
-  { name: "Lobster Two", family: lobsterTwo.style.fontFamily, group: "script" },
-  { name: "Dancing Script", family: dancingScript.style.fontFamily, group: "script" },
-  { name: "Great Vibes", family: greatVibes.style.fontFamily, group: "script" },
-  { name: "Satisfy", family: satisfy.style.fontFamily, group: "script" },
-  { name: "Cookie", family: cookie.style.fontFamily, group: "script" },
-  { name: "Courgette", family: courgette.style.fontFamily, group: "script" },
-  { name: "Sacramento", family: sacramento.style.fontFamily, group: "script" },
-  { name: "Yellowtail", family: yellowtail.style.fontFamily, group: "script" },
-  { name: "Allura", family: allura.style.fontFamily, group: "script" },
-  { name: "Alex Brush", family: alexBrush.style.fontFamily, group: "script" },
-  { name: "Parisienne", family: parisienne.style.fontFamily, group: "script" },
-  { name: "Tangerine", family: tangerine.style.fontFamily, group: "script" },
-  { name: "Pinyon Script", family: pinyonScript.style.fontFamily, group: "script" },
-  { name: "Mr Dafoe", family: mrDafoe.style.fontFamily, group: "script" },
-  { name: "Norican", family: norican.style.fontFamily, group: "script" },
-  { name: "Oleo Script", family: oleoScript.style.fontFamily, group: "script" },
-  { name: "Oleo Script Swash Caps", family: oleoScriptSwashCaps.style.fontFamily, group: "script" },
-  { name: "Sansita Swashed", family: sansitaSwashed.style.fontFamily, group: "script" },
-  { name: "Berkshire Swash", family: berkshireSwash.style.fontFamily, group: "script" },
-  { name: "Playball", family: playball.style.fontFamily, group: "script" },
-  { name: "Damion", family: damion.style.fontFamily, group: "script" },
-  { name: "Marck Script", family: marckScript.style.fontFamily, group: "script" },
-  { name: "Caveat", family: caveat.style.fontFamily, group: "script" },
-  { name: "Shadows Into Light", family: shadowsIntoLight.style.fontFamily, group: "script" },
-  { name: "Indie Flower", family: indieFlower.style.fontFamily, group: "script" },
-  { name: "Amatic SC", family: amaticSC.style.fontFamily, group: "script" },
-  { name: "Rock Salt", family: rockSalt.style.fontFamily, group: "script" },
-  { name: "Homemade Apple", family: homemadeApple.style.fontFamily, group: "script" },
-  { name: "Nothing You Could Do", family: nothingYouCouldDo.style.fontFamily, group: "script" },
-  { name: "Reenie Beanie", family: reenieBeanie.style.fontFamily, group: "script" },
-  { name: "Covered By Your Grace", family: coveredByYourGrace.style.fontFamily, group: "script" },
-  { name: "Gloria Hallelujah", family: gloriaHallelujah.style.fontFamily, group: "script" },
-  { name: "Architects Daughter", family: architectsDaughter.style.fontFamily, group: "script" },
-  { name: "Patrick Hand", family: patrickHand.style.fontFamily, group: "script" },
-  { name: "Kalam", family: kalam.style.fontFamily, group: "script" },
-  { name: "Handlee", family: handlee.style.fontFamily, group: "script" },
-  { name: "Neucha", family: neucha.style.fontFamily, group: "script" },
-  { name: "Comic Neue", family: comicNeue.style.fontFamily, group: "script" },
-  { name: "Bad Script", family: badScript.style.fontFamily, group: "script" },
-  { name: "Merienda", family: merienda.style.fontFamily, group: "script" },
-  { name: "Niconne", family: niconne.style.fontFamily, group: "script" },
-  { name: "Rochester", family: rochester.style.fontFamily, group: "script" },
-  { name: "Rouge Script", family: rougeScript.style.fontFamily, group: "script" },
-  { name: "Herr Von Muellerhoff", family: herrVonMuellerhoff.style.fontFamily, group: "script" },
-  { name: "Monsieur La Doulaise", family: monsieurLaDoulaise.style.fontFamily, group: "script" },
-  { name: "Mrs Saint Delafield", family: mrsSaintDelafield.style.fontFamily, group: "script" },
-  { name: "Italianno", family: italianno.style.fontFamily, group: "script" },
-  { name: "Grand Hotel", family: grandHotel.style.fontFamily, group: "script" },
-  { name: "Lily Script One", family: lilyScriptOne.style.fontFamily, group: "script" },
-  { name: "Leckerli One", family: leckerliOne.style.fontFamily, group: "script" },
-  { name: "Style Script", family: styleScript.style.fontFamily, group: "script" },
-  { name: "Cherish", family: cherish.style.fontFamily, group: "script" },
-  { name: "Carattere", family: carattere.style.fontFamily, group: "script" },
-  { name: "Caramel", family: caramel.style.fontFamily, group: "script" },
-  { name: "Ephesis", family: ephesis.style.fontFamily, group: "script" },
-  { name: "Ms Madi", family: msMadi.style.fontFamily, group: "script" },
-  { name: "Send Flowers", family: sendFlowers.style.fontFamily, group: "script" },
-  { name: "Splash", family: splash.style.fontFamily, group: "script" },
-  { name: "Water Brush", family: waterBrush.style.fontFamily, group: "script" },
-  { name: "Whisper", family: whisper.style.fontFamily, group: "script" },
-  { name: "Ballet", family: ballet.style.fontFamily, group: "script" },
-  { name: "Birthstone", family: birthstone.style.fontFamily, group: "script" },
-  { name: "Bonheur Royale", family: bonheurRoyale.style.fontFamily, group: "script" },
-  { name: "Corinthia", family: corinthia.style.fontFamily, group: "script" },
-  { name: "Estonia", family: estonia.style.fontFamily, group: "script" },
-  { name: "Hurricane", family: hurricane.style.fontFamily, group: "script" },
-  { name: "Imperial Script", family: imperialScript.style.fontFamily, group: "script" },
-  { name: "Inspiration", family: inspiration.style.fontFamily, group: "script" },
-  { name: "Island Moments", family: islandMoments.style.fontFamily, group: "script" },
-  { name: "Kolker Brush", family: kolkerBrush.style.fontFamily, group: "script" },
-  { name: "Lavishly Yours", family: lavishlyYours.style.fontFamily, group: "script" },
-  { name: "Love Light", family: loveLight.style.fontFamily, group: "script" },
-  { name: "Luxurious Script", family: luxuriousScript.style.fontFamily, group: "script" },
-  { name: "Meow Script", family: meowScript.style.fontFamily, group: "script" },
-  { name: "Moon Dance", family: moonDance.style.fontFamily, group: "script" },
-  { name: "Mea Culpa", family: meaCulpa.style.fontFamily, group: "script" },
-  { name: "Neonderthaw", family: neonderthaw.style.fontFamily, group: "script" },
-  { name: "Oooh Baby", family: ooohBaby.style.fontFamily, group: "script" },
-  { name: "Passions Conflict", family: passionsConflict.style.fontFamily, group: "script" },
-  { name: "Petemoss", family: petemoss.style.fontFamily, group: "script" },
-  { name: "Puppies Play", family: puppiesPlay.style.fontFamily, group: "script" },
-  { name: "Qwitcher Grypen", family: qwitcherGrypen.style.fontFamily, group: "script" },
-  { name: "Sassy Frass", family: sassyFrass.style.fontFamily, group: "script" },
-  { name: "Smooch", family: smooch.style.fontFamily, group: "script" },
-  { name: "Square Peg", family: squarePeg.style.fontFamily, group: "script" },
-  { name: "Tapestry", family: tapestry.style.fontFamily, group: "script" },
-  { name: "The Nautigal", family: theNautigal.style.fontFamily, group: "script" },
-  { name: "Twinkle Star", family: twinkleStar.style.fontFamily, group: "script" },
-  { name: "Updock", family: updock.style.fontFamily, group: "script" },
-  { name: "Vujahday Script", family: vujahdayScript.style.fontFamily, group: "script" },
-  { name: "Waterfall", family: waterfall.style.fontFamily, group: "script" },
-  { name: "Comforter", family: comforter.style.fontFamily, group: "script" },
-  { name: "Comforter Brush", family: comforterBrush.style.fontFamily, group: "script" },
-  { name: "Explora", family: explora.style.fontFamily, group: "script" },
-  { name: "Festive", family: festive.style.fontFamily, group: "script" },
-  { name: "Gwendolyn", family: gwendolyn.style.fontFamily, group: "script" },
-  { name: "Licorice", family: licorice.style.fontFamily, group: "script" },
-  { name: "Mrs Sheppards", family: mrsSheppards.style.fontFamily, group: "script" },
-  { name: "My Soul", family: mySoul.style.fontFamily, group: "script" },
-  { name: "Praise", family: praise.style.fontFamily, group: "script" },
-  { name: "Babylonica", family: babylonica.style.fontFamily, group: "script" },
-  { name: "Beau Rivage", family: beauRivage.style.fontFamily, group: "script" },
-  { name: "Fuggles", family: fuggles.style.fontFamily, group: "script" },
-  { name: "Charm", family: charm.style.fontFamily, group: "script" },
-  { name: "Charmonman", family: charmonman.style.fontFamily, group: "script" },
-  { name: "Mali", family: mali.style.fontFamily, group: "script" },
-  { name: "Itim", family: itim.style.fontFamily, group: "script" },
-  { name: "Sriracha", family: sriracha.style.fontFamily, group: "script" },
-  { name: "Pattaya", family: pattaya.style.fontFamily, group: "script" },
-  { name: "Sofia", family: sofia.style.fontFamily, group: "script" },
-  { name: "Euphoria Script", family: euphoriaScript.style.fontFamily, group: "script" },
-  { name: "Clicker Script", family: clickerScript.style.fontFamily, group: "script" },
-  { name: "Engagement", family: engagement.style.fontFamily, group: "script" },
-  { name: "Kristi", family: kristi.style.fontFamily, group: "script" },
-  { name: "La Belle Aurore", family: laBelleAurore.style.fontFamily, group: "script" },
-  { name: "Meddon", family: meddon.style.fontFamily, group: "script" },
-  { name: "Over the Rainbow", family: overtheRainbow.style.fontFamily, group: "script" },
-  { name: "Sue Ellen Francisco", family: sueEllenFrancisco.style.fontFamily, group: "script" },
-  { name: "Zeyada", family: zeyada.style.fontFamily, group: "script" },
-  { name: "Cedarville Cursive", family: cedarvilleCursive.style.fontFamily, group: "script" },
-  { name: "Dawning of a New Day", family: dawningofaNewDay.style.fontFamily, group: "script" },
-  { name: "Give You Glory", family: giveYouGlory.style.fontFamily, group: "script" },
-  { name: "Just Me Again Down Here", family: justMeAgainDownHere.style.fontFamily, group: "script" },
-  { name: "Loved by the King", family: lovedbytheKing.style.fontFamily, group: "script" },
-  { name: "Waiting for the Sunrise", family: waitingfortheSunrise.style.fontFamily, group: "script" },
-  { name: "Calligraffitti", family: calligraffitti.style.fontFamily, group: "script" },
-  { name: "Coming Soon", family: comingSoon.style.fontFamily, group: "script" },
-  { name: "Crafty Girls", family: craftyGirls.style.fontFamily, group: "script" },
-  { name: "Delius", family: delius.style.fontFamily, group: "script" },
-  { name: "Delius Swash Caps", family: deliusSwashCaps.style.fontFamily, group: "script" },
-  { name: "Gochi Hand", family: gochiHand.style.fontFamily, group: "script" },
-  { name: "Just Another Hand", family: justAnotherHand.style.fontFamily, group: "script" },
-  { name: "Schoolbell", family: schoolbell.style.fontFamily, group: "script" },
-  { name: "Short Stack", family: shortStack.style.fontFamily, group: "script" },
-  { name: "Sunshiney", family: sunshiney.style.fontFamily, group: "script" },
-  { name: "Swanky and Moo Moo", family: swankyandMooMoo.style.fontFamily, group: "script" },
-  { name: "Walter Turncoat", family: walterTurncoat.style.fontFamily, group: "script" },
-  { name: "Annie Use Your Telescope", family: annieUseYourTelescope.style.fontFamily, group: "script" },
-  { name: "Chilanka", family: chilanka.style.fontFamily, group: "script" },
-  { name: "Gaegu", family: gaegu.style.fontFamily, group: "script" },
-  { name: "Nanum Pen Script", family: nanumPenScript.style.fontFamily, group: "script" },
-  { name: "Nanum Brush Script", family: nanumBrushScript.style.fontFamily, group: "script" },
-  { name: "Hi Melody", family: hiMelody.style.fontFamily, group: "script" },
-  { name: "Dokdo", family: dokdo.style.fontFamily, group: "script" },
-  { name: "East Sea Dokdo", family: eastSeaDokdo.style.fontFamily, group: "script" },
-  { name: "Gamja Flower", family: gamjaFlower.style.fontFamily, group: "script" },
-  { name: "Poor Story", family: poorStory.style.fontFamily, group: "script" },
-  { name: "Yeon Sung", family: yeonSung.style.fontFamily, group: "script" },
-  { name: "Cute Font", family: cuteFont.style.fontFamily, group: "script" },
-  { name: "Do Hyeon", family: doHyeon.style.fontFamily, group: "script" },
-  { name: "Jua", family: jua.style.fontFamily, group: "script" },
-  { name: "Kirang Haerang", family: kirangHaerang.style.fontFamily, group: "script" },
-  { name: "Black Han Sans", family: blackHanSans.style.fontFamily, group: "script" },
-  { name: "Black And White Picture", family: blackAndWhitePicture.style.fontFamily, group: "script" },
-  { name: "Gugi", family: gugi.style.fontFamily, group: "script" },
-  { name: "Hahmlet", family: hahmlet.style.fontFamily, group: "script" },
-  { name: "Gowun Dodum", family: gowunDodum.style.fontFamily, group: "script" },
-  { name: "Gowun Batang", family: gowunBatang.style.fontFamily, group: "script" },
-  { name: "Nanum Gothic", family: nanumGothic.style.fontFamily, group: "script" },
-  { name: "Nanum Myeongjo", family: nanumMyeongjo.style.fontFamily, group: "script" },
-  { name: "Noto Sans KR", family: notoSansKR.style.fontFamily, group: "script" },
-  { name: "Rye", family: rye.style.fontFamily, group: "display" },
-  { name: "Vast Shadow", family: vastShadow.style.fontFamily, group: "display" },
-  { name: "Chewy", family: chewy.style.fontFamily, group: "display" },
-  { name: "Ranchers", family: ranchers.style.fontFamily, group: "display" },
-  { name: "Londrina Solid", family: londrinaSolid.style.fontFamily, group: "display" },
-  { name: "Londrina Shadow", family: londrinaShadow.style.fontFamily, group: "display" },
-  { name: "Londrina Outline", family: londrinaOutline.style.fontFamily, group: "display" },
-  { name: "Londrina Sketch", family: londrinaSketch.style.fontFamily, group: "display" },
-  { name: "Fredericka the Great", family: frederickatheGreat.style.fontFamily, group: "display" },
-  { name: "Modak", family: modak.style.fontFamily, group: "display" },
-  { name: "Kavoon", family: kavoon.style.fontFamily, group: "display" },
-  { name: "Lemon", family: lemon.style.fontFamily, group: "display" },
-  { name: "Cherry Cream Soda", family: cherryCreamSoda.style.fontFamily, group: "display" },
-  { name: "Frijole", family: frijole.style.fontFamily, group: "display" },
-  { name: "Knewave", family: knewave.style.fontFamily, group: "display" },
-  { name: "Original Surfer", family: originalSurfer.style.fontFamily, group: "display" },
-  { name: "Sonsie One", family: sonsieOne.style.fontFamily, group: "display" },
-  { name: "Spicy Rice", family: spicyRice.style.fontFamily, group: "display" },
-  { name: "Ribeye", family: ribeye.style.fontFamily, group: "display" },
-  { name: "Ribeye Marrow", family: ribeyeMarrow.style.fontFamily, group: "display" },
-  { name: "Sedgwick Ave", family: sedgwickAve.style.fontFamily, group: "display" },
-  { name: "Sedgwick Ave Display", family: sedgwickAveDisplay.style.fontFamily, group: "display" },
-  { name: "Slackey", family: slackey.style.fontFamily, group: "display" },
-  { name: "Trade Winds", family: tradeWinds.style.fontFamily, group: "display" },
-  { name: "Freckle Face", family: freckleFace.style.fontFamily, group: "display" },
-  { name: "Fontdiner Swanky", family: fontdinerSwanky.style.fontFamily, group: "display" },
-  { name: "Henny Penny", family: hennyPenny.style.fontFamily, group: "display" },
-  { name: "Nixie One", family: nixieOne.style.fontFamily, group: "display" },
-  { name: "Elsie", family: elsie.style.fontFamily, group: "display" },
-  { name: "Mystery Quest", family: mysteryQuest.style.fontFamily, group: "display" },
-  { name: "Protest Revolution", family: protestRevolution.style.fontFamily, group: "display" },
-  { name: "Protest Guerrilla", family: protestGuerrilla.style.fontFamily, group: "display" },
-  { name: "Alumni Sans", family: alumniSans.style.fontFamily, group: "display" },
-  { name: "Alumni Sans Collegiate One", family: alumniSansCollegiateOne.style.fontFamily, group: "display" },
-  { name: "Alumni Sans Inline One", family: alumniSansInlineOne.style.fontFamily, group: "display" },
-  { name: "Alumni Sans Pinstripe", family: alumniSansPinstripe.style.fontFamily, group: "display" },
-  { name: "Graduate", family: graduate.style.fontFamily, group: "display" },
-  { name: "Carter One", family: carterOne.style.fontFamily, group: "display" },
-  { name: "Coda", family: coda.style.fontFamily, group: "display" },
-  { name: "Coiny", family: coiny.style.fontFamily, group: "display" },
-  { name: "Fascinate", family: fascinate.style.fontFamily, group: "display" },
-  { name: "Fascinate Inline", family: fascinateInline.style.fontFamily, group: "display" },
-  { name: "Flavors", family: flavors.style.fontFamily, group: "display" },
-  { name: "Galindo", family: galindo.style.fontFamily, group: "display" },
-  { name: "Gorditas", family: gorditas.style.fontFamily, group: "display" },
-  { name: "Hanalei", family: hanalei.style.fontFamily, group: "display" },
-  { name: "Hanalei Fill", family: hanaleiFill.style.fontFamily, group: "display" },
-  { name: "Joti One", family: jotiOne.style.fontFamily, group: "display" },
-  { name: "Kumar One", family: kumarOne.style.fontFamily, group: "display" },
-  { name: "Kumar One Outline", family: kumarOneOutline.style.fontFamily, group: "display" },
-  { name: "Lakki Reddy", family: lakkiReddy.style.fontFamily, group: "display" },
-  { name: "Margarine", family: margarine.style.fontFamily, group: "display" },
-  { name: "Metal Mania", family: metalMania.style.fontFamily, group: "display" },
-  { name: "Miltonian", family: miltonian.style.fontFamily, group: "display" },
-  { name: "Miltonian Tattoo", family: miltonianTattoo.style.fontFamily, group: "display" },
-  { name: "Moul", family: moul.style.fontFamily, group: "display" },
-  { name: "Mouse Memoirs", family: mouseMemoirs.style.fontFamily, group: "display" },
-  { name: "New Rocker", family: newRocker.style.fontFamily, group: "display" },
-  { name: "Nosifer", family: nosifer.style.fontFamily, group: "display" },
-  { name: "Piedra", family: piedra.style.fontFamily, group: "display" },
-  { name: "Pirata One", family: pirataOne.style.fontFamily, group: "display" },
-  { name: "Sancreek", family: sancreek.style.fontFamily, group: "display" },
-  { name: "Sarina", family: sarina.style.fontFamily, group: "display" },
-  { name: "Shojumaru", family: shojumaru.style.fontFamily, group: "display" },
-  { name: "Smokum", family: smokum.style.fontFamily, group: "display" },
-  { name: "Snowburst One", family: snowburstOne.style.fontFamily, group: "display" },
-  { name: "Stint Ultra Expanded", family: stintUltraExpanded.style.fontFamily, group: "display" },
-  { name: "Stint Ultra Condensed", family: stintUltraCondensed.style.fontFamily, group: "display" },
-  { name: "Supermercado One", family: supermercadoOne.style.fontFamily, group: "display" },
-  { name: "Trochut", family: trochut.style.fontFamily, group: "display" },
-  { name: "Unkempt", family: unkempt.style.fontFamily, group: "display" },
-  { name: "Wendy One", family: wendyOne.style.fontFamily, group: "display" },
-  { name: "Zilla Slab Highlight", family: zillaSlabHighlight.style.fontFamily, group: "display" },
-  { name: "Reggae One", family: reggaeOne.style.fontFamily, group: "display" },
-  { name: "RocknRoll One", family: rocknRollOne.style.fontFamily, group: "display" },
-  { name: "Rampart One", family: rampartOne.style.fontFamily, group: "display" },
-  { name: "Stick", family: stick.style.fontFamily, group: "display" },
-  { name: "Train One", family: trainOne.style.fontFamily, group: "display" },
-  { name: "Yusei Magic", family: yuseiMagic.style.fontFamily, group: "display" },
-  { name: "Kaisei Opti", family: kaiseiOpti.style.fontFamily, group: "display" },
-  { name: "Kaisei Decol", family: kaiseiDecol.style.fontFamily, group: "display" },
-  { name: "Kaisei HarunoUmi", family: kaiseiHarunoUmi.style.fontFamily, group: "display" },
-  { name: "Kaisei Tokumin", family: kaiseiTokumin.style.fontFamily, group: "display" },
-  { name: "Potta One", family: pottaOne.style.fontFamily, group: "display" },
-  { name: "Hachi Maru Pop", family: hachiMaruPop.style.fontFamily, group: "display" },
-  { name: "Yomogi", family: yomogi.style.fontFamily, group: "display" },
-  { name: "Zen Antique", family: zenAntique.style.fontFamily, group: "display" },
-  { name: "Zen Kurenaido", family: zenKurenaido.style.fontFamily, group: "display" },
-  { name: "Zen Loop", family: zenLoop.style.fontFamily, group: "display" },
-  { name: "Zen Maru Gothic", family: zenMaruGothic.style.fontFamily, group: "display" },
-  { name: "Zen Old Mincho", family: zenOldMincho.style.fontFamily, group: "display" },
-  { name: "Klee One", family: kleeOne.style.fontFamily, group: "display" },
-  { name: "Shippori Antique", family: shipporiAntique.style.fontFamily, group: "display" },
-  { name: "Shippori Antique B1", family: shipporiAntiqueB1.style.fontFamily, group: "display" },
-  { name: "Mochiy Pop P One", family: mochiyPopPOne.style.fontFamily, group: "display" },
-  { name: "Murecho", family: murecho.style.fontFamily, group: "display" },
-  { name: "M PLUS 1", family: mPLUS1.style.fontFamily, group: "display" },
-  { name: "M PLUS 2", family: mPLUS2.style.fontFamily, group: "display" },
-  { name: "M PLUS 1 Code", family: mPLUS1Code.style.fontFamily, group: "display" },
-  { name: "BIZ UDPGothic", family: bIZUDPGothic.style.fontFamily, group: "display" },
-  { name: "BIZ UDPMincho", family: bIZUDPMincho.style.fontFamily, group: "display" },
-  { name: "Kosugi", family: kosugi.style.fontFamily, group: "display" },
-  { name: "Kosugi Maru", family: kosugiMaru.style.fontFamily, group: "display" },
-  { name: "Sawarabi Gothic", family: sawarabiGothic.style.fontFamily, group: "display" },
-  { name: "Sawarabi Mincho", family: sawarabiMincho.style.fontFamily, group: "display" },
-  { name: "Hina Mincho", family: hinaMincho.style.fontFamily, group: "display" },
-  { name: "Yuji Boku", family: yujiBoku.style.fontFamily, group: "display" },
-  { name: "Yuji Mai", family: yujiMai.style.fontFamily, group: "display" },
-  { name: "Yuji Syuku", family: yujiSyuku.style.fontFamily, group: "display" },
-  { name: "Yuji Hentaigana Akari", family: yujiHentaiganaAkari.style.fontFamily, group: "display" },
-  { name: "Yuji Hentaigana Akebono", family: yujiHentaiganaAkebono.style.fontFamily, group: "display" },
+  { name: "Inter", family: "'Inter'", axis: "wght@100..900", group: "common" },
+  { name: "Roboto", family: "'Roboto'", axis: "wght@100..900", group: "common" },
+  { name: "Open Sans", family: "'Open Sans'", axis: "wght@300..800", group: "common" },
+  { name: "Lato", family: "'Lato'", axis: "wght@100;300;400;700;900", group: "common" },
+  { name: "Montserrat", family: "'Montserrat'", axis: "wght@100..900", group: "common" },
+  { name: "Poppins", family: "'Poppins'", axis: "wght@100;200;300;400;500;600;700;800;900", group: "common" },
+  { name: "Nunito", family: "'Nunito'", axis: "wght@200..1000", group: "common" },
+  { name: "Nunito Sans", family: "'Nunito Sans'", axis: "wght@200..1000", group: "common" },
+  { name: "Raleway", family: "'Raleway'", axis: "wght@100..900", group: "common" },
+  { name: "Work Sans", family: "'Work Sans'", axis: "wght@100..900", group: "common" },
+  { name: "DM Sans", family: "'DM Sans'", axis: "wght@100..1000", group: "common" },
+  { name: "Rubik", family: "'Rubik'", axis: "wght@300..900", group: "common" },
+  { name: "Karla", family: "'Karla'", axis: "wght@200..800", group: "common" },
+  { name: "Mulish", family: "'Mulish'", axis: "wght@200..1000", group: "common" },
+  { name: "Cabin", family: "'Cabin'", axis: "wght@400..700", group: "common" },
+  { name: "Ubuntu", family: "'Ubuntu'", axis: "wght@300;400;500;700", group: "common" },
+  { name: "Source Sans 3", family: "'Source Sans 3'", axis: "wght@200..900", group: "common" },
+  { name: "Fira Sans", family: "'Fira Sans'", axis: "wght@100;200;300;400;500;600;700;800;900", group: "common" },
+  { name: "PT Sans", family: "'PT Sans'", axis: "wght@400;700", group: "common" },
+  { name: "Noto Sans", family: "'Noto Sans'", axis: "wght@100..900", group: "common" },
+  { name: "Public Sans", family: "'Public Sans'", axis: "wght@100..900", group: "common" },
+  { name: "IBM Plex Sans", family: "'IBM Plex Sans'", axis: "wght@100..700", group: "common" },
+  { name: "Figtree", family: "'Figtree'", axis: "wght@300..900", group: "common" },
+  { name: "Outfit", family: "'Outfit'", axis: "wght@100..900", group: "common" },
+  { name: "Sora", family: "'Sora'", axis: "wght@100..800", group: "common" },
+  { name: "Manrope", family: "'Manrope'", axis: "wght@200..800", group: "common" },
+  { name: "Plus Jakarta Sans", family: "'Plus Jakarta Sans'", axis: "wght@200..800", group: "common" },
+  { name: "Lexend", family: "'Lexend'", axis: "wght@100..900", group: "common" },
+  { name: "Urbanist", family: "'Urbanist'", axis: "wght@100..900", group: "common" },
+  { name: "Jost", family: "'Jost'", axis: "wght@100..900", group: "common" },
+  { name: "Josefin Sans", family: "'Josefin Sans'", axis: "wght@100..700", group: "common" },
+  { name: "Archivo", family: "'Archivo'", axis: "wght@100..900", group: "common" },
+  { name: "Barlow", family: "'Barlow'", axis: "wght@100;200;300;400;500;600;700;800;900", group: "common" },
+  { name: "Hind", family: "'Hind'", axis: "wght@300;400;500;600;700", group: "common" },
+  { name: "Dosis", family: "'Dosis'", axis: "wght@200..800", group: "common" },
+  { name: "Signika", family: "'Signika'", axis: "wght@300..700", group: "common" },
+  { name: "Sen", family: "'Sen'", axis: "wght@400..800", group: "common" },
+  { name: "Quicksand", family: "'Quicksand'", axis: "wght@300..700", group: "common" },
+  { name: "Varela Round", family: "'Varela Round'", axis: "wght@400", group: "common" },
+  { name: "Heebo", family: "'Heebo'", axis: "wght@100..900", group: "common" },
+  { name: "Assistant", family: "'Assistant'", axis: "wght@200..800", group: "common" },
+  { name: "Titillium Web", family: "'Titillium Web'", axis: "wght@200;300;400;600;700;900", group: "common" },
+  { name: "Exo 2", family: "'Exo 2'", axis: "wght@100..900", group: "common" },
+  { name: "Kanit", family: "'Kanit'", axis: "wght@100;200;300;400;500;600;700;800;900", group: "common" },
+  { name: "Prompt", family: "'Prompt'", axis: "wght@100;200;300;400;500;600;700;800;900", group: "common" },
+  { name: "Red Hat Display", family: "'Red Hat Display'", axis: "wght@300..900", group: "common" },
+  { name: "Red Hat Text", family: "'Red Hat Text'", axis: "wght@300..700", group: "common" },
+  { name: "Onest", family: "'Onest'", axis: "wght@100..900", group: "common" },
+  { name: "Instrument Sans", family: "'Instrument Sans'", axis: "wght@400..700", group: "common" },
+  { name: "Geist", family: "'Geist'", axis: "wght@100..900", group: "common" },
+  { name: "Syne", family: "'Syne'", axis: "wght@400..800", group: "geometric" },
+  { name: "Unbounded", family: "'Unbounded'", axis: "wght@200..900", group: "geometric" },
+  { name: "Bricolage Grotesque", family: "'Bricolage Grotesque'", axis: "wght@200..800", group: "geometric" },
+  { name: "Familjen Grotesk", family: "'Familjen Grotesk'", axis: "wght@400..700", group: "geometric" },
+  { name: "Gabarito", family: "'Gabarito'", axis: "wght@400..900", group: "geometric" },
+  { name: "Funnel Display", family: "'Funnel Display'", axis: "wght@300..800", group: "geometric" },
+  { name: "Host Grotesk", family: "'Host Grotesk'", axis: "wght@300..800", group: "geometric" },
+  { name: "Schibsted Grotesk", family: "'Schibsted Grotesk'", axis: "wght@400..900", group: "geometric" },
+  { name: "Golos Text", family: "'Golos Text'", axis: "wght@400..900", group: "geometric" },
+  { name: "Hanken Grotesk", family: "'Hanken Grotesk'", axis: "wght@100..900", group: "geometric" },
+  { name: "Albert Sans", family: "'Albert Sans'", axis: "wght@100..900", group: "geometric" },
+  { name: "Epilogue", family: "'Epilogue'", axis: "wght@100..900", group: "geometric" },
+  { name: "Kumbh Sans", family: "'Kumbh Sans'", axis: "wght@100..900", group: "geometric" },
+  { name: "Sofia Sans", family: "'Sofia Sans'", axis: "wght@1..1000", group: "geometric" },
+  { name: "Wix Madefor Display", family: "'Wix Madefor Display'", axis: "wght@400..800", group: "geometric" },
+  { name: "Rethink Sans", family: "'Rethink Sans'", axis: "wght@400..800", group: "geometric" },
+  { name: "Afacad", family: "'Afacad'", axis: "wght@400..700", group: "geometric" },
+  { name: "Reddit Sans", family: "'Reddit Sans'", axis: "wght@200..900", group: "geometric" },
+  { name: "Parkinsans", family: "'Parkinsans'", axis: "wght@300..800", group: "geometric" },
+  { name: "Darker Grotesque", family: "'Darker Grotesque'", axis: "wght@300..900", group: "geometric" },
+  { name: "Space Grotesk", family: "'Space Grotesk'", axis: "wght@300..700", group: "geometric" },
+  { name: "League Spartan", family: "'League Spartan'", axis: "wght@100..900", group: "geometric" },
+  { name: "Questrial", family: "'Questrial'", axis: "wght@400", group: "geometric" },
+  { name: "Montserrat Alternates", family: "'Montserrat Alternates'", axis: "wght@100;200;300;400;500;600;700;800;900", group: "geometric" },
+  { name: "Comfortaa", family: "'Comfortaa'", axis: "wght@300..700", group: "geometric" },
+  { name: "Fredoka", family: "'Fredoka'", axis: "wght@300..700", group: "geometric" },
+  { name: "Baloo 2", family: "'Baloo 2'", axis: "wght@400..800", group: "geometric" },
+  { name: "Lexend Zetta", family: "'Lexend Zetta'", axis: "wght@100..900", group: "geometric" },
+  { name: "Lexend Mega", family: "'Lexend Mega'", axis: "wght@100..900", group: "geometric" },
+  { name: "Lexend Exa", family: "'Lexend Exa'", axis: "wght@100..900", group: "geometric" },
+  { name: "Lexend Giga", family: "'Lexend Giga'", axis: "wght@100..900", group: "geometric" },
+  { name: "Tilt Warp", family: "'Tilt Warp'", axis: "wght@400", group: "geometric" },
+  { name: "Tilt Neon", family: "'Tilt Neon'", axis: "wght@400", group: "geometric" },
+  { name: "Anta", family: "'Anta'", axis: "wght@400", group: "geometric" },
+  { name: "Bruno Ace", family: "'Bruno Ace'", axis: "wght@400", group: "geometric" },
+  { name: "Bruno Ace SC", family: "'Bruno Ace SC'", axis: "wght@400", group: "geometric" },
+  { name: "Tomorrow", family: "'Tomorrow'", axis: "wght@100;200;300;400;500;600;700;800;900", group: "geometric" },
+  { name: "Tektur", family: "'Tektur'", axis: "wght@400..900", group: "geometric" },
+  { name: "Kdam Thmor Pro", family: "'Kdam Thmor Pro'", axis: "wght@400", group: "geometric" },
+  { name: "Genos", family: "'Genos'", axis: "wght@100..900", group: "geometric" },
+  { name: "Trispace", family: "'Trispace'", axis: "wght@100..800", group: "geometric" },
+  { name: "Smooch Sans", family: "'Smooch Sans'", axis: "wght@100..900", group: "geometric" },
+  { name: "Mohave", family: "'Mohave'", axis: "wght@300..700", group: "geometric" },
+  { name: "Pathway Extreme", family: "'Pathway Extreme'", axis: "wght@100..900", group: "geometric" },
+  { name: "Spinnaker", family: "'Spinnaker'", axis: "wght@400", group: "geometric" },
+  { name: "Telex", family: "'Telex'", axis: "wght@400", group: "geometric" },
+  { name: "Voltaire", family: "'Voltaire'", axis: "wght@400", group: "geometric" },
+  { name: "Yantramanav", family: "'Yantramanav'", axis: "wght@100;300;400;500;700;900", group: "geometric" },
+  { name: "M PLUS Rounded 1c", family: "'M PLUS Rounded 1c'", axis: "wght@100;300;400;500;700;800;900", group: "geometric" },
+  { name: "Zen Kaku Gothic New", family: "'Zen Kaku Gothic New'", axis: "wght@300;400;500;700;900", group: "geometric" },
+  { name: "Dela Gothic One", family: "'Dela Gothic One'", axis: "wght@400", group: "geometric" },
+  { name: "Righteous", family: "'Righteous'", axis: "wght@400", group: "retro" },
+  { name: "Audiowide", family: "'Audiowide'", axis: "wght@400", group: "retro" },
+  { name: "Days One", family: "'Days One'", axis: "wght@400", group: "retro" },
+  { name: "Monomaniac One", family: "'Monomaniac One'", axis: "wght@400", group: "retro" },
+  { name: "Concert One", family: "'Concert One'", axis: "wght@400", group: "retro" },
+  { name: "Lilita One", family: "'Lilita One'", axis: "wght@400", group: "retro" },
+  { name: "Paytone One", family: "'Paytone One'", axis: "wght@400", group: "retro" },
+  { name: "Bowlby One", family: "'Bowlby One'", axis: "wght@400", group: "retro" },
+  { name: "Bowlby One SC", family: "'Bowlby One SC'", axis: "wght@400", group: "retro" },
+  { name: "Racing Sans One", family: "'Racing Sans One'", axis: "wght@400", group: "retro" },
+  { name: "Krona One", family: "'Krona One'", axis: "wght@400", group: "retro" },
+  { name: "Goldman", family: "'Goldman'", axis: "wght@400;700", group: "retro" },
+  { name: "Iceberg", family: "'Iceberg'", axis: "wght@400", group: "retro" },
+  { name: "Turret Road", family: "'Turret Road'", axis: "wght@200;300;400;500;700;800", group: "retro" },
+  { name: "Sarpanch", family: "'Sarpanch'", axis: "wght@400;500;600;700;800;900", group: "retro" },
+  { name: "Fugaz One", family: "'Fugaz One'", axis: "wght@400", group: "retro" },
+  { name: "Chango", family: "'Chango'", axis: "wght@400", group: "retro" },
+  { name: "Contrail One", family: "'Contrail One'", axis: "wght@400", group: "retro" },
+  { name: "Boogaloo", family: "'Boogaloo'", axis: "wght@400", group: "retro" },
+  { name: "Sansita", family: "'Sansita'", axis: "wght@400;700;800;900", group: "retro" },
+  { name: "Sniglet", family: "'Sniglet'", axis: "wght@400;800", group: "retro" },
+  { name: "Shrikhand", family: "'Shrikhand'", axis: "wght@400", group: "retro" },
+  { name: "Titan One", family: "'Titan One'", axis: "wght@400", group: "retro" },
+  { name: "Rowdies", family: "'Rowdies'", axis: "wght@300;400;700", group: "retro" },
+  { name: "Bagel Fat One", family: "'Bagel Fat One'", axis: "wght@400", group: "retro" },
+  { name: "Gasoek One", family: "'Gasoek One'", axis: "wght@400", group: "retro" },
+  { name: "Bangers", family: "'Bangers'", axis: "wght@400", group: "retro" },
+  { name: "Luckiest Guy", family: "'Luckiest Guy'", axis: "wght@400", group: "retro" },
+  { name: "Alfa Slab One", family: "'Alfa Slab One'", axis: "wght@400", group: "retro" },
+  { name: "Ultra", family: "'Ultra'", axis: "wght@400", group: "retro" },
+  { name: "Rammetto One", family: "'Rammetto One'", axis: "wght@400", group: "retro" },
+  { name: "Rubik Mono One", family: "'Rubik Mono One'", axis: "wght@400", group: "retro" },
+  { name: "Black Ops One", family: "'Black Ops One'", axis: "wght@400", group: "retro" },
+  { name: "Bungee", family: "'Bungee'", axis: "wght@400", group: "retro" },
+  { name: "Passion One", family: "'Passion One'", axis: "wght@400;700;900", group: "retro" },
+  { name: "Squada One", family: "'Squada One'", axis: "wght@400", group: "retro" },
+  { name: "Russo One", family: "'Russo One'", axis: "wght@400", group: "retro" },
+  { name: "Poller One", family: "'Poller One'", axis: "wght@400", group: "retro" },
+  { name: "Jockey One", family: "'Jockey One'", axis: "wght@400", group: "retro" },
+  { name: "Marvel", family: "'Marvel'", axis: "wght@400;700", group: "retro" },
+  { name: "Homenaje", family: "'Homenaje'", axis: "wght@400", group: "retro" },
+  { name: "Geo", family: "'Geo'", axis: "wght@400", group: "retro" },
+  { name: "Rationale", family: "'Rationale'", axis: "wght@400", group: "retro" },
+  { name: "Strait", family: "'Strait'", axis: "wght@400", group: "retro" },
+  { name: "Economica", family: "'Economica'", axis: "wght@400;700", group: "retro" },
+  { name: "Share", family: "'Share'", axis: "wght@400;700", group: "retro" },
+  { name: "Share Tech", family: "'Share Tech'", axis: "wght@400", group: "retro" },
+  { name: "Limelight", family: "'Limelight'", axis: "wght@400", group: "retro" },
+  { name: "Poiret One", family: "'Poiret One'", axis: "wght@400", group: "retro" },
+  { name: "Abril Fatface", family: "'Abril Fatface'", axis: "wght@400", group: "retro" },
+  { name: "Yeseva One", family: "'Yeseva One'", axis: "wght@400", group: "retro" },
+  { name: "Lobster", family: "'Lobster'", axis: "wght@400", group: "retro" },
+  { name: "Pacifico", family: "'Pacifico'", axis: "wght@400", group: "retro" },
+  { name: "Kaushan Script", family: "'Kaushan Script'", axis: "wght@400", group: "retro" },
+  { name: "Permanent Marker", family: "'Permanent Marker'", axis: "wght@400", group: "retro" },
+  { name: "Protest Strike", family: "'Protest Strike'", axis: "wght@400", group: "retro" },
+  { name: "Protest Riot", family: "'Protest Riot'", axis: "wght@400", group: "retro" },
+  { name: "Chonburi", family: "'Chonburi'", axis: "wght@400", group: "retro" },
+  { name: "Cherry Bomb One", family: "'Cherry Bomb One'", axis: "wght@400", group: "retro" },
+  { name: "Mochiy Pop One", family: "'Mochiy Pop One'", axis: "wght@400", group: "retro" },
+  { name: "Jaro", family: "'Jaro'", axis: "wght@400", group: "retro" },
+  { name: "Climate Crisis", family: "'Climate Crisis'", axis: "wght@400", group: "retro" },
+  { name: "Foldit", family: "'Foldit'", axis: "wght@100..900", group: "retro" },
+  { name: "Faster One", family: "'Faster One'", axis: "wght@400", group: "retro" },
+  { name: "Wallpoet", family: "'Wallpoet'", axis: "wght@400", group: "retro" },
+  { name: "Syncopate", family: "'Syncopate'", axis: "wght@400;700", group: "retro" },
+  { name: "Major Mono Display", family: "'Major Mono Display'", axis: "wght@400", group: "retro" },
+  { name: "Bungee Shade", family: "'Bungee Shade'", axis: "wght@400", group: "retro" },
+  { name: "Bungee Inline", family: "'Bungee Inline'", axis: "wght@400", group: "retro" },
+  { name: "Monoton", family: "'Monoton'", axis: "wght@400", group: "retro" },
+  { name: "Orbitron", family: "'Orbitron'", axis: "wght@400..900", group: "space" },
+  { name: "Michroma", family: "'Michroma'", axis: "wght@400", group: "space" },
+  { name: "Chakra Petch", family: "'Chakra Petch'", axis: "wght@300;400;500;600;700", group: "space" },
+  { name: "Oxanium", family: "'Oxanium'", axis: "wght@200..800", group: "space" },
+  { name: "Quantico", family: "'Quantico'", axis: "wght@400;700", group: "space" },
+  { name: "Aldrich", family: "'Aldrich'", axis: "wght@400", group: "space" },
+  { name: "Electrolize", family: "'Electrolize'", axis: "wght@400", group: "space" },
+  { name: "Jura", family: "'Jura'", axis: "wght@300..700", group: "space" },
+  { name: "Nova Square", family: "'Nova Square'", axis: "wght@400", group: "space" },
+  { name: "Nova Flat", family: "'Nova Flat'", axis: "wght@400", group: "space" },
+  { name: "Nova Round", family: "'Nova Round'", axis: "wght@400", group: "space" },
+  { name: "Play", family: "'Play'", axis: "wght@400;700", group: "space" },
+  { name: "Saira", family: "'Saira'", axis: "wght@100..900", group: "space" },
+  { name: "Rajdhani", family: "'Rajdhani'", axis: "wght@300;400;500;600;700", group: "space" },
+  { name: "Bai Jamjuree", family: "'Bai Jamjuree'", axis: "wght@200;300;400;500;600;700", group: "space" },
+  { name: "Advent Pro", family: "'Advent Pro'", axis: "wght@100..900", group: "space" },
+  { name: "Gruppo", family: "'Gruppo'", axis: "wght@400", group: "space" },
+  { name: "Stick No Bills", family: "'Stick No Bills'", axis: "wght@200..800", group: "space" },
+  { name: "Sono", family: "'Sono'", axis: "wght@200..800", group: "space" },
+  { name: "Exo", family: "'Exo'", axis: "wght@100..900", group: "space" },
+  { name: "Zen Dots", family: "'Zen Dots'", axis: "wght@400", group: "space" },
+  { name: "Tourney", family: "'Tourney'", axis: "wght@100..900", group: "space" },
+  { name: "Krub", family: "'Krub'", axis: "wght@200;300;400;500;600;700", group: "space" },
+  { name: "Mitr", family: "'Mitr'", axis: "wght@200;300;400;500;600;700", group: "space" },
+  { name: "Niramit", family: "'Niramit'", axis: "wght@200;300;400;500;600;700", group: "space" },
+  { name: "Grandstander", family: "'Grandstander'", axis: "wght@100..900", group: "space" },
+  { name: "Playfair Display", family: "'Playfair Display'", axis: "wght@400..900", group: "serif" },
+  { name: "Merriweather", family: "'Merriweather'", axis: "wght@300..900", group: "serif" },
+  { name: "Lora", family: "'Lora'", axis: "wght@400..700", group: "serif" },
+  { name: "Roboto Slab", family: "'Roboto Slab'", axis: "wght@100..900", group: "serif" },
+  { name: "Bitter", family: "'Bitter'", axis: "wght@100..900", group: "serif" },
+  { name: "Zilla Slab", family: "'Zilla Slab'", axis: "wght@300;400;500;600;700", group: "serif" },
+  { name: "Arvo", family: "'Arvo'", axis: "wght@400;700", group: "serif" },
+  { name: "Libre Baskerville", family: "'Libre Baskerville'", axis: "wght@400..700", group: "serif" },
+  { name: "DM Serif Display", family: "'DM Serif Display'", axis: "wght@400", group: "serif" },
+  { name: "Fraunces", family: "'Fraunces'", axis: "wght@100..900", group: "serif" },
+  { name: "Instrument Serif", family: "'Instrument Serif'", axis: "wght@400", group: "serif" },
+  { name: "Young Serif", family: "'Young Serif'", axis: "wght@400", group: "serif" },
+  { name: "Newsreader", family: "'Newsreader'", axis: "wght@200..800", group: "serif" },
+  { name: "Spectral", family: "'Spectral'", axis: "wght@200;300;400;500;600;700;800", group: "serif" },
+  { name: "Crimson Pro", family: "'Crimson Pro'", axis: "wght@200..900", group: "serif" },
+  { name: "EB Garamond", family: "'EB Garamond'", axis: "wght@400..800", group: "serif" },
+  { name: "Cardo", family: "'Cardo'", axis: "wght@400;700", group: "serif" },
+  { name: "Alegreya", family: "'Alegreya'", axis: "wght@400..900", group: "serif" },
+  { name: "Bodoni Moda", family: "'Bodoni Moda'", axis: "wght@400..900", group: "serif" },
+  { name: "Italiana", family: "'Italiana'", axis: "wght@400", group: "serif" },
+  { name: "Marcellus", family: "'Marcellus'", axis: "wght@400", group: "serif" },
+  { name: "Forum", family: "'Forum'", axis: "wght@400", group: "serif" },
+  { name: "Julius Sans One", family: "'Julius Sans One'", axis: "wght@400", group: "serif" },
+  { name: "Cinzel", family: "'Cinzel'", axis: "wght@400..900", group: "serif" },
+  { name: "Cinzel Decorative", family: "'Cinzel Decorative'", axis: "wght@400;700;900", group: "serif" },
+  { name: "Cormorant Garamond", family: "'Cormorant Garamond'", axis: "wght@300..700", group: "serif" },
+  { name: "Josefin Slab", family: "'Josefin Slab'", axis: "wght@100..700", group: "serif" },
+  { name: "Noto Serif", family: "'Noto Serif'", axis: "wght@100..900", group: "serif" },
+  { name: "Source Serif 4", family: "'Source Serif 4'", axis: "wght@200..900", group: "serif" },
+  { name: "Domine", family: "'Domine'", axis: "wght@400..700", group: "serif" },
+  { name: "Vollkorn", family: "'Vollkorn'", axis: "wght@400..900", group: "serif" },
+  { name: "Prata", family: "'Prata'", axis: "wght@400", group: "serif" },
+  { name: "Gloock", family: "'Gloock'", axis: "wght@400", group: "serif" },
+  { name: "Bevan", family: "'Bevan'", axis: "wght@400", group: "serif" },
+  { name: "Oswald", family: "'Oswald'", axis: "wght@200..700", group: "condensed" },
+  { name: "Bebas Neue", family: "'Bebas Neue'", axis: "wght@400", group: "condensed" },
+  { name: "Anton", family: "'Anton'", axis: "wght@400", group: "condensed" },
+  { name: "Anton SC", family: "'Anton SC'", axis: "wght@400", group: "condensed" },
+  { name: "Antonio", family: "'Antonio'", axis: "wght@100..700", group: "condensed" },
+  { name: "Teko", family: "'Teko'", axis: "wght@300..700", group: "condensed" },
+  { name: "Archivo Black", family: "'Archivo Black'", axis: "wght@400", group: "condensed" },
+  { name: "Archivo Narrow", family: "'Archivo Narrow'", axis: "wght@400..700", group: "condensed" },
+  { name: "Barlow Condensed", family: "'Barlow Condensed'", axis: "wght@100;200;300;400;500;600;700;800;900", group: "condensed" },
+  { name: "Barlow Semi Condensed", family: "'Barlow Semi Condensed'", axis: "wght@100;200;300;400;500;600;700;800;900", group: "condensed" },
+  { name: "Saira Condensed", family: "'Saira Condensed'", axis: "wght@100;200;300;400;500;600;700;800;900", group: "condensed" },
+  { name: "Sofia Sans Condensed", family: "'Sofia Sans Condensed'", axis: "wght@1..1000", group: "condensed" },
+  { name: "Fjalla One", family: "'Fjalla One'", axis: "wght@400", group: "condensed" },
+  { name: "Pathway Gothic One", family: "'Pathway Gothic One'", axis: "wght@400", group: "condensed" },
+  { name: "League Gothic", family: "'League Gothic'", axis: "wght@400", group: "condensed" },
+  { name: "Roboto Condensed", family: "'Roboto Condensed'", axis: "wght@100..900", group: "condensed" },
+  { name: "Fira Sans Condensed", family: "'Fira Sans Condensed'", axis: "wght@100;200;300;400;500;600;700;800;900", group: "condensed" },
+  { name: "Ubuntu Condensed", family: "'Ubuntu Condensed'", axis: "wght@400", group: "condensed" },
+  { name: "Encode Sans Condensed", family: "'Encode Sans Condensed'", axis: "wght@100;200;300;400;500;600;700;800;900", group: "condensed" },
+  { name: "Yanone Kaffeesatz", family: "'Yanone Kaffeesatz'", axis: "wght@200..700", group: "condensed" },
+  { name: "Khand", family: "'Khand'", axis: "wght@300;400;500;600;700", group: "condensed" },
+  { name: "Pragati Narrow", family: "'Pragati Narrow'", axis: "wght@400;700", group: "condensed" },
+  { name: "Six Caps", family: "'Six Caps'", axis: "wght@400", group: "condensed" },
+  { name: "Staatliches", family: "'Staatliches'", axis: "wght@400", group: "condensed" },
+  { name: "Bungee Hairline", family: "'Bungee Hairline'", axis: "wght@400", group: "condensed" },
+  { name: "Space Mono", family: "'Space Mono'", axis: "wght@400;700", group: "mono" },
+  { name: "JetBrains Mono", family: "'JetBrains Mono'", axis: "wght@100..800", group: "mono" },
+  { name: "Geist Mono", family: "'Geist Mono'", axis: "wght@100..900", group: "mono" },
+  { name: "Martian Mono", family: "'Martian Mono'", axis: "wght@100..800", group: "mono" },
+  { name: "IBM Plex Mono", family: "'IBM Plex Mono'", axis: "wght@100;200;300;400;500;600;700", group: "mono" },
+  { name: "Roboto Mono", family: "'Roboto Mono'", axis: "wght@100..700", group: "mono" },
+  { name: "Fira Code", family: "'Fira Code'", axis: "wght@300..700", group: "mono" },
+  { name: "Source Code Pro", family: "'Source Code Pro'", axis: "wght@200..900", group: "mono" },
+  { name: "DM Mono", family: "'DM Mono'", axis: "wght@300;400;500", group: "mono" },
+  { name: "Azeret Mono", family: "'Azeret Mono'", axis: "wght@100..900", group: "mono" },
+  { name: "Sometype Mono", family: "'Sometype Mono'", axis: "wght@400..700", group: "mono" },
+  { name: "Red Hat Mono", family: "'Red Hat Mono'", axis: "wght@300..700", group: "mono" },
+  { name: "Chivo Mono", family: "'Chivo Mono'", axis: "wght@100..900", group: "mono" },
+  { name: "Spline Sans Mono", family: "'Spline Sans Mono'", axis: "wght@300..700", group: "mono" },
+  { name: "Nova Mono", family: "'Nova Mono'", axis: "wght@400", group: "mono" },
+  { name: "Share Tech Mono", family: "'Share Tech Mono'", axis: "wght@400", group: "mono" },
+  { name: "Xanh Mono", family: "'Xanh Mono'", axis: "wght@400", group: "mono" },
+  { name: "Kode Mono", family: "'Kode Mono'", axis: "wght@400..700", group: "mono" },
+  { name: "Ubuntu Mono", family: "'Ubuntu Mono'", axis: "wght@400;700", group: "mono" },
+  { name: "Courier Prime", family: "'Courier Prime'", axis: "wght@400;700", group: "mono" },
+  { name: "Inconsolata", family: "'Inconsolata'", axis: "wght@200..900", group: "mono" },
+  { name: "Overpass Mono", family: "'Overpass Mono'", axis: "wght@300..700", group: "mono" },
+  { name: "Cutive Mono", family: "'Cutive Mono'", axis: "wght@400", group: "mono" },
+  { name: "Syne Mono", family: "'Syne Mono'", axis: "wght@400", group: "mono" },
+  { name: "Fragment Mono", family: "'Fragment Mono'", axis: "wght@400", group: "mono" },
+  { name: "B612 Mono", family: "'B612 Mono'", axis: "wght@400;700", group: "mono" },
+  { name: "Unica One", family: "'Unica One'", axis: "wght@400", group: "futuristic" },
+  { name: "Federo", family: "'Federo'", axis: "wght@400", group: "futuristic" },
+  { name: "Megrim", family: "'Megrim'", axis: "wght@400", group: "futuristic" },
+  { name: "Kenia", family: "'Kenia'", axis: "wght@400", group: "futuristic" },
+  { name: "Revalia", family: "'Revalia'", axis: "wght@400", group: "futuristic" },
+  { name: "Stalinist One", family: "'Stalinist One'", axis: "wght@400", group: "futuristic" },
+  { name: "Bungee Outline", family: "'Bungee Outline'", axis: "wght@400", group: "futuristic" },
+  { name: "Rubik Iso", family: "'Rubik Iso'", axis: "wght@400", group: "futuristic" },
+  { name: "Rubik 80s Fade", family: "'Rubik 80s Fade'", axis: "wght@400", group: "futuristic" },
+  { name: "Rubik Vinyl", family: "'Rubik Vinyl'", axis: "wght@400", group: "futuristic" },
+  { name: "Rubik Moonrocks", family: "'Rubik Moonrocks'", axis: "wght@400", group: "futuristic" },
+  { name: "Rubik Lines", family: "'Rubik Lines'", axis: "wght@400", group: "futuristic" },
+  { name: "Rubik Glitch", family: "'Rubik Glitch'", axis: "wght@400", group: "futuristic" },
+  { name: "Rubik Maze", family: "'Rubik Maze'", axis: "wght@400", group: "futuristic" },
+  { name: "Saira Stencil One", family: "'Saira Stencil One'", axis: "wght@400", group: "futuristic" },
+  { name: "Allerta Stencil", family: "'Allerta Stencil'", axis: "wght@400", group: "futuristic" },
+  { name: "Stardos Stencil", family: "'Stardos Stencil'", axis: "wght@400;700", group: "futuristic" },
+  { name: "Sirin Stencil", family: "'Sirin Stencil'", axis: "wght@400", group: "futuristic" },
+  { name: "Emblema One", family: "'Emblema One'", axis: "wght@400", group: "futuristic" },
+  { name: "Codystar", family: "'Codystar'", axis: "wght@300;400", group: "futuristic" },
+  { name: "Ropa Sans", family: "'Ropa Sans'", axis: "wght@400", group: "futuristic" },
+  { name: "Prosto One", family: "'Prosto One'", axis: "wght@400", group: "futuristic" },
+  { name: "Kelly Slab", family: "'Kelly Slab'", axis: "wght@400", group: "futuristic" },
+  { name: "Sansation", family: "'Sansation'", axis: "wght@300;400;700", group: "futuristic" },
+  { name: "Iceland", family: "'Iceland'", axis: "wght@400", group: "futuristic" },
+  { name: "Nova Oval", family: "'Nova Oval'", axis: "wght@400", group: "futuristic" },
+  { name: "Nova Cut", family: "'Nova Cut'", axis: "wght@400", group: "futuristic" },
+  { name: "Nova Script", family: "'Nova Script'", axis: "wght@400", group: "futuristic" },
+  { name: "Nova Slim", family: "'Nova Slim'", axis: "wght@400", group: "futuristic" },
+  { name: "Lobster Two", family: "'Lobster Two'", axis: "wght@400;700", group: "script" },
+  { name: "Dancing Script", family: "'Dancing Script'", axis: "wght@400..700", group: "script" },
+  { name: "Great Vibes", family: "'Great Vibes'", axis: "wght@400", group: "script" },
+  { name: "Satisfy", family: "'Satisfy'", axis: "wght@400", group: "script" },
+  { name: "Cookie", family: "'Cookie'", axis: "wght@400", group: "script" },
+  { name: "Courgette", family: "'Courgette'", axis: "wght@400", group: "script" },
+  { name: "Sacramento", family: "'Sacramento'", axis: "wght@400", group: "script" },
+  { name: "Yellowtail", family: "'Yellowtail'", axis: "wght@400", group: "script" },
+  { name: "Allura", family: "'Allura'", axis: "wght@400", group: "script" },
+  { name: "Alex Brush", family: "'Alex Brush'", axis: "wght@400", group: "script" },
+  { name: "Parisienne", family: "'Parisienne'", axis: "wght@400", group: "script" },
+  { name: "Tangerine", family: "'Tangerine'", axis: "wght@400;700", group: "script" },
+  { name: "Pinyon Script", family: "'Pinyon Script'", axis: "wght@400", group: "script" },
+  { name: "Mr Dafoe", family: "'Mr Dafoe'", axis: "wght@400", group: "script" },
+  { name: "Norican", family: "'Norican'", axis: "wght@400", group: "script" },
+  { name: "Oleo Script", family: "'Oleo Script'", axis: "wght@400;700", group: "script" },
+  { name: "Oleo Script Swash Caps", family: "'Oleo Script Swash Caps'", axis: "wght@400;700", group: "script" },
+  { name: "Sansita Swashed", family: "'Sansita Swashed'", axis: "wght@300..900", group: "script" },
+  { name: "Berkshire Swash", family: "'Berkshire Swash'", axis: "wght@400", group: "script" },
+  { name: "Playball", family: "'Playball'", axis: "wght@400", group: "script" },
+  { name: "Damion", family: "'Damion'", axis: "wght@400", group: "script" },
+  { name: "Marck Script", family: "'Marck Script'", axis: "wght@400", group: "script" },
+  { name: "Caveat", family: "'Caveat'", axis: "wght@400..700", group: "script" },
+  { name: "Shadows Into Light", family: "'Shadows Into Light'", axis: "wght@400", group: "script" },
+  { name: "Indie Flower", family: "'Indie Flower'", axis: "wght@400", group: "script" },
+  { name: "Amatic SC", family: "'Amatic SC'", axis: "wght@400;700", group: "script" },
+  { name: "Rock Salt", family: "'Rock Salt'", axis: "wght@400", group: "script" },
+  { name: "Homemade Apple", family: "'Homemade Apple'", axis: "wght@400", group: "script" },
+  { name: "Nothing You Could Do", family: "'Nothing You Could Do'", axis: "wght@400", group: "script" },
+  { name: "Reenie Beanie", family: "'Reenie Beanie'", axis: "wght@400", group: "script" },
+  { name: "Covered By Your Grace", family: "'Covered By Your Grace'", axis: "wght@400", group: "script" },
+  { name: "Gloria Hallelujah", family: "'Gloria Hallelujah'", axis: "wght@400", group: "script" },
+  { name: "Architects Daughter", family: "'Architects Daughter'", axis: "wght@400", group: "script" },
+  { name: "Patrick Hand", family: "'Patrick Hand'", axis: "wght@400", group: "script" },
+  { name: "Kalam", family: "'Kalam'", axis: "wght@300;400;700", group: "script" },
+  { name: "Handlee", family: "'Handlee'", axis: "wght@400", group: "script" },
+  { name: "Neucha", family: "'Neucha'", axis: "wght@400", group: "script" },
+  { name: "Comic Neue", family: "'Comic Neue'", axis: "wght@300;400;700", group: "script" },
+  { name: "Bad Script", family: "'Bad Script'", axis: "wght@400", group: "script" },
+  { name: "Merienda", family: "'Merienda'", axis: "wght@300..900", group: "script" },
+  { name: "Niconne", family: "'Niconne'", axis: "wght@400", group: "script" },
+  { name: "Rochester", family: "'Rochester'", axis: "wght@400", group: "script" },
+  { name: "Rouge Script", family: "'Rouge Script'", axis: "wght@400", group: "script" },
+  { name: "Herr Von Muellerhoff", family: "'Herr Von Muellerhoff'", axis: "wght@400", group: "script" },
+  { name: "Monsieur La Doulaise", family: "'Monsieur La Doulaise'", axis: "wght@400", group: "script" },
+  { name: "Mrs Saint Delafield", family: "'Mrs Saint Delafield'", axis: "wght@400", group: "script" },
+  { name: "Italianno", family: "'Italianno'", axis: "wght@400", group: "script" },
+  { name: "Grand Hotel", family: "'Grand Hotel'", axis: "wght@400", group: "script" },
+  { name: "Lily Script One", family: "'Lily Script One'", axis: "wght@400", group: "script" },
+  { name: "Leckerli One", family: "'Leckerli One'", axis: "wght@400", group: "script" },
+  { name: "Style Script", family: "'Style Script'", axis: "wght@400", group: "script" },
+  { name: "Cherish", family: "'Cherish'", axis: "wght@400", group: "script" },
+  { name: "Carattere", family: "'Carattere'", axis: "wght@400", group: "script" },
+  { name: "Caramel", family: "'Caramel'", axis: "wght@400", group: "script" },
+  { name: "Ephesis", family: "'Ephesis'", axis: "wght@400", group: "script" },
+  { name: "Ms Madi", family: "'Ms Madi'", axis: "wght@400", group: "script" },
+  { name: "Send Flowers", family: "'Send Flowers'", axis: "wght@400", group: "script" },
+  { name: "Splash", family: "'Splash'", axis: "wght@400", group: "script" },
+  { name: "Water Brush", family: "'Water Brush'", axis: "wght@400", group: "script" },
+  { name: "Whisper", family: "'Whisper'", axis: "wght@400", group: "script" },
+  { name: "Ballet", family: "'Ballet'", axis: "wght@400", group: "script" },
+  { name: "Birthstone", family: "'Birthstone'", axis: "wght@400", group: "script" },
+  { name: "Bonheur Royale", family: "'Bonheur Royale'", axis: "wght@400", group: "script" },
+  { name: "Corinthia", family: "'Corinthia'", axis: "wght@400;700", group: "script" },
+  { name: "Estonia", family: "'Estonia'", axis: "wght@400", group: "script" },
+  { name: "Hurricane", family: "'Hurricane'", axis: "wght@400", group: "script" },
+  { name: "Imperial Script", family: "'Imperial Script'", axis: "wght@400", group: "script" },
+  { name: "Inspiration", family: "'Inspiration'", axis: "wght@400", group: "script" },
+  { name: "Island Moments", family: "'Island Moments'", axis: "wght@400", group: "script" },
+  { name: "Kolker Brush", family: "'Kolker Brush'", axis: "wght@400", group: "script" },
+  { name: "Lavishly Yours", family: "'Lavishly Yours'", axis: "wght@400", group: "script" },
+  { name: "Love Light", family: "'Love Light'", axis: "wght@400", group: "script" },
+  { name: "Luxurious Script", family: "'Luxurious Script'", axis: "wght@400", group: "script" },
+  { name: "Meow Script", family: "'Meow Script'", axis: "wght@400", group: "script" },
+  { name: "Moon Dance", family: "'Moon Dance'", axis: "wght@400", group: "script" },
+  { name: "Mea Culpa", family: "'Mea Culpa'", axis: "wght@400", group: "script" },
+  { name: "Neonderthaw", family: "'Neonderthaw'", axis: "wght@400", group: "script" },
+  { name: "Oooh Baby", family: "'Oooh Baby'", axis: "wght@400", group: "script" },
+  { name: "Passions Conflict", family: "'Passions Conflict'", axis: "wght@400", group: "script" },
+  { name: "Petemoss", family: "'Petemoss'", axis: "wght@400", group: "script" },
+  { name: "Puppies Play", family: "'Puppies Play'", axis: "wght@400", group: "script" },
+  { name: "Qwitcher Grypen", family: "'Qwitcher Grypen'", axis: "wght@400;700", group: "script" },
+  { name: "Sassy Frass", family: "'Sassy Frass'", axis: "wght@400", group: "script" },
+  { name: "Smooch", family: "'Smooch'", axis: "wght@400", group: "script" },
+  { name: "Square Peg", family: "'Square Peg'", axis: "wght@400", group: "script" },
+  { name: "Tapestry", family: "'Tapestry'", axis: "wght@400", group: "script" },
+  { name: "The Nautigal", family: "'The Nautigal'", axis: "wght@400;700", group: "script" },
+  { name: "Twinkle Star", family: "'Twinkle Star'", axis: "wght@400", group: "script" },
+  { name: "Updock", family: "'Updock'", axis: "wght@400", group: "script" },
+  { name: "Vujahday Script", family: "'Vujahday Script'", axis: "wght@400", group: "script" },
+  { name: "Waterfall", family: "'Waterfall'", axis: "wght@400", group: "script" },
+  { name: "Comforter", family: "'Comforter'", axis: "wght@400", group: "script" },
+  { name: "Comforter Brush", family: "'Comforter Brush'", axis: "wght@400", group: "script" },
+  { name: "Explora", family: "'Explora'", axis: "wght@400", group: "script" },
+  { name: "Festive", family: "'Festive'", axis: "wght@400", group: "script" },
+  { name: "Gwendolyn", family: "'Gwendolyn'", axis: "wght@400;700", group: "script" },
+  { name: "Licorice", family: "'Licorice'", axis: "wght@400", group: "script" },
+  { name: "Mrs Sheppards", family: "'Mrs Sheppards'", axis: "wght@400", group: "script" },
+  { name: "My Soul", family: "'My Soul'", axis: "wght@400", group: "script" },
+  { name: "Praise", family: "'Praise'", axis: "wght@400", group: "script" },
+  { name: "Babylonica", family: "'Babylonica'", axis: "wght@400", group: "script" },
+  { name: "Beau Rivage", family: "'Beau Rivage'", axis: "wght@400", group: "script" },
+  { name: "Fuggles", family: "'Fuggles'", axis: "wght@400", group: "script" },
+  { name: "Charm", family: "'Charm'", axis: "wght@400;700", group: "script" },
+  { name: "Charmonman", family: "'Charmonman'", axis: "wght@400;700", group: "script" },
+  { name: "Mali", family: "'Mali'", axis: "wght@200;300;400;500;600;700", group: "script" },
+  { name: "Itim", family: "'Itim'", axis: "wght@400", group: "script" },
+  { name: "Sriracha", family: "'Sriracha'", axis: "wght@400", group: "script" },
+  { name: "Pattaya", family: "'Pattaya'", axis: "wght@400", group: "script" },
+  { name: "Sofia", family: "'Sofia'", axis: "wght@400", group: "script" },
+  { name: "Euphoria Script", family: "'Euphoria Script'", axis: "wght@400", group: "script" },
+  { name: "Clicker Script", family: "'Clicker Script'", axis: "wght@400", group: "script" },
+  { name: "Engagement", family: "'Engagement'", axis: "wght@400", group: "script" },
+  { name: "Kristi", family: "'Kristi'", axis: "wght@400", group: "script" },
+  { name: "La Belle Aurore", family: "'La Belle Aurore'", axis: "wght@400", group: "script" },
+  { name: "Meddon", family: "'Meddon'", axis: "wght@400", group: "script" },
+  { name: "Over the Rainbow", family: "'Over the Rainbow'", axis: "wght@400", group: "script" },
+  { name: "Sue Ellen Francisco", family: "'Sue Ellen Francisco'", axis: "wght@400", group: "script" },
+  { name: "Zeyada", family: "'Zeyada'", axis: "wght@400", group: "script" },
+  { name: "Cedarville Cursive", family: "'Cedarville Cursive'", axis: "wght@400", group: "script" },
+  { name: "Dawning of a New Day", family: "'Dawning of a New Day'", axis: "wght@400", group: "script" },
+  { name: "Give You Glory", family: "'Give You Glory'", axis: "wght@400", group: "script" },
+  { name: "Just Me Again Down Here", family: "'Just Me Again Down Here'", axis: "wght@400", group: "script" },
+  { name: "Loved by the King", family: "'Loved by the King'", axis: "wght@400", group: "script" },
+  { name: "Waiting for the Sunrise", family: "'Waiting for the Sunrise'", axis: "wght@400", group: "script" },
+  { name: "Calligraffitti", family: "'Calligraffitti'", axis: "wght@400", group: "script" },
+  { name: "Coming Soon", family: "'Coming Soon'", axis: "wght@400", group: "script" },
+  { name: "Crafty Girls", family: "'Crafty Girls'", axis: "wght@400", group: "script" },
+  { name: "Delius", family: "'Delius'", axis: "wght@400", group: "script" },
+  { name: "Delius Swash Caps", family: "'Delius Swash Caps'", axis: "wght@400", group: "script" },
+  { name: "Gochi Hand", family: "'Gochi Hand'", axis: "wght@400", group: "script" },
+  { name: "Just Another Hand", family: "'Just Another Hand'", axis: "wght@400", group: "script" },
+  { name: "Schoolbell", family: "'Schoolbell'", axis: "wght@400", group: "script" },
+  { name: "Short Stack", family: "'Short Stack'", axis: "wght@400", group: "script" },
+  { name: "Sunshiney", family: "'Sunshiney'", axis: "wght@400", group: "script" },
+  { name: "Swanky and Moo Moo", family: "'Swanky and Moo Moo'", axis: "wght@400", group: "script" },
+  { name: "Walter Turncoat", family: "'Walter Turncoat'", axis: "wght@400", group: "script" },
+  { name: "Annie Use Your Telescope", family: "'Annie Use Your Telescope'", axis: "wght@400", group: "script" },
+  { name: "Chilanka", family: "'Chilanka'", axis: "wght@400", group: "script" },
+  { name: "Gaegu", family: "'Gaegu'", axis: "wght@300;400;700", group: "script" },
+  { name: "Nanum Pen Script", family: "'Nanum Pen Script'", axis: "wght@400", group: "script" },
+  { name: "Nanum Brush Script", family: "'Nanum Brush Script'", axis: "wght@400", group: "script" },
+  { name: "Hi Melody", family: "'Hi Melody'", axis: "wght@400", group: "script" },
+  { name: "Dokdo", family: "'Dokdo'", axis: "wght@400", group: "script" },
+  { name: "East Sea Dokdo", family: "'East Sea Dokdo'", axis: "wght@400", group: "script" },
+  { name: "Gamja Flower", family: "'Gamja Flower'", axis: "wght@400", group: "script" },
+  { name: "Poor Story", family: "'Poor Story'", axis: "wght@400", group: "script" },
+  { name: "Yeon Sung", family: "'Yeon Sung'", axis: "wght@400", group: "script" },
+  { name: "Cute Font", family: "'Cute Font'", axis: "wght@400", group: "script" },
+  { name: "Do Hyeon", family: "'Do Hyeon'", axis: "wght@400", group: "script" },
+  { name: "Jua", family: "'Jua'", axis: "wght@400", group: "script" },
+  { name: "Kirang Haerang", family: "'Kirang Haerang'", axis: "wght@400", group: "script" },
+  { name: "Black Han Sans", family: "'Black Han Sans'", axis: "wght@400", group: "script" },
+  { name: "Black And White Picture", family: "'Black And White Picture'", axis: "wght@400", group: "script" },
+  { name: "Gugi", family: "'Gugi'", axis: "wght@400", group: "script" },
+  { name: "Hahmlet", family: "'Hahmlet'", axis: "wght@100..900", group: "script" },
+  { name: "Gowun Dodum", family: "'Gowun Dodum'", axis: "wght@400", group: "script" },
+  { name: "Gowun Batang", family: "'Gowun Batang'", axis: "wght@400;700", group: "script" },
+  { name: "Nanum Gothic", family: "'Nanum Gothic'", axis: "wght@400;700;800", group: "script" },
+  { name: "Nanum Myeongjo", family: "'Nanum Myeongjo'", axis: "wght@400;700;800", group: "script" },
+  { name: "Noto Sans KR", family: "'Noto Sans KR'", axis: "wght@100..900", group: "script" },
+  { name: "Rye", family: "'Rye'", axis: "wght@400", group: "display" },
+  { name: "Vast Shadow", family: "'Vast Shadow'", axis: "wght@400", group: "display" },
+  { name: "Chewy", family: "'Chewy'", axis: "wght@400", group: "display" },
+  { name: "Ranchers", family: "'Ranchers'", axis: "wght@400", group: "display" },
+  { name: "Londrina Solid", family: "'Londrina Solid'", axis: "wght@100;300;400;900", group: "display" },
+  { name: "Londrina Shadow", family: "'Londrina Shadow'", axis: "wght@400", group: "display" },
+  { name: "Londrina Outline", family: "'Londrina Outline'", axis: "wght@400", group: "display" },
+  { name: "Londrina Sketch", family: "'Londrina Sketch'", axis: "wght@400", group: "display" },
+  { name: "Fredericka the Great", family: "'Fredericka the Great'", axis: "wght@400", group: "display" },
+  { name: "Modak", family: "'Modak'", axis: "wght@400", group: "display" },
+  { name: "Kavoon", family: "'Kavoon'", axis: "wght@400", group: "display" },
+  { name: "Lemon", family: "'Lemon'", axis: "wght@400", group: "display" },
+  { name: "Cherry Cream Soda", family: "'Cherry Cream Soda'", axis: "wght@400", group: "display" },
+  { name: "Frijole", family: "'Frijole'", axis: "wght@400", group: "display" },
+  { name: "Knewave", family: "'Knewave'", axis: "wght@400", group: "display" },
+  { name: "Original Surfer", family: "'Original Surfer'", axis: "wght@400", group: "display" },
+  { name: "Sonsie One", family: "'Sonsie One'", axis: "wght@400", group: "display" },
+  { name: "Spicy Rice", family: "'Spicy Rice'", axis: "wght@400", group: "display" },
+  { name: "Ribeye", family: "'Ribeye'", axis: "wght@400", group: "display" },
+  { name: "Ribeye Marrow", family: "'Ribeye Marrow'", axis: "wght@400", group: "display" },
+  { name: "Sedgwick Ave", family: "'Sedgwick Ave'", axis: "wght@400", group: "display" },
+  { name: "Sedgwick Ave Display", family: "'Sedgwick Ave Display'", axis: "wght@400", group: "display" },
+  { name: "Slackey", family: "'Slackey'", axis: "wght@400", group: "display" },
+  { name: "Trade Winds", family: "'Trade Winds'", axis: "wght@400", group: "display" },
+  { name: "Freckle Face", family: "'Freckle Face'", axis: "wght@400", group: "display" },
+  { name: "Fontdiner Swanky", family: "'Fontdiner Swanky'", axis: "wght@400", group: "display" },
+  { name: "Henny Penny", family: "'Henny Penny'", axis: "wght@400", group: "display" },
+  { name: "Nixie One", family: "'Nixie One'", axis: "wght@400", group: "display" },
+  { name: "Elsie", family: "'Elsie'", axis: "wght@400;900", group: "display" },
+  { name: "Mystery Quest", family: "'Mystery Quest'", axis: "wght@400", group: "display" },
+  { name: "Protest Revolution", family: "'Protest Revolution'", axis: "wght@400", group: "display" },
+  { name: "Protest Guerrilla", family: "'Protest Guerrilla'", axis: "wght@400", group: "display" },
+  { name: "Alumni Sans", family: "'Alumni Sans'", axis: "wght@100..900", group: "display" },
+  { name: "Alumni Sans Collegiate One", family: "'Alumni Sans Collegiate One'", axis: "wght@400", group: "display" },
+  { name: "Alumni Sans Inline One", family: "'Alumni Sans Inline One'", axis: "wght@400", group: "display" },
+  { name: "Alumni Sans Pinstripe", family: "'Alumni Sans Pinstripe'", axis: "wght@400", group: "display" },
+  { name: "Graduate", family: "'Graduate'", axis: "wght@400", group: "display" },
+  { name: "Carter One", family: "'Carter One'", axis: "wght@400", group: "display" },
+  { name: "Coda", family: "'Coda'", axis: "wght@400;800", group: "display" },
+  { name: "Coiny", family: "'Coiny'", axis: "wght@400", group: "display" },
+  { name: "Fascinate", family: "'Fascinate'", axis: "wght@400", group: "display" },
+  { name: "Fascinate Inline", family: "'Fascinate Inline'", axis: "wght@400", group: "display" },
+  { name: "Flavors", family: "'Flavors'", axis: "wght@400", group: "display" },
+  { name: "Galindo", family: "'Galindo'", axis: "wght@400", group: "display" },
+  { name: "Gorditas", family: "'Gorditas'", axis: "wght@400;700", group: "display" },
+  { name: "Hanalei", family: "'Hanalei'", axis: "wght@400", group: "display" },
+  { name: "Hanalei Fill", family: "'Hanalei Fill'", axis: "wght@400", group: "display" },
+  { name: "Joti One", family: "'Joti One'", axis: "wght@400", group: "display" },
+  { name: "Kumar One", family: "'Kumar One'", axis: "wght@400", group: "display" },
+  { name: "Kumar One Outline", family: "'Kumar One Outline'", axis: "wght@400", group: "display" },
+  { name: "Lakki Reddy", family: "'Lakki Reddy'", axis: "wght@400", group: "display" },
+  { name: "Margarine", family: "'Margarine'", axis: "wght@400", group: "display" },
+  { name: "Metal Mania", family: "'Metal Mania'", axis: "wght@400", group: "display" },
+  { name: "Miltonian", family: "'Miltonian'", axis: "wght@400", group: "display" },
+  { name: "Miltonian Tattoo", family: "'Miltonian Tattoo'", axis: "wght@400", group: "display" },
+  { name: "Moul", family: "'Moul'", axis: "wght@400", group: "display" },
+  { name: "Mouse Memoirs", family: "'Mouse Memoirs'", axis: "wght@400", group: "display" },
+  { name: "New Rocker", family: "'New Rocker'", axis: "wght@400", group: "display" },
+  { name: "Nosifer", family: "'Nosifer'", axis: "wght@400", group: "display" },
+  { name: "Piedra", family: "'Piedra'", axis: "wght@400", group: "display" },
+  { name: "Pirata One", family: "'Pirata One'", axis: "wght@400", group: "display" },
+  { name: "Sancreek", family: "'Sancreek'", axis: "wght@400", group: "display" },
+  { name: "Sarina", family: "'Sarina'", axis: "wght@400", group: "display" },
+  { name: "Shojumaru", family: "'Shojumaru'", axis: "wght@400", group: "display" },
+  { name: "Smokum", family: "'Smokum'", axis: "wght@400", group: "display" },
+  { name: "Snowburst One", family: "'Snowburst One'", axis: "wght@400", group: "display" },
+  { name: "Stint Ultra Expanded", family: "'Stint Ultra Expanded'", axis: "wght@400", group: "display" },
+  { name: "Stint Ultra Condensed", family: "'Stint Ultra Condensed'", axis: "wght@400", group: "display" },
+  { name: "Supermercado One", family: "'Supermercado One'", axis: "wght@400", group: "display" },
+  { name: "Trochut", family: "'Trochut'", axis: "wght@400;700", group: "display" },
+  { name: "Unkempt", family: "'Unkempt'", axis: "wght@400;700", group: "display" },
+  { name: "Wendy One", family: "'Wendy One'", axis: "wght@400", group: "display" },
+  { name: "Zilla Slab Highlight", family: "'Zilla Slab Highlight'", axis: "wght@400;700", group: "display" },
+  { name: "Reggae One", family: "'Reggae One'", axis: "wght@400", group: "display" },
+  { name: "RocknRoll One", family: "'RocknRoll One'", axis: "wght@400", group: "display" },
+  { name: "Rampart One", family: "'Rampart One'", axis: "wght@400", group: "display" },
+  { name: "Stick", family: "'Stick'", axis: "wght@400", group: "display" },
+  { name: "Train One", family: "'Train One'", axis: "wght@400", group: "display" },
+  { name: "Yusei Magic", family: "'Yusei Magic'", axis: "wght@400", group: "display" },
+  { name: "Kaisei Opti", family: "'Kaisei Opti'", axis: "wght@400;500;700", group: "display" },
+  { name: "Kaisei Decol", family: "'Kaisei Decol'", axis: "wght@400;500;700", group: "display" },
+  { name: "Kaisei HarunoUmi", family: "'Kaisei HarunoUmi'", axis: "wght@400;500;700", group: "display" },
+  { name: "Kaisei Tokumin", family: "'Kaisei Tokumin'", axis: "wght@400;500;700;800", group: "display" },
+  { name: "Potta One", family: "'Potta One'", axis: "wght@400", group: "display" },
+  { name: "Hachi Maru Pop", family: "'Hachi Maru Pop'", axis: "wght@400", group: "display" },
+  { name: "Yomogi", family: "'Yomogi'", axis: "wght@400", group: "display" },
+  { name: "Zen Antique", family: "'Zen Antique'", axis: "wght@400", group: "display" },
+  { name: "Zen Kurenaido", family: "'Zen Kurenaido'", axis: "wght@400", group: "display" },
+  { name: "Zen Loop", family: "'Zen Loop'", axis: "wght@400", group: "display" },
+  { name: "Zen Maru Gothic", family: "'Zen Maru Gothic'", axis: "wght@300;400;500;700;900", group: "display" },
+  { name: "Zen Old Mincho", family: "'Zen Old Mincho'", axis: "wght@400;500;600;700;900", group: "display" },
+  { name: "Klee One", family: "'Klee One'", axis: "wght@400;600", group: "display" },
+  { name: "Shippori Antique", family: "'Shippori Antique'", axis: "wght@400", group: "display" },
+  { name: "Shippori Antique B1", family: "'Shippori Antique B1'", axis: "wght@400", group: "display" },
+  { name: "Mochiy Pop P One", family: "'Mochiy Pop P One'", axis: "wght@400", group: "display" },
+  { name: "Murecho", family: "'Murecho'", axis: "wght@100..900", group: "display" },
+  { name: "M PLUS 1", family: "'M PLUS 1'", axis: "wght@100..900", group: "display" },
+  { name: "M PLUS 2", family: "'M PLUS 2'", axis: "wght@100..900", group: "display" },
+  { name: "M PLUS 1 Code", family: "'M PLUS 1 Code'", axis: "wght@100..700", group: "display" },
+  { name: "BIZ UDPGothic", family: "'BIZ UDPGothic'", axis: "wght@400;700", group: "display" },
+  { name: "BIZ UDPMincho", family: "'BIZ UDPMincho'", axis: "wght@400;700", group: "display" },
+  { name: "Kosugi", family: "'Kosugi'", axis: "wght@400", group: "display" },
+  { name: "Kosugi Maru", family: "'Kosugi Maru'", axis: "wght@400", group: "display" },
+  { name: "Sawarabi Gothic", family: "'Sawarabi Gothic'", axis: "wght@400", group: "display" },
+  { name: "Sawarabi Mincho", family: "'Sawarabi Mincho'", axis: "wght@400", group: "display" },
+  { name: "Hina Mincho", family: "'Hina Mincho'", axis: "wght@400", group: "display" },
+  { name: "Yuji Boku", family: "'Yuji Boku'", axis: "wght@400", group: "display" },
+  { name: "Yuji Mai", family: "'Yuji Mai'", axis: "wght@400", group: "display" },
+  { name: "Yuji Syuku", family: "'Yuji Syuku'", axis: "wght@400", group: "display" },
+  { name: "Yuji Hentaigana Akari", family: "'Yuji Hentaigana Akari'", axis: "wght@400", group: "display" },
+  { name: "Yuji Hentaigana Akebono", family: "'Yuji Hentaigana Akebono'", axis: "wght@400", group: "display" },
 ];
 
 type Saved = { id?: string; from?: string; icon: string; by: string; font: string; body: string; primary: string; casing: Casing; tracking: Tracking; weight: number; size: number; hover: string };
@@ -1345,7 +769,20 @@ function applyPrimary(hex: string) {
   root.setProperty("--primary-dark", `rgb(${Math.round(r * 0.85)}, ${Math.round(g * 0.85)}, ${Math.round(b * 0.85)})`);
 }
 
-const family = (name: string) => FONTS.find((f) => f.name === name)?.family ?? undefined;
+const loadedFonts = new Set<string>();
+function loadFont(f: Font) {
+  if (typeof document === "undefined" || loadedFonts.has(f.name)) return;
+  loadedFonts.add(f.name);
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(f.name).replace(/%20/g, "+")}${f.axis ? `:${f.axis}` : ""}&display=swap`;
+  document.head.appendChild(link);
+}
+const family = (name: string) => {
+  const f = FONTS.find((x) => x.name === name);
+  if (f?.family) loadFont(f);
+  return f?.family ?? undefined;
+};
 
 // Live favicon: the tab icon follows the chosen mark and color exactly the way app/icon.svg will once baked
 // (icon.svg drives the favicon, apple icon, OG and Twitter images across the fleet). The original hrefs are
@@ -1493,7 +930,10 @@ export default function LogoCreator() {
   const [tab, setTab] = useState<Tab>("icon");
   const [current, setCurrent] = useState<Saved | null>(null);
   const [open, setOpen] = useState(true);
-  const [hidden, setHidden] = useState(false);
+  // Starts hidden: the flag lives in localStorage, which only the effect below can read, and a panel that
+  // rendered before the read came back flashed on every refresh even when it had been dismissed. Nothing
+  // paints until the flag says it should.
+  const [hidden, setHidden] = useState(true);
 
   // The X hides the whole panel until Dom asks for it back: bump HIDE_VERSION and the stored flag no longer
   // matches. The chosen brand keeps applying while hidden so the site can be judged without the panel.
