@@ -84,6 +84,8 @@ await page.waitForTimeout(10000);
 await browser.close();
 ```
 
+**If the page shows only the order summary (product, price, Powered by, Terms, Privacy) and no button after ten seconds**, that session drew a Stripe experiment arm that never renders its form for a headless Chrome (verified 2026-09-23 on StonedGPT: the init payload differs only in experiment assignments, and no wait, locale, viewport or headless mode changes it). Reloading the same session gets the same arm. Expire the session and mint a fresh one, up to four; that is what the hub drill does (`lib/teams/payments.ts`). A page whose own words say something is wrong is a real failure.
+
 **Gotcha from the reference run**: do NOT verify completion by watching the browser URL. Fleet checkout runs on custom domains (`buy.<brand>.co/.ai`), so a `/<brand>\.co/` regex matches the checkout page itself. Verify via API instead:
 
 ```
