@@ -63,53 +63,17 @@ off: "EXACTLY like this").
 
 ## Install
 
-1. Read the app's logo component first: the one that renders the icon plus
-   the wordmark inside a Link (Brandflare: `app/components/logo/AppLogo.tsx`,
-   others are named similarly; grep `LogoIcon`). Note its exact class strings
-   and hover effect so the Logo Creator branch keeps them.
-2. Copy `files/icons.ts`, `files/catalog.ts`, `files/iconCache.ts`,
-   `files/store.ts`, `files/LogoCreator.tsx` to `app/components/logo/creator/`
-   (create the folder). Set `BRAND` in `store.ts` to the product name as
-   prose (`Brandflare`, `Ghostplug`, `StonedGPT`, `Recruiterbase`,
-   `Hypertheory`); lower and upper casings derive from it, and every storage
-   key and the hub row are namespaced by it. In `LogoCreator.tsx` set
-   `CURRENT_FONT` to the app's logo font and `CURRENT_BODY` to its body font
-   (matching `family: null` entries in FONTS), `CURRENT_PRIMARY` to its
-   `--primary` hex, and `SAVED_DEFAULT.by` to the app's slug; drop the
-   Brandflare-only `RESTORED` list.
-2b. Saved combos live in the hub: `files/hub-route.ts` is the hub's
-   `app/api/lab/route.ts` (already committed there, table `lab`: brand text
-   pk, saved jsonb, updated). Copy `files/proxy-route.ts` to the app's
-   `app/api/lab/route.ts`: a development-only proxy that forwards to
-   `HUB_URL` (default `http://localhost:3000`, Dom's hub dev server) with the
-   `HYPERTHEORY` bearer, so add `HYPERTHEORY=<hub token from
-   hypertheory/.env.local>` to the app's `.env.local` (bare line, no
-   comment). The panel merges hub and local on load, pushes on every save or
-   remove, and shows "hub" / "local only" beside SAVED. Never PUT an empty
-   list from a script: the hub route refuses it without `clear: true`, and a
-   test PUT did exactly that on 2026-09-06 (restored by hand).
-3. Wire the logo component the way `files/AppLogo.example.tsx` shows: add
-   `"use client"` if missing, `useLab()` from `./lab/store`, an
-   `lab.icon ? <svg viewBox={lab.icon.viewBox} ...><path d={lab.icon.d}/></svg> : <LogoIcon .../>`
-   branch that keeps the original className and hover transform, and the
-   wordmark span reading `CASING[lab.casing]`, `TRACKING[lab.tracking]`, and
-   `style={{ fontFamily, fontWeight }}` only when `lab.fontFamily` is set
-   (otherwise the original classes render unchanged, so production is
-   pixel-identical).
-4. Mount it in the root layout, dev only, right after the modal root:
-   `import LogoCreator from "@/app/components/logo/creator/LogoCreator";` and
-   `{process.env.NODE_ENV === "development" && <LogoCreator />}`. Every touched
-   line carries an `// EPHEMERAL: logo creator` comment.
-5. `npx tsc --noEmit`, eslint the folder, then `curl -s -o /dev/null -w "%{http_code}" http://localhost:<port>/`
-   against Dom's running dev server (ask the port if unknown; Brandflare was
-   3001). Candidate fonts are NOT next/font loaders (since 2026-09-22): the
-   FONTS list carries each family's CSS name and weight axis and `loadFont`
-   injects one Google Fonts stylesheet link the first time a family is shown.
-   583 build-time loaders fetched at once tripped Google's rate limit, and
-   under Next 16.3 a font that fails to fetch is a build error that takes the
-   dev server down. The only next/font call left is the panel's own face.
-6. Commit locally as ONE commit ("Ephemeral logo creator ...") so removal is a
-   clean revert. Never push it.
+One command, nothing by hand (2026-09-27, after a Whaletrail install lost forty minutes to two stale-copy bugs):
+
+```bash
+python3 "$(find ~/.claude/plugins ~/code/hypertheory/fleet -path '*/skills/logo-creator/scripts/install.py' 2>/dev/null | head -1)" <app-key> "<Brand>" "<#primary>" "<Font Name>"
+```
+
+Example: `install.py whaletrail Whaletrail "#0284C7" Sora`. The script copies the panel from `files/`, sets `BRAND`, the `Current (<Font>)` entry, `CURRENT_*` and `SAVED_DEFAULT` (title, normal, 500, 22, lift), puts the app's own mark from `app/icon.svg` in as the `current` icon (pass `<path d> <viewBox>` as two more arguments when icon.svg holds more than one path), writes `app/api/lab/route.ts` (the hub proxy) and `app/api/lab/keep/route.ts` (Keep for now, mark in the brand primary), adds `HYPERTHEORY` to `.env.local` from the hub's, wires `AppLogo.tsx` from `files/AppLogo.example.tsx` (the fleet shape: `text-primary` mark, `font-display` wordmark, lift hover), mounts the panel dev-only in `app/layout.tsx` after the modal root, typechecks, curls the pinned dev port and makes ONE local commit. It refuses to run twice. Never push the commit.
+
+`files/` is a byte copy of the hub's live panel (`hypertheory/app/components/logo/creator/`), refreshed whenever the hub's changes: the panel loads every Google font at RUNTIME through one stylesheet link, never one `next/font/google` loader per font. The old 583-loader copy hit Google's rate limit under Next 16.3 and 500ed the dev server on every install (Whaletrail, 2026-09-27); a `next/font/google` name can also disappear between Next versions (`Saira_Stencil_One` became `Saira_Stencil`), which the runtime link never sees. An app whose logo component departs from the fleet shape (a second wordmark class, a different hover) gets `AppLogo.tsx` adjusted by hand after the script, keeping every touched line marked `// EPHEMERAL: logo creator`.
+
+The hub itself is the one exception to the script: its panel is already installed, its mark is monochrome (`text-main`, `#171717` / `#fafafa` favicon), and its keep and bake routes are the hub-specific ones in `files/hub-*.ts`.
 
 ## Remove
 
