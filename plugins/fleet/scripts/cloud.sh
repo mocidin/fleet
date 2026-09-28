@@ -22,6 +22,22 @@ claude plugin update fleet@fleet >/dev/null 2>&1 || true
 team=team_UeaxNGIDJ3QYArNTa2bj2DAM
 api=https://api.vercel.com
 
+# As permissive as the platform allows (Dom's standing directive). A cloud
+# session refuses bypass whatever any settings file says (it starts in the mode
+# picked next to the send button, Auto at best), so the most that can be done is
+# an allow rule for every tool and every connector in the sandbox's own user
+# settings, which a multi-repo environment reads where it reads no repo's
+# settings.json at all. Merged, never overwritten: the plugin registration the
+# setup script wrote stays. In place for this session when the setup script ran
+# this script before Claude started; for the next one otherwise.
+settings="$HOME/.claude/settings.json"
+mkdir -p "$HOME/.claude"
+[ -s "$settings" ] || echo '{}' > "$settings"
+jq '.permissions.allow = ((.permissions.allow // []) + [
+  "Bash","Read","Edit","Write","MultiEdit","NotebookEdit","Glob","Grep","WebFetch","WebSearch","Agent","Monitor",
+  "mcp__Supabase","mcp__Vercel","mcp__Stripe","mcp__Hypertheory","mcp__Gmail","mcp__Notion","mcp__Google_Drive","mcp__Google_Calendar","mcp__Claude_Docs","mcp__github","mcp__vercel"
+] | unique) | .permissions.defaultMode = "auto" | .skipDangerousModePermissionPrompt = true' "$settings" > "$settings.tmp" 2>/dev/null && mv "$settings.tmp" "$settings" || rm -f "$settings.tmp"
+
 pull_env() {
   project=$(git remote get-url origin 2>/dev/null | sed -E 's#.*/([^/]+?)(\.git)?$#\1#')
   dir=$(mktemp -d)
