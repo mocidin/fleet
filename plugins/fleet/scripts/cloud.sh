@@ -1,12 +1,17 @@
 #!/bin/bash
 # Cloud session bootstrap for every fleet repo, run by the plugin's SessionStart
 # hook. Does nothing on the laptop (CLAUDE_CODE_REMOTE is only true in a cloud
-# session). In the cloud it refreshes this plugin, sets the git identity,
-# installs the repo's packages and writes .env.local from the Vercel project's
+# session). In the cloud it refreshes this plugin, then, for the repo the session
+# opened or for EVERY repo when the environment checked out several side by side
+# (cwd /home/user with hypertheory, recruiterbase, ... under it), sets the git
+# identity, installs packages and writes .env.local from the Vercel project's
 # Production env, so a phone or browser session runs against the same services
-# the laptop does. VERCEL is the team API token set once on the cloud
-# environment at claude.ai/code; the Vercel project is named after the repo.
-# Never exits non-zero: a failed bootstrap must not block a session.
+# and secrets the laptop does (the cron secret included, so a cloud session can
+# fire a hub route itself instead of waiting on a clock). VERCEL is the team API
+# token set once on the cloud environment at claude.ai/code; the Vercel project
+# is named after the repo. Every line it prints lands in the session, so the
+# session knows what it has. Never exits non-zero: a failed bootstrap must not
+# block a session.
 [ "$CLAUDE_CODE_REMOTE" = "true" ] || exit 0
 cd "${CLAUDE_PROJECT_DIR:-.}" 2>/dev/null || exit 0
 
@@ -14,20 +19,11 @@ cd "${CLAUDE_PROJECT_DIR:-.}" 2>/dev/null || exit 0
 # cloud session instead of waiting for the environment cache to rebuild.
 claude plugin update fleet@fleet >/dev/null 2>&1 || true
 
-# Commits from a cloud session carry the founder's identity, as on the laptop.
-git config user.name "Dominic Pusateri" 2>/dev/null || true
-git config user.email "dom@hypertheory.ai" 2>/dev/null || true
+team=team_UeaxNGIDJ3QYArNTa2bj2DAM
+api=https://api.vercel.com
 
-[ -f package.json ] || exit 0
-
-if [ ! -d node_modules ]; then
-  npm ci --no-audit --no-fund --loglevel=error >/dev/null 2>&1 || npm install --no-audit --no-fund --loglevel=error >/dev/null 2>&1 || true
-fi
-
-if [ ! -s .env.local ] && [ -n "$VERCEL" ]; then
+pull_env() {
   project=$(git remote get-url origin 2>/dev/null | sed -E 's#.*/([^/]+?)(\.git)?$#\1#')
-  team=team_UeaxNGIDJ3QYArNTa2bj2DAM
-  api=https://api.vercel.com
   dir=$(mktemp -d)
   # The list endpoint hands back ciphertext whatever decrypt says; only the
   # single-record endpoint decrypts, so it is one call per variable, in parallel,
@@ -54,5 +50,31 @@ if [ ! -s .env.local ] && [ -n "$VERCEL" ]; then
     echo "fleet: could not pull env for $project from Vercel"
   fi
   rm -rf "$dir"
+}
+
+# One repo: identity, packages, env. Runs in a subshell so a cd never leaks.
+bootstrap() (
+  cd "$1" 2>/dev/null || exit 0
+  # Commits from a cloud session carry the founder's identity, as on the laptop.
+  git config user.name "Dominic Pusateri" 2>/dev/null || true
+  git config user.email "dom@hypertheory.ai" 2>/dev/null || true
+  [ -f package.json ] || exit 0
+  if [ ! -d node_modules ]; then
+    npm ci --no-audit --no-fund --loglevel=error >/dev/null 2>&1 || npm install --no-audit --no-fund --loglevel=error >/dev/null 2>&1 || true
+  fi
+  if [ -s .env.local ]; then
+    echo "fleet: $(basename "$PWD") already has .env.local"
+  elif [ -n "$VERCEL" ]; then
+    pull_env
+  else
+    echo "fleet: $(basename "$PWD") has no .env.local and the environment has no VERCEL token to pull one"
+  fi
+)
+
+if [ -d .git ]; then
+  bootstrap "$PWD"
+else
+  # A multi-repo environment: the session opens above the repos, so each one is bootstrapped in turn.
+  for d in */; do [ -d "$d/.git" ] && bootstrap "$PWD/${d%/}"; done
 fi
 exit 0
