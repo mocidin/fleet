@@ -2,7 +2,7 @@
 # The keeper: the one maintenance job for the laptop. Runs hourly from launchd
 # (ai.hypertheory.keeper); "keeper deep" is the same sweep by hand when asked.
 #
-#   keeper            hourly pass: end chats idle 12h, stop dev servers idle 6h
+#   keeper            hourly pass: pull every fleet repo, end chats idle 12h, stop dev servers idle 6h
 #                     (the hub excepted), prune week-old Claude scratch, warn
 #                     when swap runs high; runs the weekly sweep by itself on
 #                     the first pass between 3 and 6am once 7 days have passed
@@ -117,9 +117,15 @@ sweep() {
   echo; echo "Reclaimed: $(( ($(df -k / | awk 'NR==2{print $4}') - START) / 1048576 ))GB, ~/.claude is $(du -sh ~/.claude 2>/dev/null | cut -f1)"
 }
 
+# --- repos: bring every fleet repo to the latest origin/main, so what a cloud
+# chat pushed is on the laptop within the hour even when no chat is opened and
+# no dev server restarted. pull.sh never forces and never touches uncommitted
+# work; a repo it could not pull is a line in the log.
+repos() { for d in $FLEET/*/; do [[ -d $d/.git ]] || continue; act "pull ${d:t}" && bash $FLEET/fleet/scripts/pull.sh ${d%/} | sed "s/^/$(date '+%F %T') /"; done }
+
 case $MODE in
   deep) sweep ;;
-  hourly) chats 12; servers 6; scratch; memory
+  hourly) repos; chats 12; servers 6; scratch; memory
     (( NOW - $(stat -f %m $STAMP 2>/dev/null || echo 0) > 7 * 86400 )) && [[ $(date +%H) == 0[3-5] ]] && sweep ;;
   *) echo "usage: keeper [hourly|deep] [dry]"; exit 1 ;;
 esac

@@ -1,0 +1,5 @@
+{
+  "name": "fleet",
+  "description": "The cloud session bootstrap for the Hypertheory fleet: one SessionStart hook, no skills",
+  "author": { "name": "Dominic Pusateri", "email": "dom@hypertheory.ai" }
+}

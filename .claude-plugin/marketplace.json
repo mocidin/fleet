@@ -1,0 +1,14 @@
+{
+  "name": "fleet",
+  "owner": {
+    "name": "Dominic Pusateri",
+    "email": "dom@hypertheory.ai"
+  },
+  "plugins": [
+    {
+      "name": "fleet",
+      "source": "./",
+      "description": "The cloud session bootstrap for the Hypertheory fleet: one SessionStart hook, no skills (those live in the hub's .claude/skills)"
+    }
+  ]
+}

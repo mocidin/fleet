@@ -1,10 +1,12 @@
 #!/bin/bash
-# Cloud session bootstrap for every fleet repo. The cloud environment's setup
-# script clones this repo and runs this file once
-# (git clone --depth 1 https://github.com/mocidin/fleet ~/.claude/fleet;
-# bash ~/.claude/fleet/scripts/cloud.sh), and this file registers itself as the
-# sandbox's SessionStart hook, so it runs again at every session start. Does
-# nothing on the laptop (CLAUDE_CODE_REMOTE is only true in a cloud session).
+# Cloud session bootstrap for every fleet repo, run at every session start by
+# the SessionStart hook of this repo's hook-only plugin (hooks/hooks.json),
+# which the cloud environment's setup script installs from GitHub
+# (claude plugin marketplace add mocidin/fleet; claude plugin install
+# fleet@fleet --scope user). The plugin carries this hook and nothing else: no
+# skills. Run from a plain clone instead (bash <clone>/scripts/cloud.sh), it
+# registers itself as the sandbox's SessionStart hook. Does nothing on the
+# laptop (CLAUDE_CODE_REMOTE is only true in a cloud session).
 # It links the fleet's skills from the hub's clone into the sandbox (a session
 # over one repo also loads that repo's own copy). For the repo the session
 # opened or for EVERY repo when the environment checked out several side by side
@@ -21,9 +23,14 @@
 self="$(cd "$(dirname "$0")" && pwd)"
 cd "${CLAUDE_PROJECT_DIR:-.}" 2>/dev/null || exit 0
 
-# Pull this repo, so an edit to this script reaches the next cloud session
+# Refresh this repo, so an edit to this script reaches the next cloud session
 # instead of waiting for the environment cache to rebuild.
-git -C "$self/.." pull --ff-only --quiet 2>/dev/null || true
+if [ -n "$CLAUDE_PLUGIN_ROOT" ]; then
+  claude plugin marketplace update fleet >/dev/null 2>&1 || true
+  claude plugin update fleet@fleet >/dev/null 2>&1 || true
+else
+  git -C "$self/.." pull --ff-only --quiet 2>/dev/null || true
+fi
 
 team=team_UeaxNGIDJ3QYArNTa2bj2DAM
 api=https://api.vercel.com
@@ -33,20 +40,21 @@ api=https://api.vercel.com
 # picked next to the send button, Auto at best), so the most that can be done is
 # an allow rule for every tool and every connector in the sandbox's own user
 # settings, which a multi-repo environment reads where it reads no repo's
-# settings.json at all. The same file carries this script as the SessionStart
-# hook, written once and replaced in place, never stacked. Merged, never
+# settings.json at all. Run from a plain clone, the same file carries this
+# script as the SessionStart hook, written once and replaced in place, never
+# stacked; run by the plugin's hook, none is written. Merged, never
 # overwritten: whatever else the sandbox's settings hold stays. In place for
 # this session when the setup script ran this script before Claude started; for
 # the next one otherwise.
 settings="$HOME/.claude/settings.json"
 mkdir -p "$HOME/.claude"
 [ -s "$settings" ] || echo '{}' > "$settings"
-jq --arg hook "bash \"$self/cloud.sh\"" '.permissions.allow = ((.permissions.allow // []) + [
+jq --arg hook "bash \"$self/cloud.sh\"" --arg plugin "$CLAUDE_PLUGIN_ROOT" '.permissions.allow = ((.permissions.allow // []) + [
   "Bash","Read","Edit","Write","MultiEdit","NotebookEdit","Glob","Grep","WebFetch","WebSearch","Agent","Monitor",
   "mcp__Supabase","mcp__Vercel","mcp__Stripe","mcp__Hypertheory","mcp__Gmail","mcp__Notion","mcp__Google_Drive","mcp__Google_Calendar","mcp__Claude_Docs","mcp__github","mcp__vercel"
 ] | unique) | .permissions.defaultMode = "auto" | .skipDangerousModePermissionPrompt = true
-| .hooks.SessionStart = ((.hooks.SessionStart // []) | map(select(((.hooks // []) | map(.command // "" | test("scripts/cloud\\.sh")) | any) | not))
-  + [{matcher: "startup|resume", hooks: [{type: "command", command: $hook, timeout: 600, statusMessage: "Bootstrapping the cloud session"}]}])' "$settings" > "$settings.tmp" 2>/dev/null && mv "$settings.tmp" "$settings" || rm -f "$settings.tmp"
+| if $plugin != "" then . else .hooks.SessionStart = ((.hooks.SessionStart // []) | map(select(((.hooks // []) | map(.command // "" | test("scripts/cloud\\.sh")) | any) | not))
+  + [{matcher: "startup|resume", hooks: [{type: "command", command: $hook, timeout: 600, statusMessage: "Bootstrapping the cloud session"}]}]) end' "$settings" > "$settings.tmp" 2>/dev/null && mv "$settings.tmp" "$settings" || rm -f "$settings.tmp"
 
 pull_env() {
   project=$(git remote get-url origin 2>/dev/null | sed -E 's#.*/([^/]+?)(\.git)?$#\1#')

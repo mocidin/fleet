@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/cloud.sh\"",
+            "timeout": 600,
+            "statusMessage": "Bootstrapping the cloud session"
+          }
+        ]
+      }
+    ]
+  }
+}
