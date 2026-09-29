@@ -14,7 +14,7 @@ allowed-tools:
 
 # Security review
 
-> Fleet root: `~/code/hypertheory` on the laptop. In a cloud session only the attached repo exists; resolve `<repo>` against `git rev-parse --show-toplevel`. Skill files: `$CLAUDE_PLUGIN_ROOT/skills/security-review/` (scanner at `scripts/scan.mjs`, posture queries at `scripts/rls.sql`).
+> Fleet root: `~/code/hypertheory` on the laptop. In a cloud session only the attached repo exists; resolve `<repo>` against `git rev-parse --show-toplevel`. Skill files: `$FLEET_ROOT/jobs/security-review/` (scanner at `scripts/scan.mjs`, posture queries at `scripts/rls.sql`).
 
 One question, answered per app: **can someone who is not supposed to, read, change, delete, or pay nothing for something, by sending a request this code accepts?** Everything in this skill exists to answer that with evidence, write the answer down once, and stay quiet when the answer is no.
 
@@ -54,7 +54,7 @@ Work through every step; skip none. Read the scanner output in full before judgi
 ### 1. Scanner (deterministic candidates)
 
 ```bash
-node "$CLAUDE_PLUGIN_ROOT/skills/security-review/scripts/scan.mjs" <repo> > <scratchpad>/scan-<app>.txt
+node "$FLEET_ROOT/jobs/security-review/scripts/scan.mjs" <repo> > <scratchpad>/scan-<app>.txt
 ```
 
 Same tree in, same list out. It never decides; it narrows the code you must actually read to the places a hole can live. Sections and how to judge each:

@@ -262,7 +262,7 @@ Do not attempt any other action on the Vercel MCP layer. Do not claim the MCP la
 
 #### 3f. Vercel CLI identity
 
-The Vercel **CLI** authenticates separately from Vercel MCP (see canonical map). Its token lives at `~/Library/Application Support/com.vercel.cli/auth.json` (macOS; Linux fallback `~/.local/share/com.vercel.cli/auth.json`). This is the credential `vercel deploy`, `vercel env`, and the `/env-cleanup` skill use — so a wrong-account CLI silently deploys to or reads env from the wrong account even when every other layer is correct.
+The Vercel **CLI** authenticates separately from Vercel MCP (see canonical map). Its token lives at `~/Library/Application Support/com.vercel.cli/auth.json` (macOS; Linux fallback `~/.local/share/com.vercel.cli/auth.json`). This is the credential `vercel deploy` and `vercel env` use — so a wrong-account CLI silently deploys to or reads env from the wrong account even when every other layer is correct.
 
 **Do NOT trust `vercel whoami`'s output string.** It prints the Vercel *username*, not the email — and the personal account's username is literally `dpusateri0`, which collides with the dead GitHub phantom of the same name (see collision note above). On Vercel that handle is genuine and correct. **Always verify by email**, never by the username string.
 

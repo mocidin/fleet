@@ -16,7 +16,7 @@ finalized by Dom 2026-08-29: do not restyle it, a new look gets its own variant)
 tiles fade out across the left third where LinkedIn's profile photo sits. The user
 picks a header; the chosen one's variant and seed are its permanent recipe.
 
-The scripts live beside this SKILL.md (find the directory with `find ~/code/hypertheory/fleet ~/.claude/plugins -path '*/skills/social-assets/scripts/social-assets.mjs' | head -1`).
+The scripts live beside this SKILL.md (`~/.claude/skills/social-assets/scripts/`).
 
 ```bash
 node <this skill's directory>/scripts/social-assets.mjs <app-key> [--variant <family>|random] [--theme light|dark|white|brand] [--seed N] [--count 3]

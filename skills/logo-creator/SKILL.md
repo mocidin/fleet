@@ -66,7 +66,7 @@ off: "EXACTLY like this").
 One command, nothing by hand (2026-09-27, after a Whaletrail install lost forty minutes to two stale-copy bugs):
 
 ```bash
-python3 "$(find ~/.claude/plugins ~/code/hypertheory/fleet -path '*/skills/logo-creator/scripts/install.py' 2>/dev/null | head -1)" <app-key> "<Brand>" "<#primary>" "<Font Name>"
+python3 ~/.claude/skills/logo-creator/scripts/install.py <app-key> "<Brand>" "<#primary>" "<Font Name>"
 ```
 
 Example: `install.py whaletrail Whaletrail "#0284C7" Sora`. The script copies the panel from `files/`, sets `BRAND`, the `Current (<Font>)` entry, `CURRENT_*` and `SAVED_DEFAULT` (title, normal, 500, 22, lift), puts the app's own mark from `app/icon.svg` in as the `current` icon (pass `<path d> <viewBox>` as two more arguments when icon.svg holds more than one path), writes `app/api/lab/route.ts` (the hub proxy) and `app/api/lab/keep/route.ts` (Keep for now, mark in the brand primary), adds `HYPERTHEORY` to `.env.local` from the hub's, wires `AppLogo.tsx` from `files/AppLogo.example.tsx` (the fleet shape: `text-primary` mark, `font-display` wordmark, lift hover), mounts the panel dev-only in `app/layout.tsx` after the modal root, typechecks, curls the pinned dev port and makes ONE local commit. It refuses to run twice. Never push the commit.

@@ -14,7 +14,7 @@ One rulebook, one reference: the always-on core `hypertheory/.claude/rules/fleet
 Edit the hub's file, then run:
 
 ```bash
-python3 "$(find ~/.claude/plugins ~/code/hypertheory/fleet -path '*/skills/sync-rulebook/scripts/sync.py' 2>/dev/null | head -1)"
+python3 ~/.claude/skills/sync-rulebook/scripts/sync.py
 ```
 
 The script prints each repo it updated. Commit each changed repo with a one-sentence message describing the rule change (no em dashes) and push only when the user says push. In a cloud session only the repos attached to the session are present; attach all six for a full sync, or run it again from the laptop.
