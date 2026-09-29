@@ -54,7 +54,7 @@ mkdir -p "$HOME/.claude"
 [ -s "$settings" ] || echo '{}' > "$settings"
 jq --arg hook "bash \"$self/cloud.sh\"" --arg plugin "$plugin" '.permissions.allow = ((.permissions.allow // []) + [
   "Bash","Read","Edit","Write","MultiEdit","NotebookEdit","Glob","Grep","WebFetch","WebSearch","Agent","Monitor",
-  "mcp__Supabase","mcp__Vercel","mcp__Stripe","mcp__Hypertheory","mcp__Gmail","mcp__Notion","mcp__Google_Drive","mcp__Google_Calendar","mcp__Claude_Docs","mcp__github","mcp__vercel"
+  "mcp__Supabase","mcp__Vercel","mcp__Stripe","mcp__Hypertheory","mcp__Gmail","mcp__Notion","mcp__Google_Drive","mcp__Google_Calendar","mcp__Claude_Docs","mcp__github","mcp__vercel","mcp__Claude_Code_Remote"
 ] | unique) | .permissions.defaultMode = "auto" | .skipDangerousModePermissionPrompt = true
 | .hooks.SessionStart = ((.hooks.SessionStart // []) | map(select(((.hooks // []) | map(.command // "" | test("scripts/cloud\\.sh")) | any) | not))
   + (if $plugin != "" then [] else [{matcher: "startup|resume", hooks: [{type: "command", command: $hook, timeout: 600, statusMessage: "Bootstrapping the cloud session"}]}] end))
@@ -122,5 +122,17 @@ if [ -d .git ]; then
 else
   # A multi-repo environment: the session opens above the repos, so each one is bootstrapped in turn.
   for d in */; do [ -d "$d/.git" ] && bootstrap "$PWD/${d%/}"; done
+  # Which repos a session opens with is picked by hand when the chat is started,
+  # so a repo made since can be missing. The fleet is read from the hub's own
+  # settings (one <APP>_SUPABASE_URL per app, the roster's convention), and a
+  # missing repo is named so the session attaches it itself, which the allow
+  # rule above lets it do without a prompt.
+  if [ -s hypertheory/.env.local ]; then
+    missing=""
+    for app in $(awk -F= '{print $1}' hypertheory/.env.local | sed -nE 's/^(NEXT_PUBLIC_)?([A-Z]+)_SUPABASE_URL$/\2/p' | tr 'A-Z' 'a-z' | sort -u) email-landing; do
+      [ -d "$app/.git" ] || missing="$missing $app"
+    done
+    [ -n "$missing" ] && echo "fleet: not attached to this session:$missing. Before any work that spans the fleet (a rulebook or skills sync, a fleet-wide change), attach each with the add_repo tool (owner mocidin, push access)."
+  fi
 fi
 exit 0
