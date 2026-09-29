@@ -5,8 +5,8 @@
 # bash ~/.claude/fleet/scripts/cloud.sh), and this file registers itself as the
 # sandbox's SessionStart hook, so it runs again at every session start. Does
 # nothing on the laptop (CLAUDE_CODE_REMOTE is only true in a cloud session).
-# The skills need nothing from it: a cloud session loads them from the
-# .claude/skills folder of the repo it cloned. For the repo the session
+# It links the fleet's skills from the hub's clone into the sandbox (a session
+# over one repo also loads that repo's own copy). For the repo the session
 # opened or for EVERY repo when the environment checked out several side by side
 # (cwd /home/user with hypertheory, recruiterbase, ... under it), sets the git
 # identity, installs packages and writes .env.local from the Vercel project's
@@ -96,6 +96,14 @@ bootstrap() (
     echo "fleet: $(basename "$PWD") has no .env.local and the environment has no VERCEL token to pull one"
   fi
 )
+
+# The skills, where a repo's own copy is not loaded at start: a session over
+# several repos opens above the clones, so the hub's folder (any repo's, when
+# the hub is not attached: the copies are identical) is linked into the
+# sandbox's own ~/.claude/skills.
+for src in "$PWD/hypertheory/.claude/skills" "$PWD"/*/.claude/skills "$PWD/.claude/skills"; do
+  [ -d "$src" ] && { bash "$self/skills.sh" "$src" || true; break; }
+done
 
 if [ -d .git ]; then
   bootstrap "$PWD"

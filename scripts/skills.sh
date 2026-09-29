@@ -1,20 +1,27 @@
 #!/bin/bash
-# The laptop's link step. The fleet's skills live in the hub repo, one folder
-# each under .claude/skills/, and every fleet repo carries a synced copy, which
-# is what a chat opened in a repo loads, laptop or cloud. This links the hub's
-# folders into ~/.claude/skills as well, so a chat opened anywhere on the laptop
-# has them, and an edit to the hub's copy is live in every laptop chat before it
-# is synced or committed. Run by the laptop's user-scope SessionStart hook. It
-# pulls the hub first, so a skill changed from the phone is here in the next
-# chat; a skill deleted from the hub loses its link. Never exits non-zero: a
-# failed refresh must not block a session.
+# The link step. The fleet's skills live in the hub repo, one folder each under
+# .claude/skills/, and every fleet repo carries a synced copy, which is what a
+# chat opened in a repo loads, laptop or cloud. This links the hub's folders
+# into ~/.claude/skills as well, for the two cases a repo's own copy does not
+# cover: a chat opened outside a repo (anywhere on the laptop, or a cloud
+# session over several repos, which starts above the clones and would not see
+# their skills until it worked in one), and an edit to the hub's copy, live in
+# every laptop chat before it is synced or committed. Run by the laptop's
+# user-scope SessionStart hook with no argument (it pulls the hub first, so a
+# skill changed from the phone is here in the next chat) and by cloud.sh with
+# the skills folder of the hub's clone. A skill deleted from the hub loses its
+# link. Never exits non-zero: a failed refresh must not block a session.
 main() {
-  hub="$HOME/code/hypertheory/hypertheory"
+  here="$(cd "$(dirname "$0")" && pwd)"
   dest="$HOME/.claude/skills"
-  [ -d "$hub/.claude/skills" ] || exit 0
-  git -C "$hub" pull --ff-only --quiet 2>/dev/null || true
+  src="$1"
+  if [ -z "$src" ]; then
+    src="$HOME/code/hypertheory/hypertheory/.claude/skills"
+    bash "$here/pull.sh" "$HOME/code/hypertheory/hypertheory"
+  fi
+  [ -d "$src" ] || exit 0
   mkdir -p "$dest"
-  for dir in "$hub"/.claude/skills/*/; do
+  for dir in "$src"/*/; do
     [ -f "$dir/SKILL.md" ] || continue
     link="$dest/$(basename "$dir")"
     # A real folder of the same name is somebody's own skill: left alone, and said.
@@ -27,4 +34,4 @@ main() {
   done
   exit 0
 }
-main
+main "$@"
