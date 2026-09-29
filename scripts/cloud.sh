@@ -42,19 +42,23 @@ api=https://api.vercel.com
 # settings, which a multi-repo environment reads where it reads no repo's
 # settings.json at all. Run from a plain clone, the same file carries this
 # script as the SessionStart hook, written once and replaced in place, never
-# stacked; run by the plugin's hook, none is written. Merged, never
+# stacked; run by the plugin's hook or from the plugin's own folders (the setup
+# script's first run), none is written and one left by an earlier run is
+# removed, so the script never runs twice at a start. Merged, never
 # overwritten: whatever else the sandbox's settings hold stays. In place for
 # this session when the setup script ran this script before Claude started; for
 # the next one otherwise.
+plugin="$CLAUDE_PLUGIN_ROOT"; case "$self" in */.claude/plugins/*) plugin="$self" ;; esac
 settings="$HOME/.claude/settings.json"
 mkdir -p "$HOME/.claude"
 [ -s "$settings" ] || echo '{}' > "$settings"
-jq --arg hook "bash \"$self/cloud.sh\"" --arg plugin "$CLAUDE_PLUGIN_ROOT" '.permissions.allow = ((.permissions.allow // []) + [
+jq --arg hook "bash \"$self/cloud.sh\"" --arg plugin "$plugin" '.permissions.allow = ((.permissions.allow // []) + [
   "Bash","Read","Edit","Write","MultiEdit","NotebookEdit","Glob","Grep","WebFetch","WebSearch","Agent","Monitor",
   "mcp__Supabase","mcp__Vercel","mcp__Stripe","mcp__Hypertheory","mcp__Gmail","mcp__Notion","mcp__Google_Drive","mcp__Google_Calendar","mcp__Claude_Docs","mcp__github","mcp__vercel"
 ] | unique) | .permissions.defaultMode = "auto" | .skipDangerousModePermissionPrompt = true
-| if $plugin != "" then . else .hooks.SessionStart = ((.hooks.SessionStart // []) | map(select(((.hooks // []) | map(.command // "" | test("scripts/cloud\\.sh")) | any) | not))
-  + [{matcher: "startup|resume", hooks: [{type: "command", command: $hook, timeout: 600, statusMessage: "Bootstrapping the cloud session"}]}]) end' "$settings" > "$settings.tmp" 2>/dev/null && mv "$settings.tmp" "$settings" || rm -f "$settings.tmp"
+| .hooks.SessionStart = ((.hooks.SessionStart // []) | map(select(((.hooks // []) | map(.command // "" | test("scripts/cloud\\.sh")) | any) | not))
+  + (if $plugin != "" then [] else [{matcher: "startup|resume", hooks: [{type: "command", command: $hook, timeout: 600, statusMessage: "Bootstrapping the cloud session"}]}] end))
+| if (.hooks.SessionStart | length) == 0 then del(.hooks.SessionStart) else . end' "$settings" > "$settings.tmp" 2>/dev/null && mv "$settings.tmp" "$settings" || rm -f "$settings.tmp"
 
 pull_env() {
   project=$(git remote get-url origin 2>/dev/null | sed -E 's#.*/([^/]+?)(\.git)?$#\1#')
