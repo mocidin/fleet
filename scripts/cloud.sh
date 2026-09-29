@@ -5,7 +5,8 @@
 # bash ~/.claude/fleet/scripts/cloud.sh), and this file registers itself as the
 # sandbox's SessionStart hook, so it runs again at every session start. Does
 # nothing on the laptop (CLAUDE_CODE_REMOTE is only true in a cloud session).
-# In the cloud it refreshes the skills, then, for the repo the session
+# The skills need nothing from it: a cloud session loads them from the
+# .claude/skills folder of the repo it cloned. For the repo the session
 # opened or for EVERY repo when the environment checked out several side by side
 # (cwd /home/user with hypertheory, recruiterbase, ... under it), sets the git
 # identity, installs packages and writes .env.local from the Vercel project's
@@ -20,10 +21,9 @@
 self="$(cd "$(dirname "$0")" && pwd)"
 cd "${CLAUDE_PROJECT_DIR:-.}" 2>/dev/null || exit 0
 
-# Pull the latest skills and link them, so an edit pushed to mocidin/fleet
-# reaches the next cloud session instead of waiting for the environment cache
-# to rebuild.
-bash "$self/skills.sh" || true
+# Pull this repo, so an edit to this script reaches the next cloud session
+# instead of waiting for the environment cache to rebuild.
+git -C "$self/.." pull --ff-only --quiet 2>/dev/null || true
 
 team=team_UeaxNGIDJ3QYArNTa2bj2DAM
 api=https://api.vercel.com
