@@ -1,6 +1,8 @@
 #!/bin/zsh
-# The keeper: the one maintenance job for the laptop. Runs hourly from launchd
-# (ai.hypertheory.keeper); "keeper deep" is the same sweep by hand when asked.
+# The keeper: the one maintenance job for the laptop. launchd calls it every
+# five minutes (ai.hypertheory.keeper): each call pulls every fleet repo, and
+# once an hour the call goes on to the hourly pass; "keeper deep" is the
+# weekly sweep by hand when asked.
 #
 #   keeper            hourly pass: pull every fleet repo, end chats idle 12h, stop dev servers idle 6h
 #                     (the hub excepted), prune week-old Claude scratch, warn
@@ -16,7 +18,7 @@
 # ignored, so new bloat surfaces on the next run instead of needing an audit.
 MODE=${1:-hourly}; DRY=${2:-}; [[ $MODE == dry ]] && { MODE=hourly; DRY=dry }
 FLEET=~/code/hypertheory; DEV=/opt/homebrew/bin/dev
-STATE=~/.claude/.keeper-state; STAMP=~/.claude/.last-cleanup
+STATE=~/.claude/.keeper-state; STAMP=~/.claude/.last-cleanup; PASS=~/.claude/.keeper-pass
 NOW=$(date +%s); H=3600
 say() { echo "$(date '+%F %T') $*" }
 act() { [[ -n $DRY ]] && { echo "  would: $*"; return 1 }; return 0 }
@@ -125,7 +127,11 @@ repos() { for d in $FLEET/*/; do [[ -d $d/.git ]] || continue; act "pull ${d:t}"
 
 case $MODE in
   deep) sweep ;;
-  hourly) repos; chats 12; servers 6; scratch; memory
+  hourly) repos
+    # launchd calls every five minutes so the pull is never far behind; the rest is the hourly pass.
+    (( NOW - $(stat -f %m $PASS 2>/dev/null || echo 0) >= H - 60 )) || exit 0
+    [[ -z $DRY ]] && touch $PASS
+    chats 12; servers 6; scratch; memory
     (( NOW - $(stat -f %m $STAMP 2>/dev/null || echo 0) > 7 * 86400 )) && [[ $(date +%H) == 0[3-5] ]] && sweep ;;
   *) echo "usage: keeper [hourly|deep] [dry]"; exit 1 ;;
 esac
