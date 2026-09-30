@@ -107,6 +107,26 @@ Last verified: 2026-08-08 (re-confirmed against supabase.com/docs database-advis
 - 2026-08-08: Added explicit TO-role naming and index-RLS-predicate-columns rules (https://supabase.com/docs/guides/troubleshooting/rls-performance-and-best-practices-Z5Jjwv); rest re-confirmed unchanged.
 <!-- EVOLVING:END -->
 
+## The fleet standard: the shared tables
+
+Every fleet app's database carries the same three tables, created by the hub's `/new-app` skill (`fleet_base_tables`) and read by the hub for the app's activity, attribution and analytics. Their shape is a fleet standard, and one app deviating from it is drift this run brings back, the same way the Monday conventions check holds every fleet file byte-identical. The standard, exactly:
+
+| Table | Columns | Indexes, RLS, triggers |
+| --- | --- | --- |
+| `contact` | `id uuid pk default gen_random_uuid()`, `user_id uuid references auth.users(id) on delete set null`, `email text not null`, `message text not null`, `created_at timestamptz default now()` | `idx_contact_user_id (user_id)`; RLS on |
+| `logs` | `id uuid pk default gen_random_uuid()`, `user_id uuid`, `email text`, `event text not null`, `metadata jsonb not null default '{}'`, `created_at timestamptz not null default now()` | `logs_created_at_idx (created_at desc)`, `logs_event_idx (event)`, `logs_user_id_idx (user_id)`; RLS on; the trigger `on_auth_user_created_log_signup` on `auth.users` (function `log_signup`) inserts the row `event = 'signup'` for every new account |
+| `pageviews` | `created timestamptz default now()`, `visitor text`, `path text`, `source text`, `metadata jsonb` | `pageviews_created_idx (created)`, `pageviews_source_created_idx (source, created)`; RLS on with the policy `"anon insert"` for insert to anon |
+
+Fleet-wide column rules apply to every table, shared or not: times are `timestamptz` in UTC, names are the simplest single word (`limit`, `phone`, never `event_type` or `created_at_utc`), extra per-row data lives in a `metadata` jsonb column rather than new columns, and the schema holds the bare minimum of columns.
+
+**What counts as drift, and what this run does about it.** Compare each shared table against the standard in Phase 1a. A missing index, policy, trigger or column is added (additive, always-safe). A column, table, trigger or function that exists under another name (`event_type` for `event`, `on_auth_user_created_log` for `on_auth_user_created_log_signup`), or a signup row written under another value (`account_created` for `signup`), is renamed to the standard through expand and contract, never a bare rename, because the app's code and the hub's readers name the old one and would break the moment it went:
+
+1. **Expand (this run).** Add the standard column beside the old one, backfill it (`event = case event_type when 'account_created' then 'signup' else event_type end`), and install one trigger that keeps the two in step on insert and update in both directions, so code writing either name lands both. A wrongly named trigger or function gets its standard-named twin, the old one left in place. A rename of a whole table gets a standard-named updatable view over it, so both names read and write. Nothing is dropped in this step.
+2. **Hand the code its change.** Grep the app's repository and every reference repository mounted beside it (the hub reads these tables: its `lib/marketing`, `lib/teams` and `lib/fleet` readers, and any override keyed by this app's name) for the old name and value. Every file that names them goes in the report's `code` list, one line per repository, plain words saying what to change to the standard name and value and where. The hub raises that list as an alert the fix lane works within the hour, so the code moves on its own; this run never edits a repository.
+3. **Contract (a later run).** When Phase 1a finds the old name still present and the grep of every mounted repository no longer names it, the old column, trigger, function or view is dropped under the ordinary drop gate above, with the recoverable copy the gate requires for a populated column. A column whose only remaining reader is the sync trigger counts as unreferenced.
+
+A shared column of the right name but a different type (`bigint` for `uuid`) is drift too, but changing a key's type is not verifiable safe on live data: it goes in `proposed` with the migration it would take, never applied.
+
 ## Phase 0 — Detect the project shape
 
 **First, run the Self-evolution Phase 0 above (refresh the best-practices snapshot) — then continue detecting the project shape.**
@@ -130,6 +150,8 @@ Create a TodoWrite list with the sections below so the user sees progress. Run a
 -- Full table/column/FK snapshot
 -- Use mcp__supabase__list_tables with schemas=["public"], verbose=true
 ```
+
+Compare the three shared tables against the fleet standard above, name for name, column for column, and list every deviation as a finding for Phase 2 (the Fleet drift bucket).
 
 Also pull policies, indexes, functions, triggers:
 
@@ -237,6 +259,12 @@ Each item below carries a precondition. When the precondition passes, apply the 
 - **Adding `UNIQUE`.** Precondition: no duplicates AND the app's insert path has collision handling (or you add it in the same turn). Passes → add; fails → skip-and-note.
 - **Changing a function's return signature.** Precondition: every caller is updated in the same turn. Passes → change; fails → skip-and-note.
 - **Changing FK `ON DELETE` behavior.** The correct semantic can't be inferred safely, so this is NOT applied autonomously — always skip-and-note it as a flagged item (changing it could destroy billing/audit rows).
+
+### Fleet drift (the shared tables off the standard)
+
+- **A missing standard index, policy, trigger or column** on `contact`, `logs` or `pageviews`: additive, applied like any always-safe change.
+- **A shared column, table, trigger, function or signup value under another name**: the expand step of the fleet-standard section (the standard-named twin beside the old, backfilled, kept in step by a trigger), then the code lines in the report. Precondition for the expand: the standard name is free on that table. Precondition for the contract, in a later run: no mounted repository names the old one, then the ordinary drop gate.
+- **A shared column of the right name and another type**: `proposed`, never applied.
 
 ### Out-of-scope (flag, do not apply)
 
@@ -401,6 +429,9 @@ Output a structured report:
 
 ### App-side follow-ups needed
 - <file:line> — <change required>
+
+### Code to move onto the fleet standard (one line per repository)
+- <repository>: <what to rename to the standard name and value, and where>
 ```
 
 ## Anti-patterns to watch for (learned from prior runs)
