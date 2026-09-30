@@ -109,13 +109,14 @@ Last verified: 2026-08-08 (re-confirmed against supabase.com/docs database-advis
 
 ## The fleet standard: the shared tables
 
-Every fleet app's database carries the same three tables, created by the hub's `/new-app` skill (`fleet_base_tables`) and read by the hub for the app's activity, attribution and analytics. Their shape is a fleet standard, and one app deviating from it is drift this run brings back, the same way the Monday conventions check holds every fleet file byte-identical. The standard, exactly:
+Every fleet app's database carries the same four tables, created by the hub's `/new-app` skill (`fleet_base_tables`) and read by the hub for the app's activity, attribution, analytics and referrals. Their shape is a fleet standard, and one app deviating from it is drift this run brings back, the same way the Monday conventions check holds every fleet file byte-identical. The standard, exactly:
 
 | Table | Columns | Indexes, RLS, triggers |
 | --- | --- | --- |
 | `contact` | `id uuid pk default gen_random_uuid()`, `user_id uuid references auth.users(id) on delete set null`, `email text not null`, `message text not null`, `created_at timestamptz default now()` | `idx_contact_user_id (user_id)`; RLS on |
 | `logs` | `id uuid pk default gen_random_uuid()`, `user_id uuid`, `email text`, `event text not null`, `metadata jsonb not null default '{}'`, `created_at timestamptz not null default now()` | `logs_created_at_idx (created_at desc)`, `logs_event_idx (event)`, `logs_user_id_idx (user_id)`; RLS on; the trigger `on_auth_user_created_log_signup` on `auth.users` (function `log_signup`) inserts the row `event = 'signup'` for every new account |
 | `pageviews` | `created timestamptz default now()`, `visitor text`, `path text`, `source text`, `metadata jsonb` | `pageviews_created_idx (created)`, `pageviews_source_created_idx (source, created)`; RLS on with the policy `"anon insert"` for insert to anon |
+| `referral` | `user_id uuid pk references auth.users(id) on delete cascade`, `code text not null unique`, `by text`, `metadata jsonb not null default '{}'`, `created_at timestamptz not null default now()` | `referral_by_idx (by)`; RLS on, no policies (the service role alone reads and writes it, through the fleet's `lib/referral.ts`) |
 
 Fleet-wide column rules apply to every table, shared or not: times are `timestamptz` in UTC, names are the simplest single word (`limit`, `phone`, never `event_type` or `created_at_utc`), extra per-row data lives in a `metadata` jsonb column rather than new columns, and the schema holds the bare minimum of columns.
 
@@ -151,7 +152,7 @@ Create a TodoWrite list with the sections below so the user sees progress. Run a
 -- Use mcp__supabase__list_tables with schemas=["public"], verbose=true
 ```
 
-Compare the three shared tables against the fleet standard above, name for name, column for column, and list every deviation as a finding for Phase 2 (the Fleet drift bucket).
+Compare the four shared tables against the fleet standard above, name for name, column for column, and list every deviation as a finding for Phase 2 (the Fleet drift bucket).
 
 Also pull policies, indexes, functions, triggers:
 
@@ -262,7 +263,7 @@ Each item below carries a precondition. When the precondition passes, apply the 
 
 ### Fleet drift (the shared tables off the standard)
 
-- **A missing standard index, policy, trigger or column** on `contact`, `logs` or `pageviews`: additive, applied like any always-safe change.
+- **A missing standard index, policy, trigger or column** on `contact`, `logs`, `pageviews` or `referral`: additive, applied like any always-safe change.
 - **A shared column, table, trigger, function or signup value under another name**: the expand step of the fleet-standard section (the standard-named twin beside the old, backfilled, kept in step by a trigger), then the code lines in the report. Precondition for the expand: the standard name is free on that table. Precondition for the contract, in a later run: no mounted repository names the old one, then the ordinary drop gate.
 - **A shared column of the right name and another type**: `proposed`, never applied.
 
